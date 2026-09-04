@@ -1,0 +1,18 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Override indigo with Petroleum Blue palette */
+  --color-indigo-50: #f0f9fa;
+  --color-indigo-100: #d1eff1;
+  --color-indigo-200: #a3dfe3;
+  --color-indigo-300: #66c7d0;
+  --color-indigo-400: #33a6b3;
+  --color-indigo-500: #008190;
+  --color-indigo-600: #005f73; /* Main Petroleum Blue */
+  --color-indigo-700: #004d5d;
+  --color-indigo-800: #003c4a;
+  --color-indigo-900: #002d3a;
+  --color-indigo-950: #001a24;
+}
