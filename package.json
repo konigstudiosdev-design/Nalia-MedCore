@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "build:web": "tsc && vite build --mode web",
+    "build": "vite build",
+    "build:web": "vite build --mode web",
     "preview": "vite preview",
     "format": "oxfmt",
     "electron:build": "npm run build && electron-builder"
