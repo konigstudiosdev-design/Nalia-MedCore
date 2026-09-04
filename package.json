@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:web": "vite build --mode web",
+    "build:web": "vite build --mode web && node scripts/prepare-web-build.js",
     "preview": "vite preview",
     "format": "oxfmt",
     "electron:build": "npm run build && electron-builder"
