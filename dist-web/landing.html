@@ -217,10 +217,10 @@
             </ul>
           </div>
 
-          <a href="https://github.com/konigstudiosdev-design/Nalia-MedCore" target="_blank" class="w-full py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-brand-600/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+          <button onclick="openBuyModal('source')" class="w-full py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-brand-600/30 transition-all active:scale-95 flex items-center justify-center gap-2">
             <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-            <span>Comprar / Ver en GitHub</span>
-          </a>
+            <span>Comprar Licencia Full</span>
+          </button>
         </div>
 
         <!-- CARD 2: DESCARGAR DESKTOP (MAC / WINDOWS) -->
@@ -230,22 +230,22 @@
               <i data-lucide="monitor" class="w-7 h-7"></i>
             </div>
             <div>
-              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-indigo-500/30">Instaladores Nativos</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-indigo-500/30">Versión Escritorio de Pago</span>
               <h3 class="text-2xl font-black text-white mt-3">Escritorio Nativo</h3>
-              <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Ejecutables independientes compilados con Electron para instalar directamente en tu equipo.</p>
+              <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Ejecutables independientes de pago compilados con Electron para instalar directamente en tu equipo.</p>
             </div>
 
             <ul class="space-y-3 text-xs font-medium text-zinc-300 border-t border-zinc-800 pt-6">
               <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> macOS Installer (`.dmg` Apple Silicon / Intel)</li>
               <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Windows Portable Installer (`.exe`)</li>
-              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Ejecución fuera del navegador con rendimiento nativo</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Licencia de uso para escritorio sin límites</li>
             </ul>
           </div>
 
-          <a href="https://github.com/konigstudiosdev-design/Nalia-MedCore/releases" target="_blank" class="w-full py-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2">
+          <button onclick="openBuyModal('desktop')" class="w-full py-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2">
             <i data-lucide="download" class="w-4 h-4"></i>
-            <span>Descargar (.DMG / .EXE)</span>
-          </a>
+            <span>Comprar Ejecutable (.DMG / .EXE)</span>
+          </button>
         </div>
 
         <!-- CARD 3: PROBAR DEMO WEB PWA -->
@@ -255,21 +255,21 @@
               <i data-lucide="globe" class="w-7 h-7"></i>
             </div>
             <div>
-              <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-emerald-500/30">Acceso Web Inmediato</span>
+              <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-emerald-500/30">Prueba Gratuita 15 Días</span>
               <h3 class="text-2xl font-black text-white mt-3">Demo Web / PWA</h3>
-              <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Prueba la plataforma interactiva directamente desde el navegador o instálala como PWA.</p>
+              <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Prueba la plataforma interactiva gratis por 15 días desde el navegador o instálala como PWA.</p>
             </div>
 
             <ul class="space-y-3 text-xs font-medium text-zinc-300 border-t border-zinc-800 pt-6">
-              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Acceso en vivo a la app médica</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Acceso gratis controlado por IP (15 Días)</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Contador en vivo de días restantes</li>
               <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Prueba de roles: Médico, Enfermera, Recepción, Admin</li>
-              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Instalable como Web App en 1-clic</li>
             </ul>
           </div>
 
           <a href="/app" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-emerald-600/30 transition-all active:scale-95 flex items-center justify-center gap-2">
             <i data-lucide="play" class="w-4 h-4"></i>
-            <span>Probar Demo en Vivo</span>
+            <span>Iniciar Prueba Gratis (15 Días)</span>
           </a>
         </div>
 
@@ -548,6 +548,43 @@
     </div>
   </footer>
 
+  <!-- MODAL DE COMPRA / ADQUISICIÓN -->
+  <div id="buy-modal" class="fixed inset-0 z-[999] bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="glass-card rounded-[40px] p-8 md:p-10 max-w-xl w-full border border-white/10 relative space-y-6 animate-in zoom-in-95 duration-300">
+      <button onclick="closeBuyModal()" class="absolute top-6 right-6 p-2 text-zinc-400 hover:text-white bg-zinc-900 rounded-full">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 bg-brand-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-brand-600/30">
+          <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h3 id="buy-modal-title" class="text-2xl font-black text-white">Adquirir Nalia MedCore</h3>
+          <p id="buy-modal-subtitle" class="text-xs text-zinc-400 font-bold uppercase tracking-widest mt-0.5">SaaS Medical Intelligence</p>
+        </div>
+      </div>
+
+      <p id="buy-modal-desc" class="text-xs text-zinc-300 leading-relaxed font-medium">
+        Para adquirir la licencia del software o solicitar el instalador nativo de escritorio, selecciona tu método de contacto preferido o solicita tu enlace de pago.
+      </p>
+
+      <div class="space-y-3 pt-2">
+        <a id="btn-whatsapp" href="https://wa.me/5215500000000?text=Hola,%20me%20interesa%20adquirir%20la%20licencia%20de%20Nalia%20MedCore" target="_blank" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-lg transition-all flex items-center justify-center gap-3">
+          <i data-lucide="message-circle" class="w-5 h-5"></i>
+          <span>Comprar vía WhatsApp Directo</span>
+        </a>
+
+        <a id="btn-github-license" href="https://github.com/konigstudiosdev-design/Nalia-MedCore/releases" target="_blank" class="w-full py-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-lg transition-all flex items-center justify-center gap-3 border border-zinc-700">
+          <i data-lucide="github" class="w-5 h-5"></i>
+          <span>Ver Releases & Descargas en GitHub</span>
+        </a>
+      </div>
+
+      <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-widest text-center pt-2">* Entrega inmediata de archivos e instrucciones de instalación tras confirmar pago.</p>
+    </div>
+  </div>
+
   <!-- ROLE SWITCHER INTERACTIVE SCRIPT -->
   <script>
     lucide.createIcons();
@@ -574,6 +611,29 @@
       if (selectedContent) {
         selectedContent.classList.remove('hidden');
       }
+    }
+
+    function openBuyModal(type) {
+      const modal = document.getElementById('buy-modal');
+      const title = document.getElementById('buy-modal-title');
+      const desc = document.getElementById('buy-modal-desc');
+
+      if (type === 'source') {
+        title.innerText = 'Licencia Código Fuente Full';
+        desc.innerText = 'Incluye acceso completo al repositorio de código fuente React 19 + TypeScript + Electron + Firebase + PWA, con derechos de propiedad e instalación ilimitada.';
+      } else if (type === 'desktop') {
+        title.innerText = 'Adquirir Ejecutable de Escritorio';
+        desc.innerText = 'Obtén la versión nativa ejecutable (.DMG para macOS o .EXE para Windows) para instalar la aplicación de escritorio de forma independiente.';
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeBuyModal() {
+      const modal = document.getElementById('buy-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
     }
   </script>
 </body>
