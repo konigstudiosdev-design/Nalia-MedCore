@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nalia MedCore - Plataforma Médica SaaS de Nueva Generación</title>
+  <meta name="description" content="Plataforma SaaS médica modular multi-rol para clínicas, consultorios y equipos de salud. Expedientes NOM-024, signos vitales en vivo, recetas en PDF y caja." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Tailwind CSS v4 via CDN for standalone landing page -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9fa',
+              100: '#d1eff1',
+              500: '#008190',
+              600: '#005f73',
+              700: '#004d5d',
+              900: '#002d3a',
+              950: '#001a24'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #080808;
+      color: #f4f4f5;
+      font-family: 'Inter', sans-serif;
+    }
+    .glass-card {
+      background: rgba(18, 18, 18, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(0, 95, 115, 0.5);
+      box-shadow: 0 20px 40px -15px rgba(0, 95, 115, 0.25);
+    }
+    .bg-grid {
+      background-image: radial-gradient(rgba(0, 95, 115, 0.15) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #ffffff 0%, #a3dfe3 50%, #008190 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .badge-gradient {
+      background: linear-gradient(135deg, rgba(0, 95, 115, 0.3) 0%, rgba(0, 129, 144, 0.1) 100%);
+      border: 1px solid rgba(0, 166, 179, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-[#080808] text-zinc-100 antialiased selection:bg-brand-600 selection:text-white bg-grid">
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#080808]/80 backdrop-blur-2xl border-b border-zinc-800/80">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-brand-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-brand-600/30 group-hover:scale-105 transition-transform">
+          <i data-lucide="building-2" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="font-black text-xl tracking-tighter text-white block leading-none">Nalia MedCore</span>
+          <span class="text-[9px] font-black text-brand-400 uppercase tracking-widest">SaaS Medical Intelligence</span>
+        </div>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-zinc-400">
+        <a href="#demostracion" class="hover:text-white transition-colors">Qué hace</a>
+        <a href="#audiencia" class="hover:text-white transition-colors">Para quién es</a>
+        <a href="#demostracion" class="hover:text-white transition-colors">Experiencia de Roles</a>
+        <a href="#tecnologia" class="hover:text-white transition-colors">Cómo se hizo</a>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <a href="/" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-brand-600/30 transition-all active:scale-95 flex items-center gap-2">
+          <span>Probar Demo en Vivo</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="pt-36 pb-24 px-6 relative overflow-hidden">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-600/20 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute top-1/2 -right-40 w-96 h-96 bg-emerald-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto text-center space-y-8 relative z-10">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full badge-gradient text-brand-300 text-xs font-black uppercase tracking-widest animate-bounce">
+        <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400"></i>
+        <span>SaaS Medical Intelligence v4.0 • PWA & Desktop</span>
+      </div>
+
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] text-gradient">
+        La Plataforma Médica Modular de Nueva Generación
+      </h1>
+
+      <p class="text-lg md:text-xl text-zinc-400 font-medium max-w-3xl mx-auto leading-relaxed">
+        Gestión clínica multi-rol aislada para <strong class="text-white">Médicos</strong>, <strong class="text-white">Enfermería</strong>, <strong class="text-white">Recepción</strong> y <strong class="text-white">Administración</strong>. Integración de signos vitales en vivo, expedientes NOM-024, recetas PDF oficiales y control financiero.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <a href="/" class="w-full sm:w-auto px-10 py-5 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-sm uppercase tracking-widest shadow-2xl shadow-brand-600/40 transition-all active:scale-95 flex items-center justify-center gap-3">
+          <i data-lucide="play" class="w-5 h-5 fill-current"></i>
+          <span>Entrar a la Plataforma</span>
+        </a>
+        <a href="#demostracion" class="w-full sm:w-auto px-8 py-5 glass-card hover:bg-zinc-800 text-zinc-200 rounded-2xl font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3">
+          <i data-lucide="layers" class="w-5 h-5 text-brand-400"></i>
+          <span>Explorar Roles</span>
+        </a>
+      </div>
+
+      <!-- APP MOCKUP SHOWCASE -->
+      <div class="pt-12 relative max-w-5xl mx-auto">
+        <div class="glass-card rounded-[40px] p-4 md:p-6 shadow-2xl border border-white/10 relative overflow-hidden group">
+          <div class="bg-[#0A0A0A] rounded-[28px] overflow-hidden border border-zinc-800">
+            <!-- Simulated Window Header -->
+            <div class="h-12 bg-[#121212] border-b border-zinc-800 px-6 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                <span class="text-[10px] font-mono text-zinc-500 ml-4">Nalia MedCore - Plataforma Médica Modular SaaS</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs font-mono text-emerald-400">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Firestore Multi-Tenant • En Línea</span>
+              </div>
+            </div>
+
+            <!-- Dashboard Preview UI -->
+            <div class="p-8 space-y-8">
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-[#121212] p-5 rounded-2xl border border-zinc-800 text-left">
+                  <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Sala de Espera</p>
+                  <p class="text-3xl font-black text-white mt-1">4 Pacientes</p>
+                  <p class="text-[10px] font-bold text-emerald-500 mt-2 uppercase">Atención Fluida</p>
+                </div>
+                <div class="bg-[#121212] p-5 rounded-2xl border border-zinc-800 text-left">
+                  <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Consultas Hoy</p>
+                  <p class="text-3xl font-black text-white mt-1">12 Agendadas</p>
+                  <p class="text-[10px] font-bold text-brand-400 mt-2 uppercase">Google Sync</p>
+                </div>
+                <div class="bg-[#121212] p-5 rounded-2xl border border-zinc-800 text-left">
+                  <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Signos Vitales</p>
+                  <p class="text-3xl font-black text-white mt-1">3 Listos</p>
+                  <p class="text-[10px] font-bold text-indigo-400 mt-2 uppercase">Enfermería Activa</p>
+                </div>
+                <div class="bg-[#121212] p-5 rounded-2xl border border-zinc-800 text-left">
+                  <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Caja del Día</p>
+                  <p class="text-3xl font-black text-emerald-400 mt-1 font-mono">$8,450 MXN</p>
+                  <p class="text-[10px] font-bold text-zinc-400 mt-2 uppercase">Corte Listo</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 1: ¿PARA QUIÉN ESTÁ PENSADO? -->
+  <section id="audiencia" class="py-24 px-6 border-t border-zinc-900 bg-[#0A0A0A]/50">
+    <div class="max-w-6xl mx-auto space-y-16">
+      <div class="text-center space-y-4 max-w-3xl mx-auto">
+        <span class="px-3 py-1 rounded-full badge-gradient text-brand-300 text-[10px] font-black uppercase tracking-widest">Especialización de Mercado</span>
+        <h2 class="text-3xl md:text-50xl font-black tracking-tight text-white">¿Para quién está pensado Nalia MedCore?</h2>
+        <p class="text-zinc-400 text-sm md:text-base font-medium leading-relaxed">Diseñado desde cero para resolver la fragmentación operativa en consultorios independientes y centros médicos multidisciplinarios.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
+          <div class="w-12 h-12 bg-brand-600/20 text-brand-400 rounded-2xl flex items-center justify-center border border-brand-500/20">
+            <i data-lucide="stethoscope" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-white">Médicos & Especialistas</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Médicos generales y especialistas que requieren notas SOAP rápidas, historia clínica y generación de recetas en PDF oficial.</p>
+        </div>
+
+        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
+          <div class="w-12 h-12 bg-rose-500/20 text-rose-400 rounded-2xl flex items-center justify-center border border-rose-500/20">
+            <i data-lucide="heart-pulse" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-white">Personal de Enfermería</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Enfermeras y asistentes que realizan la toma de signos vitales, somatometría (IMC) y procedimientos de apoyo médico.</p>
+        </div>
+
+        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
+          <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center border border-amber-500/20">
+            <i data-lucide="user-check" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-white">Recepción & Caja</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Recepcionistas encargadas del agendamiento, confirmación de llegada (Check-in), cobro de consultas y cortes de caja.</p>
+        </div>
+
+        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
+          <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/20">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-white">Clínicas & Admins</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Propietarios de clínicas que necesitan métricas de ingresos, gestión de equipo, auditoría inmutable y cumplimiento legal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2: EXPERIENCIA DE ROLES INTERACTIVA -->
+  <section id="demostracion" class="py-24 px-6 border-t border-zinc-900">
+    <div class="max-w-6xl mx-auto space-y-12">
+      <div class="text-center space-y-4 max-w-3xl mx-auto">
+        <span class="px-3 py-1 rounded-full badge-gradient text-brand-300 text-[10px] font-black uppercase tracking-widest">Arquitectura de Contexto</span>
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-white">Aislamiento Estricto por Rol de Usuario</h2>
+        <p class="text-zinc-400 text-sm font-medium">Cada trabajador entra a una interfaz diseñada 100% para su función, eliminando la duplicidad de menús.</p>
+      </div>
+
+      <!-- Role Tabs -->
+      <div class="flex justify-center border-b border-zinc-800 max-w-2xl mx-auto">
+        <button onclick="switchRoleTab('doctor')" id="tab-doctor" class="role-tab px-6 py-4 text-xs font-black uppercase tracking-widest border-b-2 border-brand-500 text-brand-400 flex items-center gap-2">
+          <i data-lucide="stethoscope" class="w-4 h-4"></i> Médico
+        </button>
+        <button onclick="switchRoleTab('nurse')" id="tab-nurse" class="role-tab px-6 py-4 text-xs font-black uppercase tracking-widest border-b-2 border-transparent text-zinc-500 hover:text-zinc-300 flex items-center gap-2">
+          <i data-lucide="heart-pulse" class="w-4 h-4"></i> Enfermería
+        </button>
+        <button onclick="switchRoleTab('reception')" id="tab-reception" class="role-tab px-6 py-4 text-xs font-black uppercase tracking-widest border-b-2 border-transparent text-zinc-500 hover:text-zinc-300 flex items-center gap-2">
+          <i data-lucide="user-check" class="w-4 h-4"></i> Recepción
+        </button>
+        <button onclick="switchRoleTab('admin')" id="tab-admin" class="role-tab px-6 py-4 text-xs font-black uppercase tracking-widest border-b-2 border-transparent text-zinc-500 hover:text-zinc-300 flex items-center gap-2">
+          <i data-lucide="shield" class="w-4 h-4"></i> Administración
+        </button>
+      </div>
+
+      <!-- Role Details Content -->
+      <div class="glass-card rounded-[40px] p-8 md:p-12 relative overflow-hidden">
+
+        <!-- DOCTOR ROLE CONTENT -->
+        <div id="content-doctor" class="role-content space-y-6">
+          <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
+            <div class="w-14 h-14 bg-brand-600/20 text-brand-400 rounded-2xl flex items-center justify-center border border-brand-500/30">
+              <i data-lucide="stethoscope" class="w-8 h-8"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-black text-white">Perfil: Médico / Especialista</h3>
+              <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Atención Clínica y Diagnóstico</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-brand-300">Consultas SOAP Estructuradas</h4>
+              <p class="text-xs text-zinc-400">Anamnesis subjetiva, hallazgos objetivos por sistemas, diagnóstico e indicaciones del plan médico.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-emerald-400">Pre-llenado de Signos Vitales</h4>
+              <p class="text-xs text-zinc-400">Recibe en automático los signos tomados por enfermería antes de abrir la consulta.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-indigo-400">Recetas Digitales PDF</h4>
+              <p class="text-xs text-zinc-400">Emisión de recetas oficiales impresas o en PDF con cédula profesional (DGP), sello y marca de agua.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- NURSE ROLE CONTENT -->
+        <div id="content-nurse" class="role-content hidden space-y-6">
+          <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
+            <div class="w-14 h-14 bg-rose-500/20 text-rose-400 rounded-2xl flex items-center justify-center border border-rose-500/30">
+              <i data-lucide="heart-pulse" class="w-8 h-8"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-black text-white">Perfil: Enfermería Asistencial</h3>
+              <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Captura de Signos y Apoyo Médico</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-rose-400">Captura de Signos & Somatometría</h4>
+              <p class="text-xs text-zinc-400">Registro rápido de Tensión Arterial, FC, Temp, SpO2, Peso, Talla e IMC calculado automáticamente.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-amber-400">Centro de Solicitudes Vivas</h4>
+              <p class="text-xs text-zinc-400">Notificaciones en tiempo real enviadas por los médicos (aplicación de medicamentos, curaciones, muestras).</p>
+            </div>
+            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-brand-300">Expediente Asistencial</h4>
+              <p class="text-xs text-zinc-400">Ficha de identificación sin botones de consulta médica, garantizando la privacidad de roles.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECEPTION ROLE CONTENT -->
+        <div id="content-reception" class="role-content hidden space-y-6">
+          <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
+            <div class="w-14 h-14 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center border border-amber-500/30">
+              <i data-lucide="user-check" class="w-8 h-8"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-black text-white">Perfil: Recepción / Caja Operativa</h3>
+              <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Validación, Agendamiento y Cobranza</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-amber-400">Validation & Check-in</h4>
+              <p class="text-xs text-zinc-400">Confirmación de llegada de pacientes para enviarlos a sala de espera e informar al médico.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-emerald-400">Monitor de Cobros</h4>
+              <p class="text-xs text-zinc-400">Notificaciones automáticas con el monto a cobrar asignado por el médico al terminar la consulta.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-indigo-400">Corte de Caja Diario</h4>
+              <p class="text-xs text-zinc-400">Desglose inmediato de ingresos por Efectivo, Tarjeta/TPV, Transferencias y Aseguradoras.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN ROLE CONTENT -->
+        <div id="content-admin" class="role-content hidden space-y-6">
+          <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
+            <div class="w-14 h-14 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/30">
+              <i data-lucide="shield" class="w-8 h-8"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-black text-white">Perfil: Administrador de Organización</h3>
+              <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Métricas, Equipo y Cumplimiento Legal</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-emerald-400">Gestión de Equipo & Permisos</h4>
+              <p class="text-xs text-zinc-400">Creación directa de colaboradores con usuario y contraseña sin requerir correos de confirmación.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-indigo-400">Compliance & Legal Hold</h4>
+              <p class="text-xs text-zinc-400">Matriz NOM-024 / NOM-004, auditorías inmutables y congelamiento legal de datos.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-brand-300">Modo Dual (Clínico/Admin)</h4>
+              <p class="text-xs text-zinc-400">El propietario puede alternar entre atender pacientes como médico o supervisar la clínica como administrador.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3: ¿CÓMO SE HIZO? (STACK TECNOLÓGICO) -->
+  <section id="tecnologia" class="py-24 px-6 border-t border-zinc-900 bg-[#0A0A0A]/50">
+    <div class="max-w-6xl mx-auto space-y-16">
+      <div class="text-center space-y-4 max-w-3xl mx-auto">
+        <span class="px-3 py-1 rounded-full badge-gradient text-brand-300 text-[10px] font-black uppercase tracking-widest">Ingeniería & Código</span>
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-white">¿Cómo está construido Nalia MedCore?</h2>
+        <p class="text-zinc-400 text-sm font-medium">Stack moderno de alto rendimiento enfocado en seguridad multi-tenant y disponibilidad continua.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="glass-card rounded-3xl p-8 space-y-3">
+          <span class="text-[10px] font-mono font-black text-brand-400 uppercase">Core Framework</span>
+          <h3 class="text-xl font-black text-white">React 19 + TypeScript + Vite</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Compilación ultra-rápida, renderizado reactivo y tipos estrictos que previenen errores en tiempo de ejecución.</p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 space-y-3">
+          <span class="text-[10px] font-mono font-black text-emerald-400 uppercase">Diseño & Estilos</span>
+          <h3 class="text-xl font-black text-white">Tailwind CSS v4</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Diseño en modo claro y oscuro con variables CSS avanzadas y paleta institucional Azul Petróleo (`#005f73`).</p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 space-y-3">
+          <span class="text-[10px] font-mono font-black text-indigo-400 uppercase">Base de Datos Cloud</span>
+          <h3 class="text-xl font-black text-white">Firebase Firestore Multi-Tenant</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Aislamiento estricto de datos por organización, sincronización en vivo y caché local en memoria.</p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 space-y-3">
+          <span class="text-[10px] font-mono font-black text-amber-400 uppercase">Escritorio Nativo</span>
+          <h3 class="text-xl font-black text-white">Electron 43 Engine</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Empaquetado nativo para macOS (`.dmg`) y Windows (`.exe`) ejecutable sin dependencias externas.</p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 space-y-3">
+          <span class="text-[10px] font-mono font-black text-rose-400 uppercase">Web PWA Support</span>
+          <h3 class="text-xl font-black text-white">Vite PWA Service Worker</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Instalable en 1-clic desde cualquier navegador web en Mac, PC, Android o iOS como aplicación nativa.</p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 space-y-3">
+          <span class="text-[10px] font-mono font-black text-brand-300 uppercase">Google Calendar API</span>
+          <h3 class="text-xl font-black text-white">Sincronización Externa</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Vinculación de eventos personales con la agenda médica en tiempo real vía OAuth 2.0.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="py-24 px-6 border-t border-zinc-900 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto glass-card rounded-[48px] p-12 md:p-16 text-center space-y-8 relative z-10 border border-brand-500/30">
+      <div class="w-20 h-20 bg-brand-600 text-white rounded-3xl flex items-center justify-center mx-auto shadow-2xl shadow-brand-600/50">
+        <i data-lucide="building-2" class="w-10 h-10"></i>
+      </div>
+
+      <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white leading-tight">
+        Comienza a transformar la gestión médica de tu clínica hoy
+      </h2>
+
+      <p class="text-zinc-400 text-base max-w-xl mx-auto font-medium leading-relaxed">
+        Accede a la demostración en vivo y experimenta la plataforma modular diseñada para la salud.
+      </p>
+
+      <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4">
+        <a href="/" class="px-10 py-5 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-brand-600/40 transition-all active:scale-95 flex items-center justify-center gap-3">
+          <span>Ingresar a la Plataforma Demo</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 px-6 border-t border-zinc-900 bg-[#050505] text-xs font-bold text-zinc-500">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-brand-600 rounded-xl flex items-center justify-center text-white">
+          <i data-lucide="building-2" class="w-4 h-4"></i>
+        </div>
+        <span class="font-black text-white text-sm">Nalia MedCore SaaS Platform</span>
+      </div>
+      <p class="text-zinc-600 font-mono">Nalia Technologies © 2026 • Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- ROLE SWITCHER INTERACTIVE SCRIPT -->
+  <script>
+    lucide.createIcons();
+
+    function switchRoleTab(role) {
+      // Reset tabs
+      document.querySelectorAll('.role-tab').forEach(t => {
+        t.classList.remove('border-brand-500', 'text-brand-400');
+        t.classList.add('border-transparent', 'text-zinc-500');
+      });
+
+      // Highlight selected tab
+      const selectedTab = document.getElementById('tab-' + role);
+      if (selectedTab) {
+        selectedTab.classList.add('border-brand-500', 'text-brand-400');
+        selectedTab.classList.remove('border-transparent', 'text-zinc-500');
+      }
+
+      // Hide all contents
+      document.querySelectorAll('.role-content').forEach(c => c.classList.add('hidden'));
+
+      // Show selected content
+      const selectedContent = document.getElementById('content-' + role);
+      if (selectedContent) {
+        selectedContent.classList.remove('hidden');
+      }
+    }
+  </script>
+</body>
+</html>

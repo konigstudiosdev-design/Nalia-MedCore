@@ -9,7 +9,7 @@ function createWindow() {
   win = new BrowserWindow({
     width: 1200,
     height: 800,
-    icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+    icon: path.join(process.env.VITE_PUBLIC || "", "pwa-512x512.svg"),
     webPreferences: {
       preload: path.join(__dirname$1, "preload.js")
     }
@@ -20,7 +20,7 @@ function createWindow() {
   if (process.env.VITE_DEV_SERVER_URL) {
     win.loadURL(process.env.VITE_DEV_SERVER_URL);
   } else {
-    win.loadFile(path.join(process.env.DIST, "index.html"));
+    win.loadFile(path.join(process.env.DIST || "", "index.html"));
   }
 }
 app.on("window-all-closed", () => {

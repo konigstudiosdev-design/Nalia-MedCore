@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build:web",
+  "outputDirectory": "dist-web",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/landing",
+      "destination": "/landing.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

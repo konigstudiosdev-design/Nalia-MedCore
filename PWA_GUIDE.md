@@ -1,31 +1,52 @@
-# Guía de PWA para MedCore
+# Guía de Publicación e Instalación: Nalia MedCore
 
-He configurado la plataforma para que funcione como una **Aplicación Web Progresiva (PWA)** de alto rendimiento.
+Esta guía explica cómo publicar la plataforma en **GitHub** y hacerla accesible o descargable en **cualquier computadora o dispositivo** como PWA e instalable de escritorio.
 
-## Cambios realizados
+---
 
-1.  **Configuración de Vite**: Se añadió `vite-plugin-pwa` con un manifiesto completo (nombre, colores, iconos).
-2.  **Modo Web Independiente**: Se añadió un script `npm run build:web` que genera una versión optimizada para navegadores en la carpeta `dist-web`, sin las dependencias de Electron.
-3.  **Metadatos de PWA**: Se actualizaron las etiquetas en `index.html` para mejor soporte en iOS (Safe Areas, Status Bar) y navegadores modernos.
-4.  **Service Worker**: Se integró el registro automático del Service Worker en `src/main.tsx`, con una validación para evitar conflictos cuando se ejecuta dentro de Electron.
+## 1. Subir el Código a GitHub
 
-## Acción Requerida
-
-Debido a un problema de permisos en el caché de npm de este entorno, no pude completar la instalación física del plugin. Por favor, ejecuta el siguiente comando en tu terminal para finalizar la configuración:
+1. Crea un repositorio nuevo en tu cuenta de GitHub (ejemplo: `nalia-medcore`).
+2. Abre la terminal en la carpeta del proyecto y ejecuta:
 
 ```bash
-npm install
+git remote add origin https://github.com/TU_USUARIO/nalia-medcore.git
+git branch -M main
+git push -u origin main
 ```
 
-Si encuentras errores de permisos (`EACCES`), intenta primero reparar tu caché de npm:
+---
 
+## 2. Publicar como PWA Web (Vercel / Netlify / GitHub Pages)
+
+Para que cualquier persona pueda entrar desde una URL e instalar la PWA en su computadora o celular:
+
+### Opción A: Vercel (Recomendada - 2 minutos)
+1. Inicia sesión en [Vercel](https://vercel.com).
+2. Haz clic en **"Add New Project"** e importa tu repositorio de GitHub `nalia-medcore`.
+3. Configuración del Build:
+   - **Build Command**: `npm run build:web`
+   - **Output Directory**: `dist-web`
+4. Haz clic en **Deploy**.
+5. ¡Listo! Vercel te dará una URL HTTPS (ejemplo: `https://nalia-medcore.vercel.app`).
+
+### Instalación como PWA en cualquier computadora:
+- Entran a la URL en Chrome, Edge o Safari.
+- Hacen clic en el botón **"Instalar Nalia MedCore"** en la barra del navegador.
+- La aplicación se abrirá en su propia ventana independiente con icono nativo.
+
+---
+
+## 3. Generar Ejecutables de Escritorio (Mac / Windows)
+
+Si deseas ofrecer instaladores descargables (`.dmg` para Mac o `.exe` para Windows):
+
+1. Ejecuta en tu computadora:
 ```bash
-sudo chown -R $(id -u):$(id -g) ~/.npm
+npm run electron:build
 ```
-
-## Próximos Pasos
-
-Para que la PWA sea instalable, debes colocar los iconos de la aplicación en la carpeta `public/`:
-- `pwa-192x192.png`
-- `pwa-512x512.png`
-- `apple-touch-icon.png` (Opcional, pero recomendado para iPhone)
+2. Los ejecutables se compilarán en la carpeta `release/`:
+   - **Mac**: `Nalia MedCore-1.0.0-mac.dmg`
+   - **Windows**: `Nalia MedCore-1.0.0-win.exe`
+3. En tu repositorio de GitHub, ve a **Releases > Draft a new release**, sube los archivos de la carpeta `release/` y publica la release.
+4. Cualquier usuario podrá descargar directamente el ejecutable e instalarlo.
