@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nalia MedCore - Plataforma Médica SaaS de Nueva Generación</title>
-  <meta name="description" content="Plataforma SaaS médica modular multi-rol para clínicas, consultorios y equipos de salud. Expedientes NOM-024, signos vitales en vivo, recetas en PDF y caja." />
+  <meta name="description" content="Plataforma SaaS médica modular multi-rol para clínicas, consultorios y equipos de salud. Adquiere la licencia completa o descarga para Mac y Windows." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
   <!-- Tailwind CSS v4 via CDN for standalone landing page -->
@@ -93,12 +93,13 @@
         <a href="#audiencia" class="hover:text-white transition-colors">Para quién es</a>
         <a href="#demostracion" class="hover:text-white transition-colors">Experiencia de Roles</a>
         <a href="#tecnologia" class="hover:text-white transition-colors">Cómo se hizo</a>
+        <a href="#comprar" class="hover:text-white transition-colors text-brand-300">Comprar / Descargar</a>
       </div>
 
       <div class="flex items-center gap-4">
-        <a href="/" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-brand-600/30 transition-all active:scale-95 flex items-center gap-2">
-          <span>Probar Demo en Vivo</span>
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        <a href="#comprar" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-brand-600/30 transition-all active:scale-95 flex items-center gap-2">
+          <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+          <span>Comprar / Descargar</span>
         </a>
       </div>
     </div>
@@ -124,13 +125,13 @@
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-        <a href="/" class="w-full sm:w-auto px-10 py-5 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-sm uppercase tracking-widest shadow-2xl shadow-brand-600/40 transition-all active:scale-95 flex items-center justify-center gap-3">
-          <i data-lucide="play" class="w-5 h-5 fill-current"></i>
-          <span>Entrar a la Plataforma</span>
+        <a href="#comprar" class="w-full sm:w-auto px-10 py-5 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-sm uppercase tracking-widest shadow-2xl shadow-brand-600/40 transition-all active:scale-95 flex items-center justify-center gap-3">
+          <i data-lucide="download" class="w-5 h-5"></i>
+          <span>Comprar o Descargar Sistema</span>
         </a>
-        <a href="#demostracion" class="w-full sm:w-auto px-8 py-5 glass-card hover:bg-zinc-800 text-zinc-200 rounded-2xl font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3">
-          <i data-lucide="layers" class="w-5 h-5 text-brand-400"></i>
-          <span>Explorar Roles</span>
+        <a href="/app" class="w-full sm:w-auto px-8 py-5 glass-card hover:bg-zinc-800 text-zinc-200 rounded-2xl font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3">
+          <i data-lucide="play" class="w-5 h-5 text-emerald-400"></i>
+          <span>Probar Demo en Vivo</span>
         </a>
       </div>
 
@@ -183,12 +184,105 @@
     </div>
   </section>
 
+  <!-- SECCIÓN: ADQUISICIÓN Y DESCARGAS (COMPRAR / DESCARGAR) -->
+  <section id="comprar" class="py-24 px-6 border-t border-zinc-900 bg-brand-950/40 relative">
+    <div class="max-w-6xl mx-auto space-y-16">
+      <div class="text-center space-y-4 max-w-3xl mx-auto">
+        <span class="px-4 py-1.5 rounded-full badge-gradient text-brand-300 text-xs font-black uppercase tracking-widest">Adquisición del Sistema</span>
+        <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">Comprar Licencia o Descargar Software</h2>
+        <p class="text-zinc-400 text-sm md:text-base font-medium leading-relaxed">
+          Elige la modalidad que mejor se adapte a tu clínica o proyecto. Descarga ejecutables de escritorio o adquiere la licencia completa de código fuente.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- CARD 1: CÓDIGO FUENTE / LICENCIA COMPLETA -->
+        <div class="glass-card rounded-[40px] p-8 md:p-10 space-y-8 flex flex-col justify-between border border-brand-500/40 relative group hover:border-brand-400 transition-all">
+          <div class="space-y-6">
+            <div class="w-14 h-14 bg-brand-600 text-white rounded-2xl flex items-center justify-center shadow-xl shadow-brand-600/30">
+              <i data-lucide="code" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <span class="px-3 py-1 bg-brand-500/20 text-brand-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-brand-500/30">Licencia SaaS Completa</span>
+              <h3 class="text-2xl font-black text-white mt-3">Código Fuente Full</h3>
+              <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Acceso total al código fuente original React 19, TypeScript, Electron, Firebase y configuraciones de PWA.</p>
+            </div>
+
+            <ul class="space-y-3 text-xs font-medium text-zinc-300 border-t border-zinc-800 pt-6">
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Código fuente en TypeScript 100% comentado</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Módulos multi-rol aislados (Médico, Enfermera, Recepción, Admin)</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Guía de despliegue en Vercel, Firebase y GitHub</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Compiladores nativos para Mac DMG y Windows EXE</li>
+            </ul>
+          </div>
+
+          <a href="https://github.com/konigstudiosdev-design/Nalia-MedCore" target="_blank" class="w-full py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-brand-600/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+            <span>Comprar / Ver en GitHub</span>
+          </a>
+        </div>
+
+        <!-- CARD 2: DESCARGAR DESKTOP (MAC / WINDOWS) -->
+        <div class="glass-card rounded-[40px] p-8 md:p-10 space-y-8 flex flex-col justify-between border border-zinc-800 relative group hover:border-indigo-500/40 transition-all">
+          <div class="space-y-6">
+            <div class="w-14 h-14 bg-indigo-600/20 text-indigo-400 rounded-2xl flex items-center justify-center border border-indigo-500/30">
+              <i data-lucide="monitor" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-indigo-500/30">Instaladores Nativos</span>
+              <h3 class="text-2xl font-black text-white mt-3">Escritorio Nativo</h3>
+              <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Ejecutables independientes compilados con Electron para instalar directamente en tu equipo.</p>
+            </div>
+
+            <ul class="space-y-3 text-xs font-medium text-zinc-300 border-t border-zinc-800 pt-6">
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> macOS Installer (`.dmg` Apple Silicon / Intel)</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Windows Portable Installer (`.exe`)</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Ejecución fuera del navegador con rendimiento nativo</li>
+            </ul>
+          </div>
+
+          <a href="https://github.com/konigstudiosdev-design/Nalia-MedCore/releases" target="_blank" class="w-full py-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2">
+            <i data-lucide="download" class="w-4 h-4"></i>
+            <span>Descargar (.DMG / .EXE)</span>
+          </a>
+        </div>
+
+        <!-- CARD 3: PROBAR DEMO WEB PWA -->
+        <div class="glass-card rounded-[40px] p-8 md:p-10 space-y-8 flex flex-col justify-between border border-zinc-800 relative group hover:border-emerald-500/40 transition-all">
+          <div class="space-y-6">
+            <div class="w-14 h-14 bg-emerald-600/20 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/30">
+              <i data-lucide="globe" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-emerald-500/30">Acceso Web Inmediato</span>
+              <h3 class="text-2xl font-black text-white mt-3">Demo Web / PWA</h3>
+              <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Prueba la plataforma interactiva directamente desde el navegador o instálala como PWA.</p>
+            </div>
+
+            <ul class="space-y-3 text-xs font-medium text-zinc-300 border-t border-zinc-800 pt-6">
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Acceso en vivo a la app médica</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Prueba de roles: Médico, Enfermera, Recepción, Admin</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Instalable como Web App en 1-clic</li>
+            </ul>
+          </div>
+
+          <a href="/app" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-emerald-600/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+            <i data-lucide="play" class="w-4 h-4"></i>
+            <span>Probar Demo en Vivo</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- SECCIÓN 1: ¿PARA QUIÉN ESTÁ PENSADO? -->
   <section id="audiencia" class="py-24 px-6 border-t border-zinc-900 bg-[#0A0A0A]/50">
     <div class="max-w-6xl mx-auto space-y-16">
       <div class="text-center space-y-4 max-w-3xl mx-auto">
         <span class="px-3 py-1 rounded-full badge-gradient text-brand-300 text-[10px] font-black uppercase tracking-widest">Especialización de Mercado</span>
-        <h2 class="text-3xl md:text-50xl font-black tracking-tight text-white">¿Para quién está pensado Nalia MedCore?</h2>
+        <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">¿Para quién está pensado Nalia MedCore?</h2>
         <p class="text-zinc-400 text-sm md:text-base font-medium leading-relaxed">Diseñado desde cero para resolver la fragmentación operativa en consultorios independientes y centros médicos multidisciplinarios.</p>
       </div>
 
@@ -297,7 +391,7 @@
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
             <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
               <h4 class="font-black text-sm text-rose-400">Captura de Signos & Somatometría</h4>
-              <p class="text-xs text-zinc-400">Registro rápido de Tensión Arterial, FC, Temp, SpO2, Peso, Talla e IMC calculado automáticamente.</p>
+              <p class="text-xs text-zinc-400">Registro rápido de Tensión Arterial, FC, Temp, SpO2, Peso, Talla e IMC calculated automáticamente.</p>
             </div>
             <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
               <h4 class="font-black text-sm text-amber-400">Centro de Solicitudes Vivas</h4>
@@ -429,13 +523,13 @@
       </h2>
 
       <p class="text-zinc-400 text-base max-w-xl mx-auto font-medium leading-relaxed">
-        Accede a la demostración en vivo y experimenta la plataforma modular diseñada para la salud.
+        Adquiere el sistema completo o descarga la versión de escritorio para tu equipo.
       </p>
 
       <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4">
-        <a href="/" class="px-10 py-5 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-brand-600/40 transition-all active:scale-95 flex items-center justify-center gap-3">
-          <span>Ingresar a la Plataforma Demo</span>
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        <a href="#comprar" class="px-10 py-5 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-brand-600/40 transition-all active:scale-95 flex items-center justify-center gap-3">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span>Comprar / Descargar</span>
         </a>
       </div>
     </div>
