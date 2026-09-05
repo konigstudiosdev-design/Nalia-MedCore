@@ -1,21 +1,51 @@
-import React, { useMemo } from 'react';
-import { Users, Clock, CreditCard, Calendar, UserPlus, LogIn, CheckCircle2, AlertCircle, Search } from 'lucide-react';
-import { AgendaItem, Patient, Transaction } from '../../../types';
+import React, { useState, useMemo } from 'react';
+import { Users, Clock, CreditCard, Calendar, UserPlus, LogIn, CheckCircle2, AlertCircle, Search, Stethoscope } from 'lucide-react';
+import { AgendaItem, Patient, Transaction, User } from '../../../types';
 import { KPICard } from '../KPICard';
-import { StatusBadge } from '../../shared/StatusBadge';
+import { Modal } from '../../shared/Modal';
 
 interface ReceptionDashboardProps {
   agenda: AgendaItem[];
   patients: Patient[];
   transactions?: Transaction[];
-  onRegisterArrival: (id: string) => void;
+  doctors?: User[];
+  onRegisterArrival: (id: string, doctorId?: string, doctorName?: string) => void;
   navigateTo: (moduleId: string) => void;
 }
 
-export function ReceptionDashboard({ agenda = [], patients = [], transactions = [], onRegisterArrival, navigateTo }: ReceptionDashboardProps) {
+export function ReceptionDashboard({ agenda = [], patients = [], transactions = [], doctors = [], onRegisterArrival, navigateTo }: ReceptionDashboardProps) {
   const pendingArrival = agenda.filter(a => a.status === 'confirmed' || a.status === 'pending');
   const waiting = agenda.filter(a => a.status === 'waiting' || a.status === 'in_consultation');
   const pendingPayment = agenda.filter(a => a.status === 'pending_payment');
+
+  const [assigningApt, setAssigningApt] = useState<AgendaItem | null>(null);
+  const [selectedDoctorId, setSelectedDoctorId] = useState<string>('');
+
+  const handleArrivalClick = (apt: AgendaItem) => {
+    // Si solo hay 1 médico en el staff (o ninguno), confirmar directamente sin modal
+    if (!doctors || doctors.length <= 1) {
+      const doc = doctors && doctors.length > 0 ? doctors[0] : null;
+      onRegisterArrival(
+        apt.id,
+        doc?.id || 'owner',
+        doc ? `${doc.name}${doc.lastName ? ' ' + doc.lastName : ''}` : 'Médico'
+      );
+      return;
+    }
+
+    // Si hay múltiples médicos, abrir modal para que recepción seleccione a quién va
+    setAssigningApt(apt);
+    setSelectedDoctorId(apt.doctorId || (doctors.length > 0 ? doctors[0].id : ''));
+  };
+
+  const handleConfirmAssignment = () => {
+    if (!assigningApt || !selectedDoctorId) return;
+    const doc = doctors?.find(d => d.id === selectedDoctorId);
+    const doctorName = doc ? `${doc.name}${doc.lastName ? ' ' + doc.lastName : ''}` : 'Médico';
+
+    onRegisterArrival(assigningApt.id, selectedDoctorId, doctorName);
+    setAssigningApt(null);
+  };
 
   // Cálculo en vivo del total cobrado hoy en caja
   const cajaHoy = useMemo(() => {
@@ -61,7 +91,7 @@ export function ReceptionDashboard({ agenda = [], patients = [], transactions = 
                        </div>
                     </div>
                     <button
-                      onClick={() => onRegisterArrival(apt.id)}
+                      onClick={() => handleArrivalClick(apt)}
                       className="px-6 py-3 bg-indigo-600 text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-lg shadow-indigo-600/20 active:scale-95 transition-all flex items-center gap-2"
                     >
                       Confirmar Llegada
@@ -151,6 +181,77 @@ export function ReceptionDashboard({ agenda = [], patients = [], transactions = 
            </table>
         </div>
       </div>
+
+      {/* Modal para Selección de Médico al Confirmar Llegada */}
+      {assigningApt && (
+        <Modal
+          isOpen={true}
+          onClose={() => setAssigningApt(null)}
+          title="Asignar Médico de Atención"
+        >
+          <div className="space-y-6">
+            <div className="p-4 bg-zinc-50 dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800">
+              <span class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Paciente en Recepción</span>
+              <p className="text-lg font-black text-zinc-900 dark:text-zinc-50">{assigningApt.patientName}</p>
+              <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest mt-1">{assigningApt.time} • {assigningApt.type}</p>
+            </div>
+
+            <div className="space-y-3">
+              <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest block ml-1">
+                Seleccione el Médico disponible para la atención:
+              </label>
+
+              <div className="space-y-2 max-h-[280px] overflow-y-auto pr-1">
+                {doctors?.map(doc => {
+                  const docName = `${doc.name}${doc.lastName ? ' ' + doc.lastName : ''}`;
+                  const isSelected = selectedDoctorId === doc.id;
+
+                  return (
+                    <div
+                      key={doc.id}
+                      onClick={() => setSelectedDoctorId(doc.id)}
+                      className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between ${
+                        isSelected
+                          ? 'bg-indigo-500/10 border-indigo-500 text-indigo-600 dark:text-indigo-400 font-black'
+                          : 'bg-zinc-50 dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center text-sm shadow-md">
+                          {doc.name.charAt(0)}
+                        </div>
+                        <div>
+                          <div className="text-sm font-black text-zinc-900 dark:text-zinc-50">Dr(a). {docName}</div>
+                          <div className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">{doc.specialty || 'Médico de Staff'}</div>
+                        </div>
+                      </div>
+
+                      <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${isSelected ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-zinc-300 dark:border-zinc-700'}`}>
+                        {isSelected && <CheckCircle2 size={12}/>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 flex justify-end gap-3">
+              <button
+                onClick={() => setAssigningApt(null)}
+                className="px-6 py-3 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleConfirmAssignment}
+                className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-black text-xs uppercase tracking-widest shadow-lg shadow-indigo-600/20 active:scale-95 transition-all flex items-center gap-2"
+              >
+                <CheckCircle2 size={16}/> Confirmar y Enviar a Sala
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }

@@ -33,7 +33,7 @@ import { TeamManagement } from './components/settings/TeamManagement';
 export default function MedIOSApp() {
   const {
     currentUser, authLoading, workMode, toggleWorkMode,
-    patients, agenda, transactions, nursingRequests, consultations, prescriptions, settings, googleEvents, isGoogleConnected,
+    patients, agenda, transactions, nursingRequests, consultations, prescriptions, settings, googleEvents, isGoogleConnected, doctors,
     toast, hideToast, logout,
     addPatient, updatePatient, deletePatient, addAgendaItem, confirmArrival, updateAppointment, deleteAppointment,
     requestNursingSupport, updateNursingRequest, connectGoogle, disconnectGoogle,
@@ -163,7 +163,7 @@ export default function MedIOSApp() {
     switch (currentUser.role) {
       case 'doctor':
       case 'organization_admin': // Admin en modo clínico se comporta como médico
-        return <DoctorDashboard agenda={agenda} patients={patients} nursingRequests={nursingRequests} onStartConsultation={handleStartConsultation} navigateTo={navigateTo} />;
+        return <DoctorDashboard agenda={agenda} patients={patients} nursingRequests={nursingRequests} user={currentUser} onStartConsultation={handleStartConsultation} navigateTo={navigateTo} />;
       case 'nurse':
         return (
           <NurseDashboard
@@ -176,7 +176,7 @@ export default function MedIOSApp() {
           />
         );
       case 'reception':
-        return <ReceptionDashboard agenda={agenda} patients={patients} transactions={transactions} onRegisterArrival={confirmArrival} navigateTo={navigateTo} />;
+        return <ReceptionDashboard agenda={agenda} patients={patients} transactions={transactions} doctors={doctors} onRegisterArrival={confirmArrival} navigateTo={navigateTo} />;
       default:
         return <div>Access Denied</div>;
     }

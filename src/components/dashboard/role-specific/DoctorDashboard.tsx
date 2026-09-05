@@ -3,20 +3,28 @@ import {
   Users, Stethoscope, Clock, FileSearch, Sparkles, Play, CheckCircle2,
   ChevronRight, Activity, Zap, History, UserPlus, TrendingUp
 } from 'lucide-react';
-import { AgendaItem, Patient, NursingRequest } from '../../../types';
+import { AgendaItem, Patient, NursingRequest, User as UserType } from '../../../types';
 import { KPICard } from '../KPICard';
 
 interface DoctorDashboardProps {
   agenda: AgendaItem[];
   patients: Patient[];
   nursingRequests: NursingRequest[];
+  user?: UserType | null;
   onStartConsultation: (id: string) => void;
   navigateTo: (moduleId: string) => void;
 }
 
-export function DoctorDashboard({ agenda, patients, nursingRequests, onStartConsultation, navigateTo }: DoctorDashboardProps) {
-  const readyForConsultation = agenda.filter(a => a.status === 'waiting');
-  const inConsultation = agenda.filter(a => a.status === 'in_consultation');
+export function DoctorDashboard({ agenda, patients, nursingRequests, user, onStartConsultation, navigateTo }: DoctorDashboardProps) {
+  // Filtro inteligente: Muestra pacientes asignados específicamente a este médico
+  const readyForConsultation = agenda.filter(a =>
+    a.status === 'waiting' &&
+    (!user?.id || a.doctorId === user.id || a.doctorId === 'owner' || !a.doctorId)
+  );
+  const inConsultation = agenda.filter(a =>
+    a.status === 'in_consultation' &&
+    (!user?.id || a.doctorId === user.id || a.doctorId === 'owner' || !a.doctorId)
+  );
   const activeRequests = nursingRequests.filter(r => r.status !== 'completed' && r.status !== 'cancelled');
   const finishedToday = agenda.filter(a => a.status === 'finished' || a.status === 'pending_payment' || a.status === 'paid');
 

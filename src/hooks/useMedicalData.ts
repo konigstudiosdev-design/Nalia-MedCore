@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Patient, AgendaItem, Transaction, User, VitalSigns, NursingRequest, Consultation, Prescription } from '../types';
 import * as dbService from '../lib/db';
 import { googleCalendarService } from '../lib/googleCalendar';
 import { auth, db } from '../lib/firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { doc, onSnapshot, collection } from 'firebase/firestore';
+import { doc, onSnapshot, collection, query, where } from 'firebase/firestore';
 
 export function useMedicalData() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -17,6 +17,7 @@ export function useMedicalData() {
   const [nursingRequests, setNursingRequests] = useState<NursingRequest[]>([]);
   const [consultations, setConsultations] = useState<Consultation[]>([]);
   const [prescriptions, setPrescriptions] = useState<Prescription[]>([]);
+  const [teamMembers, setTeamMembers] = useState<User[]>([]);
   const [googleEvents, setGoogleEvents] = useState<any[]>([]);
   const [isGoogleConnected, setIsGoogleConnected] = useState(false);
 
@@ -129,6 +130,23 @@ export function useMedicalData() {
 
   // Suscripciones a Datos Clínicos
   useEffect(() => {
+    if (!currentUser?.organizationId) return;
+    const q = query(collection(db, 'users'), where('organizationId', '==', currentUser.organizationId));
+    const unsubTeam = onSnapshot(q, (snapshot) => {
+      const users = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as User));
+      setTeamMembers(users);
+    });
+    return () => unsubTeam();
+  }, [currentUser?.organizationId]);
+
+  const doctors = useMemo(() => {
+    const docList = teamMembers.filter(m => m.role === 'doctor' || m.role === 'organization_admin');
+    if (docList.length > 0) return docList;
+    if (currentUser) return [currentUser];
+    return [];
+  }, [teamMembers, currentUser]);
+
+  useEffect(() => {
     if (!currentUser?.organizationId || !currentUser?.onboardingCompleted) return;
 
     const unsubPatients = dbService.subscribeToPatients(setPatients, currentUser.organizationId);
@@ -205,7 +223,7 @@ export function useMedicalData() {
 
   return {
     currentUser, authLoading, workMode, toggleWorkMode,
-    patients, agenda, transactions, nursingRequests, consultations, prescriptions, settings, googleEvents, isGoogleConnected,
+    patients, agenda, transactions, nursingRequests, consultations, prescriptions, settings, googleEvents, isGoogleConnected, doctors, teamMembers,
     toast, hideToast, logout,
     addPatient,
     updatePatient: async (data: Partial<Patient>) => {
@@ -221,10 +239,14 @@ export function useMedicalData() {
       }
     },
     addAgendaItem,
-    confirmArrival: async (id: string) => {
+    confirmArrival: async (id: string, assignedDoctorId?: string, assignedDoctorName?: string) => {
       try {
-        await dbService.updateAppointmentStatus(id, 'waiting', currentUser!.organizationId, { arrivalTimestamp: new Date().toISOString() });
-        showToast('Llegada confirmada');
+        const extraData: any = { arrivalTimestamp: new Date().toISOString() };
+        if (assignedDoctorId) extraData.doctorId = assignedDoctorId;
+        if (assignedDoctorName) extraData.doctorId_name = assignedDoctorName;
+
+        await dbService.updateAppointmentStatus(id, 'waiting', currentUser!.organizationId, extraData);
+        showToast('Llegada confirmada' + (assignedDoctorName ? ` con Dr(a). ${assignedDoctorName}` : ''));
       } catch (e) {
         showToast('Error al confirmar llegada', 'error');
       }
