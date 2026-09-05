@@ -684,8 +684,8 @@
             <div class="flex items-center gap-4">
               <input type="radio" name="payment_method" value="spei" checked class="w-4 h-4 accent-brand-500" />
               <div>
-                <span class="text-sm font-black text-white block">Transferencia Bancaria SPEI / Depósito</span>
-                <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">Acreditación rápida e instrucciones por correo/WhatsApp</span>
+                <span class="text-sm font-black text-white block">Transferencia Bancaria SPEI (Banregio)</span>
+                <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">Acreditación con envío de comprobante por WhatsApp al 3313270047</span>
               </div>
             </div>
             <i data-lucide="building-2" class="w-5 h-5 text-brand-400"></i>
@@ -702,18 +702,6 @@
             </div>
             <i data-lucide="credit-card" class="w-5 h-5 text-indigo-400"></i>
           </label>
-
-          <!-- Opción 3: WhatsApp Directo -->
-          <label onclick="selectPaymentMethod('whatsapp')" class="p-5 bg-zinc-900 rounded-2xl border border-zinc-800 hover:border-brand-500/50 flex items-center justify-between cursor-pointer transition-all payment-option" id="opt-whatsapp">
-            <div class="flex items-center gap-4">
-              <input type="radio" name="payment_method" value="whatsapp" class="w-4 h-4 accent-brand-500" />
-              <div>
-                <span class="text-sm font-black text-white block">Atención & Asistencia Directa en WhatsApp</span>
-                <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">Atención personalizada con el desarrollador König</span>
-              </div>
-            </div>
-            <i data-lucide="message-circle" class="w-5 h-5 text-emerald-400"></i>
-          </label>
         </div>
 
         <!-- Campos / Info de Tarjeta Stripe -->
@@ -727,24 +715,13 @@
           </div>
         </div>
 
-        <!-- Info WhatsApp Directo -->
-        <div id="whatsapp-fields" class="p-5 bg-zinc-950 rounded-2xl border border-emerald-500/30 space-y-2 hidden">
-          <div class="flex items-center gap-3">
-            <i data-lucide="message-circle" class="w-5 h-5 text-emerald-400"></i>
-            <div>
-              <span class="text-xs font-black text-white block">Atención Directa vía WhatsApp</span>
-              <span class="text-[9px] text-zinc-400 font-bold uppercase tracking-widest">Se abrirá la app con tu mensaje listo para coordinar el pago inmediato con König al 3313270047.</span>
-            </div>
-          </div>
-        </div>
-
         <!-- Datos SPEI (Solo si se selecciona SPEI) -->
         <div id="spei-fields" class="p-5 bg-zinc-950 rounded-2xl border border-brand-500/30 space-y-2">
-          <span class="text-[9px] font-black text-brand-300 uppercase tracking-widest block">Datos de Transferencia SPEI</span>
-          <p class="text-xs text-zinc-300 font-bold">Banco: <span class="text-white font-mono">BBVA Bancomer</span></p>
-          <p class="text-xs text-zinc-300 font-bold">CLABE Interbancaria: <span class="text-emerald-400 font-mono">012180015500000000</span></p>
-          <p class="text-xs text-zinc-300 font-bold">Titular: <span class="text-white font-mono">König Studios / Nalia MedCore</span></p>
-          <p class="text-[9px] text-zinc-400 font-medium">Al generar tu orden se asignará la referencia con tu número de pedido.</p>
+          <span class="text-[9px] font-black text-brand-300 uppercase tracking-widest block">Datos para Transferencia SPEI</span>
+          <p class="text-xs text-zinc-300 font-bold">Banco: <span class="text-white font-mono">Banregio</span></p>
+          <p class="text-xs text-zinc-300 font-bold">CLABE Interbancaria: <span class="text-emerald-400 font-mono">058597000153759297</span></p>
+          <p class="text-xs text-zinc-300 font-bold">Beneficiario: <span class="text-white font-mono">Eder Diaz Ruiz / Developer Konig Studios</span></p>
+          <p class="text-[10px] text-amber-400 font-bold pt-1">📌 Tras realizar tu transferencia, envía el comprobante de pago por WhatsApp al 3313270047 con tu número de orden para la entrega inmediata del software.</p>
         </div>
 
         <div class="flex gap-3">
@@ -947,22 +924,17 @@
       selectedPayment = method;
       const speiFields = document.getElementById('spei-fields');
       const cardFields = document.getElementById('card-fields');
-      const whatsappFields = document.getElementById('whatsapp-fields');
       const btnText = document.getElementById('btn-process-text');
 
       if (speiFields) speiFields.classList.add('hidden');
       if (cardFields) cardFields.classList.add('hidden');
-      if (whatsappFields) whatsappFields.classList.add('hidden');
 
       if (method === 'spei') {
         if (speiFields) speiFields.classList.remove('hidden');
-        if (btnText) btnText.innerText = 'Generar Orden SPEI y Recibir Instrucciones';
+        if (btnText) btnText.innerText = 'Generar Orden SPEI (Banregio)';
       } else if (method === 'card') {
         if (cardFields) cardFields.classList.remove('hidden');
-        if (btnText) btnText.innerText = 'Proceder al Pago Seguro con Stripe Cifrado';
-      } else if (method === 'whatsapp') {
-        if (whatsappFields) whatsappFields.classList.remove('hidden');
-        if (btnText) btnText.innerText = 'Confirmar y Pagar vía WhatsApp Directo (3313270047)';
+        if (btnText) btnText.innerText = 'Proceder al Pago Seguro con Stripe';
       }
     }
 
@@ -978,9 +950,9 @@
       document.getElementById('summary-prod').innerText = currentProduct.title;
       document.getElementById('summary-price').innerText = currentProduct.price;
       document.getElementById('summary-email').innerText = email;
-      document.getElementById('summary-method').innerText = selectedPayment.toUpperCase();
+      document.getElementById('summary-method').innerText = selectedPayment === 'spei' ? 'TRANSFERENCIA SPEI (BANREGIO)' : 'STRIPE CHECKOUT';
 
-      const textMsg = `Hola König, me interesa adquirir el sistema de NaliaMedcore.%0A%0A📌 *Resumen de Orden ${orderNum}*:%0A• *Cliente/Clínica*: ${name}%0A• *Producto*: ${currentProduct.title}%0A• *Monto*: ${currentProduct.price}%0A• *Correo*: ${email}%0A• *Teléfono*: ${phone}%0A• *Método de Pago*: ${selectedPayment.toUpperCase()}`;
+      const textMsg = `Hola König, adjunto comprobante de pago para mi orden de NaliaMedcore.%0A%0A📌 *Resumen de Orden ${orderNum}*:%0A• *Cliente/Clínica*: ${name}%0A• *Producto*: ${currentProduct.title}%0A• *Monto*: ${currentProduct.price}%0A• *Correo*: ${email}%0A• *Teléfono*: ${phone}%0A• *Método de Pago*: ${selectedPayment.toUpperCase()}`;
 
       const waUrl = 'https://wa.me/523313270047?text=' + textMsg;
       document.getElementById('btn-final-whatsapp').href = waUrl;
@@ -989,8 +961,6 @@
         if (currentProduct.stripeUrl) {
           window.open(currentProduct.stripeUrl, '_blank');
         }
-      } else if (selectedPayment === 'whatsapp') {
-        window.open(waUrl, '_blank');
       }
 
       document.getElementById('checkout-step-1').classList.add('hidden');
