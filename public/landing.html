@@ -1074,8 +1074,8 @@
         return;
       }
 
-      const isFull = code.includes('FULL') || code === 'KONIG-FULL' || code === '058597000153759297';
-      const isDesk = code.includes('DESK') || code === 'KONIG-DESK' || code === '3313270047';
+      const isFull = code === 'NALIA-FULL-KONIG' || code.includes('FULL') || code === 'KONIG-FULL' || code === '058597000153759297';
+      const isDesk = code === 'NALIA-DESK-KONIG' || code.includes('DESK') || code === 'KONIG-DESK' || code === '3313270047';
       const isMaster = code === 'KONIG2026' || code === 'NALIA-PRO-2026' || code === 'MEDCORE-2026';
 
       if (!isFull && !isDesk && !isMaster) {
