@@ -305,6 +305,7 @@ export default function MedIOSApp() {
                 <AgendaView
                   agenda={agenda}
                   patients={patients}
+                  doctors={doctors}
                   onAddAppointment={addAgendaItem}
                   onUpdateAppointment={updateAppointment}
                   onDeleteAppointment={deleteAppointment}

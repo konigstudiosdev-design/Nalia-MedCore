@@ -11,6 +11,7 @@ import { Modal } from '../shared/Modal';
 interface AgendaViewProps {
   agenda: AgendaItem[];
   patients: Patient[];
+  doctors?: User[];
   onAddAppointment: (data: Partial<AgendaItem>) => void;
   onUpdateAppointment: (id: string, status: AppointmentStatus, extra?: any) => void;
   onDeleteAppointment: (id: string) => void;
@@ -27,7 +28,7 @@ const START_HOUR = 0;
 const END_HOUR = 23;
 
 export function AgendaView({
-  agenda, patients, onAddAppointment, onUpdateAppointment, onDeleteAppointment, onStartConsultation,
+  agenda, patients, doctors = [], onAddAppointment, onUpdateAppointment, onDeleteAppointment, onStartConsultation,
   googleEvents = [], isGoogleConnected = false, onConnectGoogle, onDisconnectGoogle, userRole
 }: AgendaViewProps) {
   const [viewMode, setViewMode] = useState<'day' | 'week' | 'month' | 'google'>('day');
@@ -91,18 +92,24 @@ export function AgendaView({
 
     try {
       setIsSaving(true);
+      const selectedDoc = doctors?.find(d => d.id === newAppointment.doctorId) || (doctors && doctors.length > 0 ? doctors[0] : null);
+      const doctorName = selectedDoc ? `${selectedDoc.name}${selectedDoc.lastName ? ' ' + selectedDoc.lastName : ''}` : 'Médico';
+      const doctorId = selectedDoc?.id || newAppointment.doctorId || 'owner';
+
       await onAddAppointment({
         ...newAppointment,
         date: formatDate(selectedDate),
         patientName: finalPatientName,
         patientId: newAppointment.patientId || 'unregistered',
+        doctorId: doctorId,
+        doctorId_name: doctorName,
         serviceId: 'general',
         status: newAppointment.status || 'confirmed',
         duration: newAppointment.duration || 30
       });
 
       setIsAddModalOpen(false);
-      setNewAppointment({ time: '09:00', duration: 30, type: 'consulta', status: 'confirmed' });
+      setNewAppointment({ time: '09:00', duration: 30, type: 'consulta', status: 'confirmed', doctorId: doctors && doctors.length > 0 ? doctors[0].id : '' });
       setSearchPatient('');
     } catch (error) {
       console.error("Error creating appointment:", error);
@@ -472,6 +479,24 @@ export function AgendaView({
                  ))}
                </div>
             </div>
+
+            {doctors && doctors.length > 0 && (
+              <div>
+                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2 block">Médico de Atención *</label>
+                <select
+                  value={newAppointment.doctorId || (doctors.length > 0 ? doctors[0].id : '')}
+                  onChange={e => setNewAppointment({ ...newAppointment, doctorId: e.target.value })}
+                  className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3 text-white font-bold text-xs outline-none focus:ring-2 focus:ring-indigo-500/50"
+                >
+                  {doctors.map(d => (
+                    <option key={d.id} value={d.id}>
+                      Dr(a). {d.name} {d.lastName || ''} ({d.specialty || 'Médico de Staff'})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
             <div className="grid grid-cols-2 gap-4">
                <input type="time" value={newAppointment.time} onChange={e => setNewAppointment({...newAppointment, time: e.target.value})} className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3 text-white font-mono font-bold" />
                <select value={newAppointment.duration} onChange={e => setNewAppointment({...newAppointment, duration: parseInt(e.target.value)})} className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3 text-white font-bold">
