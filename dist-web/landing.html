@@ -716,18 +716,24 @@
           </label>
         </div>
 
-        <!-- Campos de Tarjeta (Solo si se selecciona tarjeta) -->
-        <div id="card-fields" class="p-5 bg-zinc-950 rounded-2xl border border-zinc-800 space-y-3 hidden">
-          <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block">Número de Tarjeta</label>
-          <input type="text" placeholder="4000 0000 0000 0000" class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-xs font-bold text-white outline-none font-mono" />
-          <div class="grid grid-cols-2 gap-3">
+        <!-- Campos / Info de Tarjeta Stripe -->
+        <div id="card-fields" class="p-5 bg-zinc-950 rounded-2xl border border-indigo-500/30 space-y-3 hidden">
+          <div class="flex items-center gap-3">
+            <i data-lucide="shield-check" class="w-5 h-5 text-indigo-400"></i>
             <div>
-              <label class="text-[9px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Vencimiento</label>
-              <input type="text" placeholder="MM/AA" class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-xs font-bold text-white outline-none font-mono" />
+              <span class="text-xs font-black text-white block">Checkout Cifrado con Stripe</span>
+              <span class="text-[9px] text-zinc-400 font-bold uppercase tracking-widest">Al confirmar, serás redirigido al portal oficial de Stripe para completar tu pago de forma 100% segura.</span>
             </div>
+          </div>
+        </div>
+
+        <!-- Info WhatsApp Directo -->
+        <div id="whatsapp-fields" class="p-5 bg-zinc-950 rounded-2xl border border-emerald-500/30 space-y-2 hidden">
+          <div class="flex items-center gap-3">
+            <i data-lucide="message-circle" class="w-5 h-5 text-emerald-400"></i>
             <div>
-              <label class="text-[9px] font-black text-zinc-400 uppercase tracking-widest block mb-1">CVC / CVV</label>
-              <input type="text" placeholder="123" class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-xs font-bold text-white outline-none font-mono" />
+              <span class="text-xs font-black text-white block">Atención Directa vía WhatsApp</span>
+              <span class="text-[9px] text-zinc-400 font-bold uppercase tracking-widest">Se abrirá la app con tu mensaje listo para coordinar el pago inmediato con König al 3313270047.</span>
             </div>
           </div>
         </div>
@@ -745,9 +751,9 @@
           <button onclick="goToStep1()" class="py-4 px-6 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 rounded-2xl font-black text-xs uppercase tracking-widest transition-all">
             Volver
           </button>
-          <button onclick="processOrder()" class="flex-1 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-emerald-600/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+          <button id="btn-process-submit" onclick="processOrder()" class="flex-1 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-emerald-600/30 transition-all active:scale-95 flex items-center justify-center gap-2">
             <i data-lucide="check-circle" class="w-4 h-4"></i>
-            <span>Confirmar y Generar Orden de Compra</span>
+            <span id="btn-process-text">Confirmar y Generar Orden de Compra</span>
           </button>
         </div>
       </div>
@@ -939,16 +945,22 @@
       selectedPayment = method;
       const speiFields = document.getElementById('spei-fields');
       const cardFields = document.getElementById('card-fields');
+      const whatsappFields = document.getElementById('whatsapp-fields');
+      const btnText = document.getElementById('btn-process-text');
+
+      if (speiFields) speiFields.classList.add('hidden');
+      if (cardFields) cardFields.classList.add('hidden');
+      if (whatsappFields) whatsappFields.classList.add('hidden');
 
       if (method === 'spei') {
-        speiFields.classList.remove('hidden');
-        cardFields.classList.add('hidden');
+        if (speiFields) speiFields.classList.remove('hidden');
+        if (btnText) btnText.innerText = 'Generar Orden SPEI y Recibir Instrucciones';
       } else if (method === 'card') {
-        cardFields.classList.remove('hidden');
-        speiFields.classList.add('hidden');
-      } else {
-        speiFields.classList.add('hidden');
-        cardFields.classList.add('hidden');
+        if (cardFields) cardFields.classList.remove('hidden');
+        if (btnText) btnText.innerText = 'Proceder al Pago Seguro con Stripe Cifrado';
+      } else if (method === 'whatsapp') {
+        if (whatsappFields) whatsappFields.classList.remove('hidden');
+        if (btnText) btnText.innerText = 'Confirmar y Pagar vía WhatsApp Directo (3313270047)';
       }
     }
 
@@ -969,6 +981,10 @@
       const textMsg = `Hola König, me interesa adquirir el sistema de NaliaMedcore.%0A%0A📌 *Resumen de Orden ${orderNum}*:%0A• *Cliente/Clínica*: ${name}%0A• *Producto*: ${currentProduct.title}%0A• *Monto*: ${currentProduct.price}%0A• *Correo*: ${email}%0A• *Teléfono*: ${phone}%0A• *Método de Pago*: ${selectedPayment.toUpperCase()}`;
 
       document.getElementById('btn-final-whatsapp').href = 'https://wa.me/523313270047?text=' + textMsg;
+
+      if (selectedPayment === 'whatsapp') {
+        window.open('https://wa.me/523313270047?text=' + textMsg, '_blank');
+      }
 
       document.getElementById('checkout-step-1').classList.add('hidden');
       document.getElementById('checkout-step-2').classList.add('hidden');
