@@ -1126,6 +1126,25 @@
       btnContainer.innerHTML = htmlButtons;
       lucide.createIcons();
     }
+
+    function openUnlockModalWithCode(code) {
+      openUnlockModal();
+      document.getElementById('license-code-input').value = code;
+      validateLicenseCode();
+    }
+
+    // Detección automática de redirección post-pago de Stripe (?success=full o ?success=desk)
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const successType = urlParams.get('success');
+      const codeParam = urlParams.get('code');
+
+      if (successType === 'full' || codeParam === 'NALIA-FULL-KONIG') {
+        setTimeout(() => openUnlockModalWithCode('NALIA-FULL-KONIG'), 300);
+      } else if (successType === 'desk' || codeParam === 'NALIA-DESK-KONIG') {
+        setTimeout(() => openUnlockModalWithCode('NALIA-DESK-KONIG'), 300);
+      }
+    });
   </script>
 </body>
 </html>
