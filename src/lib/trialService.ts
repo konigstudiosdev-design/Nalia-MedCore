@@ -33,7 +33,27 @@ function sanitizeIpKey(ip: string): string {
   return ip.replace(/[\.\:\/]/g, '_');
 }
 
-export async function checkOrStartTrial(): Promise<TrialStatus> {
+export function isDevOrElectron(): boolean {
+  if (typeof window === 'undefined') return false;
+  const host = window.location.hostname;
+  if (
+    host === 'localhost' ||
+    host === '127.0.0.1' ||
+    host.startsWith('192.168.') ||
+    host.startsWith('10.') ||
+    navigator.userAgent.includes('Electron')
+  ) {
+    return true;
+  }
+  return false;
+}
+
+export async function checkOrStartTrial(): Promise<TrialStatus | null> {
+  // En desarrollo local (localhost), red local o aplicación Electron de escritorio NO se muestra la prueba
+  if (isDevOrElectron()) {
+    return null;
+  }
+
   const ip = await getUserIp();
   const sanitizedKey = sanitizeIpKey(ip);
   const now = Date.now();
