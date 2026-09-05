@@ -850,6 +850,7 @@
           type: 'source',
           title: 'Licencia Código Fuente Full',
           price: '$299 USD ($4,999 MXN)',
+          stripeUrl: 'https://buy.stripe.com/naliamedcore_full',
           desc: 'Acceso total al código fuente original React 19 + TypeScript + Electron + Firebase con derechos de propiedad e instalación ilimitada.',
           includes: [
             'Código fuente completo en TypeScript 100% comentado',
@@ -865,6 +866,7 @@
           type: 'desktop',
           title: 'Software de Escritorio Nativo Nalia MedCore',
           price: '$99 USD ($1,799 MXN)',
+          stripeUrl: 'https://buy.stripe.com/naliamedcore_desktop',
           desc: 'Archivos ejecutables independientes compilados con Electron para instalar directamente en tu equipo.',
           includes: [
             'Instalador nativo ejecutable para macOS (.DMG Apple Silicon / Intel)',
@@ -980,10 +982,15 @@
 
       const textMsg = `Hola König, me interesa adquirir el sistema de NaliaMedcore.%0A%0A📌 *Resumen de Orden ${orderNum}*:%0A• *Cliente/Clínica*: ${name}%0A• *Producto*: ${currentProduct.title}%0A• *Monto*: ${currentProduct.price}%0A• *Correo*: ${email}%0A• *Teléfono*: ${phone}%0A• *Método de Pago*: ${selectedPayment.toUpperCase()}`;
 
-      document.getElementById('btn-final-whatsapp').href = 'https://wa.me/523313270047?text=' + textMsg;
+      const waUrl = 'https://wa.me/523313270047?text=' + textMsg;
+      document.getElementById('btn-final-whatsapp').href = waUrl;
 
-      if (selectedPayment === 'whatsapp') {
-        window.open('https://wa.me/523313270047?text=' + textMsg, '_blank');
+      if (selectedPayment === 'card') {
+        if (currentProduct.stripeUrl) {
+          window.open(currentProduct.stripeUrl, '_blank');
+        }
+      } else if (selectedPayment === 'whatsapp') {
+        window.open(waUrl, '_blank');
       }
 
       document.getElementById('checkout-step-1').classList.add('hidden');
