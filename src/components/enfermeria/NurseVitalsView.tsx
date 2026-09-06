@@ -21,6 +21,18 @@ export function NurseVitalsView({
   const [selectedAppointment, setSelectedAppointment] = useState<AgendaItem | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const formatDateDisplay = (dateStr?: string) => {
+    if (!dateStr) return 'Hoy';
+    try {
+      const [y, m, d] = dateStr.split('-').map(Number);
+      if (!y || !m || !d) return dateStr;
+      const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+      return `${d} ${months[m - 1]} ${y}`;
+    } catch {
+      return dateStr;
+    }
+  };
+
   // Pacientes en sala de espera o con solicitud de signos vitales
   const waitingPatients = agenda.filter(a =>
     a.status === 'waiting' ||
@@ -137,7 +149,7 @@ export function NurseVitalsView({
                               )}
                            </div>
                            <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-1">
-                              Hora Cita: {apt.time} • Tipo: {apt.type}
+                              Fecha Cita: {formatDateDisplay(apt.date)} • Hora Cita: {apt.time} • Tipo: {apt.type}
                            </div>
                         </div>
                      </div>
