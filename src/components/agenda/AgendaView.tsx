@@ -27,6 +27,12 @@ const HOUR_HEIGHT = 80; // Reducimos un poco la altura para que quepan más hora
 const START_HOUR = 0;
 const END_HOUR = 23;
 
+const TIME_OPTIONS_24H = Array.from({ length: 48 }, (_, i) => {
+  const h = Math.floor(i / 2).toString().padStart(2, '0');
+  const m = i % 2 === 0 ? '00' : '30';
+  return `${h}:${m}`;
+});
+
 const HOURS_24 = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0'));
 const MINUTES_15 = ['00', '15', '30', '45'];
 
@@ -502,43 +508,61 @@ export function AgendaView({
               </div>
             )}
 
-            {/* SELECCIÓN MINIMALISTA Y ELEGANTE DE HORARIO 24H Y DURACIÓN */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2 flex items-center gap-1.5 ml-1">
-                  <Clock size={12} className="text-indigo-400"/> Horario de Cita (24h) *
+            {/* SELECTOR SCROLLABLE HORIZONTAL MINIMALISTA (24H) */}
+            <div className="space-y-2">
+              <div className="flex justify-between items-center px-1">
+                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest flex items-center gap-1.5">
+                  <Clock size={12} className="text-indigo-400"/> Horario de Cita (Formato 24h) *
                 </label>
-                <input
-                  type="time"
-                  value={newAppointment.time || '09:00'}
-                  onChange={e => setNewAppointment({ ...newAppointment, time: e.target.value })}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3.5 text-white font-mono font-black text-sm outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all cursor-pointer"
-                />
+                <span className="text-[10px] font-mono font-black text-emerald-400 px-2.5 py-0.5 bg-emerald-500/10 rounded-full border border-emerald-500/20">
+                  {newAppointment.time || '09:00'} hrs
+                </span>
               </div>
 
-              <div>
-                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2 block ml-1">
-                  Duración *
-                </label>
-                <div className="grid grid-cols-4 gap-1 bg-zinc-900 p-1.5 rounded-2xl border border-zinc-800 h-[50px] items-center">
-                  {[15, 30, 45, 60].map(dur => {
-                    const isSelected = (newAppointment.duration || 30) === dur;
-                    return (
-                      <button
-                        key={dur}
-                        type="button"
-                        onClick={() => setNewAppointment({ ...newAppointment, duration: dur })}
-                        className={`h-full rounded-xl font-black text-[10px] uppercase transition-all flex items-center justify-center ${
-                          isSelected
-                            ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
-                            : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
-                        }`}
-                      >
-                        {dur}m
-                      </button>
-                    );
-                  })}
-                </div>
+              <div className="flex gap-1.5 overflow-x-auto p-2 bg-zinc-900/80 border border-zinc-800 rounded-2xl custom-scrollbar snap-x">
+                {TIME_OPTIONS_24H.map(t => {
+                  const isSelected = (newAppointment.time || '09:00') === t;
+                  return (
+                    <button
+                      key={t}
+                      type="button"
+                      onClick={() => setNewAppointment({ ...newAppointment, time: t })}
+                      className={`px-3 py-2.5 rounded-xl font-mono text-xs font-black shrink-0 transition-all snap-center ${
+                        isSelected
+                          ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 scale-105'
+                          : 'bg-zinc-950/80 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800/50'
+                      }`}
+                    >
+                      {t}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* SELECCIÓN DE DURACIÓN */}
+            <div>
+              <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2 block ml-1">
+                Duración Estimada *
+              </label>
+              <div className="grid grid-cols-4 gap-1.5 bg-zinc-900 p-1.5 rounded-2xl border border-zinc-800">
+                {[15, 30, 45, 60].map(dur => {
+                  const isSelected = (newAppointment.duration || 30) === dur;
+                  return (
+                    <button
+                      key={dur}
+                      type="button"
+                      onClick={() => setNewAppointment({ ...newAppointment, duration: dur })}
+                      className={`py-2.5 rounded-xl font-black text-[10px] uppercase transition-all flex items-center justify-center ${
+                        isSelected
+                          ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+                          : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
+                      }`}
+                    >
+                      {dur}m
+                    </button>
+                  );
+                })}
               </div>
             </div>
             <button onClick={handleCreateAppointment} disabled={isSaving || !searchPatient}
