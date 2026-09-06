@@ -39,7 +39,7 @@ export const savePatient = async (patient: Partial<Patient>, orgId: string) => {
   const colRef = collection(db, 'organizations', orgId, 'patients');
   if (patient.id) {
     const docRef = doc(db, 'organizations', orgId, 'patients', patient.id);
-    await updateDoc(docRef, { ...patient, updatedAt: serverTimestamp() });
+    await setDoc(docRef, { ...patient, updatedAt: serverTimestamp() }, { merge: true });
   } else {
     await addDoc(colRef, {
       ...patient,

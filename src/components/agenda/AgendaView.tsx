@@ -27,6 +27,12 @@ const HOUR_HEIGHT = 80; // Reducimos un poco la altura para que quepan más hora
 const START_HOUR = 0;
 const END_HOUR = 23;
 
+const TIME_OPTIONS_24H = Array.from({ length: 48 }, (_, i) => {
+  const h = Math.floor(i / 2).toString().padStart(2, '0');
+  const m = i % 2 === 0 ? '00' : '30';
+  return `${h}:${m}`;
+});
+
 export function AgendaView({
   agenda, patients, doctors = [], onAddAppointment, onUpdateAppointment, onDeleteAppointment, onStartConsultation,
   googleEvents = [], isGoogleConnected = false, onConnectGoogle, onDisconnectGoogle, userRole
@@ -497,11 +503,25 @@ export function AgendaView({
               </div>
             )}
 
-            <div className="grid grid-cols-2 gap-4">
-               <input type="time" value={newAppointment.time} onChange={e => setNewAppointment({...newAppointment, time: e.target.value})} className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3 text-white font-mono font-bold" />
-               <select value={newAppointment.duration} onChange={e => setNewAppointment({...newAppointment, duration: parseInt(e.target.value)})} className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3 text-white font-bold">
-                 <option value={15}>15 min</option><option value={30}>30 min</option><option value={60}>60 min</option>
-               </select>
+            <div class="grid grid-cols-2 gap-4">
+               <div>
+                 <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-1.5 block">Hora (Formato 24h) *</label>
+                 <select
+                   value={newAppointment.time || '09:00'}
+                   onChange={e => setNewAppointment({...newAppointment, time: e.target.value})}
+                   className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-4 py-3.5 text-white font-mono font-bold text-xs outline-none focus:ring-2 focus:ring-indigo-500/50"
+                 >
+                   {TIME_OPTIONS_24H.map(t => (
+                     <option key={t} value={t}>{t} hrs</option>
+                   ))}
+                 </select>
+               </div>
+               <div>
+                 <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-1.5 block">Duración *</label>
+                 <select value={newAppointment.duration} onChange={e => setNewAppointment({...newAppointment, duration: parseInt(e.target.value)})} className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-4 py-3.5 text-white font-bold text-xs outline-none focus:ring-2 focus:ring-indigo-500/50">
+                   <option value={15}>15 min</option><option value={30}>30 min</option><option value={45}>45 min</option><option value={60}>60 min</option>
+                 </select>
+               </div>
             </div>
             <button onClick={handleCreateAppointment} disabled={isSaving || !searchPatient}
               className="w-full py-4 bg-indigo-600 disabled:bg-zinc-800 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl active:scale-95 transition-all"
