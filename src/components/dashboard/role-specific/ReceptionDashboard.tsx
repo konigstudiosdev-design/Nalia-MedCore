@@ -16,8 +16,24 @@ interface ReceptionDashboardProps {
 
 export function ReceptionDashboard({ agenda = [], patients = [], transactions = [], doctors = [], onRegisterArrival, navigateTo }: ReceptionDashboardProps) {
   const hoy = useMemo(() => formatLocalDate(), []);
-  const pendingArrival = agenda.filter(a => (a.status === 'confirmed' || a.status === 'pending') && (!a.date || a.date === hoy));
-  const waiting = agenda.filter(a => (a.status === 'waiting' || a.status === 'in_consultation') && (!a.date || a.date === hoy));
+
+  // Sincronización completa con la Agenda del Día para Recepción
+  const agendaHoy = useMemo(() => {
+    return agenda.filter(a => !a.date || a.date === hoy);
+  }, [agenda, hoy]);
+
+  const [activeTab, setActiveTab] = useState<'pending' | 'waiting' | 'in_consultation' | 'all'>('pending');
+
+  const filteredAppointments = useMemo(() => {
+    if (activeTab === 'pending') return agendaHoy.filter(a => a.status === 'confirmed' || a.status === 'pending');
+    if (activeTab === 'waiting') return agendaHoy.filter(a => a.status === 'waiting');
+    if (activeTab === 'in_consultation') return agendaHoy.filter(a => a.status === 'in_consultation');
+    return agendaHoy;
+  }, [agendaHoy, activeTab]);
+
+  const pendingArrival = agendaHoy.filter(a => a.status === 'confirmed' || a.status === 'pending');
+  const waitingCount = agendaHoy.filter(a => a.status === 'waiting').length;
+  const inConsultationCount = agendaHoy.filter(a => a.status === 'in_consultation').length;
   const pendingPayment = agenda.filter(a => a.status === 'pending_payment');
 
   const [assigningApt, setAssigningApt] = useState<AgendaItem | null>(null);
@@ -66,37 +82,103 @@ export function ReceptionDashboard({ agenda = [], patients = [], transactions = 
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Check-in List */}
+        {/* Check-in List & Agenda Sync */}
         <div className="bg-white dark:bg-[#121212] border border-zinc-200 dark:border-zinc-800 rounded-[32px] overflow-hidden shadow-sm flex flex-col">
-          <div className="p-6 border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center bg-zinc-50/50 dark:bg-[#0A0A0A]">
+          <div className="p-6 border-b border-zinc-100 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-zinc-50/50 dark:bg-[#0A0A0A]">
             <div>
                <h3 className="font-black text-lg">Validación y Recepción</h3>
-               <p className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mt-0.5">Control de llegada de pacientes</p>
+               <p className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mt-0.5">Control de llegada y flujo de agenda del día</p>
             </div>
+            <button
+              onClick={() => navigateTo('agenda')}
+              className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-indigo-600 hover:text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all self-start sm:self-auto"
+            >
+              Ver Agenda Full
+            </button>
           </div>
-          <div className="flex-1 overflow-y-auto max-h-[400px]">
-            {pendingArrival.length === 0 ? (
+
+          {/* Filtros de Estado de Agenda */}
+          <div className="flex bg-zinc-100/50 dark:bg-[#080808] p-1 border-b border-zinc-100 dark:border-zinc-800/80">
+            {[
+              { id: 'pending', label: 'Por Llegar', count: pendingArrival.length },
+              { id: 'waiting', label: 'En Sala', count: waitingCount },
+              { id: 'in_consultation', label: 'En Consulta', count: inConsultationCount },
+              { id: 'all', label: 'Todos Hoy', count: agendaHoy.length }
+            ].map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`flex-1 py-2 rounded-lg text-[9px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
+                  activeTab === tab.id
+                    ? 'bg-white dark:bg-zinc-800 text-indigo-600 dark:text-indigo-400 shadow-sm border border-zinc-200 dark:border-zinc-700'
+                    : 'text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                }`}
+              >
+                <span>{tab.label}</span>
+                <span className={`px-1.5 py-0.2 rounded-full text-[8px] ${activeTab === tab.id ? 'bg-indigo-500/20 text-indigo-500' : 'bg-zinc-200 dark:bg-zinc-800'}`}>
+                  {tab.count}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div className="flex-1 overflow-y-auto max-h-[420px]">
+            {filteredAppointments.length === 0 ? (
               <div className="p-12 text-center text-zinc-400">
                  <LogIn size={40} className="mx-auto mb-4 opacity-10"/>
-                 <p className="font-bold text-sm">No hay pacientes por llegar</p>
+                 <p className="font-bold text-sm">No hay citas en este estado para hoy</p>
               </div>
             ) : (
               <div className="divide-y divide-zinc-50 dark:divide-zinc-900/50">
-                {pendingArrival.map(apt => (
+                {filteredAppointments.map(apt => (
                   <div key={apt.id} className="p-5 flex items-center justify-between hover:bg-zinc-50 dark:hover:bg-zinc-900/30 transition-colors">
                     <div className="flex items-center gap-4">
-                       <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-500 font-bold text-xs">{apt.time}</div>
+                       <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-500 font-bold text-xs shrink-0">{apt.time}</div>
                        <div>
-                          <div className="font-black text-sm">{apt.patientName}</div>
-                          <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">{apt.type} • Dr. {apt.doctorId}</div>
+                          <div className="font-black text-sm text-zinc-900 dark:text-zinc-50">{apt.patientName}</div>
+                          <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-0.5">
+                            {apt.type} • <span className="text-indigo-500 font-black">Dr(a). {apt.doctorId_name || apt.doctorId}</span>
+                          </div>
                        </div>
                     </div>
-                    <button
-                      onClick={() => handleArrivalClick(apt)}
-                      className="px-6 py-3 bg-indigo-600 text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-lg shadow-indigo-600/20 active:scale-95 transition-all flex items-center gap-2"
-                    >
-                      Confirmar Llegada
-                    </button>
+
+                    <div className="shrink-0 ml-2">
+                      {(apt.status === 'confirmed' || apt.status === 'pending') && (
+                        <button
+                          onClick={() => handleArrivalClick(apt)}
+                          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-md shadow-indigo-600/20 active:scale-95 transition-all flex items-center gap-1.5"
+                        >
+                          Confirmar Llegada
+                        </button>
+                      )}
+
+                      {apt.status === 'waiting' && (
+                        <span className="px-3 py-1.5 bg-amber-500/10 text-amber-600 dark:text-amber-400 rounded-xl text-[9px] font-black uppercase tracking-widest border border-amber-500/20">
+                          En Sala de Espera
+                        </span>
+                      )}
+
+                      {apt.status === 'in_consultation' && (
+                        <span className="px-3 py-1.5 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-xl text-[9px] font-black uppercase tracking-widest border border-indigo-500/20 animate-pulse">
+                          En Consulta
+                        </span>
+                      )}
+
+                      {apt.status === 'pending_payment' && (
+                        <button
+                          onClick={() => navigateTo('finanzas')}
+                          className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-md shadow-emerald-600/20 active:scale-95 transition-all"
+                        >
+                          Cobrar
+                        </button>
+                      )}
+
+                      {(apt.status === 'finished' || apt.status === 'paid') && (
+                        <span className="px-3 py-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-xl text-[9px] font-black uppercase tracking-widest border border-emerald-500/20">
+                          Completado
+                        </span>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
