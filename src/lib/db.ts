@@ -14,6 +14,14 @@ import {
 import { db } from './firebase';
 import { Patient, AgendaItem, Transaction, NursingRequest, User, Organization, Consultation, Prescription } from '../types';
 
+// Helper de Fecha Local YYYY-MM-DD (Evita errores de zona horaria UTC en horario nocturno)
+export const formatLocalDate = (date: Date = new Date()): string => {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+};
+
 // Users
 export const updateUserProfile = async (userId: string, data: Partial<User>) => {
   const docRef = doc(db, 'users', userId);

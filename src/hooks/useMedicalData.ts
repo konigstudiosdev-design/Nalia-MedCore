@@ -207,7 +207,7 @@ export function useMedicalData() {
       }
       await dbService.createAppointment({
         ...data,
-        date: data.date || new Date().toISOString().split('T')[0],
+        date: data.date || dbService.formatLocalDate(),
         patientId: finalPatientId,
         organizationId: currentUser.organizationId,
         doctorId: currentUser.id || 'owner',

@@ -7,6 +7,7 @@ import {
 import { AgendaItem, Patient, AppointmentStatus, Role } from '../../types';
 import { StatusBadge } from '../shared/StatusBadge';
 import { Modal } from '../shared/Modal';
+import { formatLocalDate } from '../../lib/db';
 
 interface AgendaViewProps {
   agenda: AgendaItem[];
@@ -69,7 +70,7 @@ export function AgendaView({
 
   const getHeight = (duration: number) => (duration / 60) * HOUR_HEIGHT;
 
-  const formatDate = (date: Date) => date.toISOString().split('T')[0];
+  const formatDate = (date: Date) => formatLocalDate(date);
 
   const filteredAgenda = useMemo(() => {
     const targetDate = formatDate(selectedDate);

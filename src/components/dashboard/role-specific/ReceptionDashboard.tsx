@@ -3,6 +3,7 @@ import { Users, Clock, CreditCard, Calendar, UserPlus, LogIn, CheckCircle2, Aler
 import { AgendaItem, Patient, Transaction, User } from '../../../types';
 import { KPICard } from '../KPICard';
 import { Modal } from '../../shared/Modal';
+import { formatLocalDate } from '../../../lib/db';
 
 interface ReceptionDashboardProps {
   agenda: AgendaItem[];
@@ -14,8 +15,9 @@ interface ReceptionDashboardProps {
 }
 
 export function ReceptionDashboard({ agenda = [], patients = [], transactions = [], doctors = [], onRegisterArrival, navigateTo }: ReceptionDashboardProps) {
-  const pendingArrival = agenda.filter(a => a.status === 'confirmed' || a.status === 'pending');
-  const waiting = agenda.filter(a => a.status === 'waiting' || a.status === 'in_consultation');
+  const hoy = useMemo(() => formatLocalDate(), []);
+  const pendingArrival = agenda.filter(a => (a.status === 'confirmed' || a.status === 'pending') && (!a.date || a.date === hoy));
+  const waiting = agenda.filter(a => (a.status === 'waiting' || a.status === 'in_consultation') && (!a.date || a.date === hoy));
   const pendingPayment = agenda.filter(a => a.status === 'pending_payment');
 
   const [assigningApt, setAssigningApt] = useState<AgendaItem | null>(null);
@@ -49,11 +51,10 @@ export function ReceptionDashboard({ agenda = [], patients = [], transactions = 
 
   // Cálculo en vivo del total cobrado hoy en caja
   const cajaHoy = useMemo(() => {
-    const hoy = new Date().toISOString().split('T')[0];
     return transactions
       .filter(t => t.date.startsWith(hoy) && t.type === 'ingreso')
       .reduce((acc, t) => acc + t.amount, 0);
-  }, [transactions]);
+  }, [transactions, hoy]);
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
