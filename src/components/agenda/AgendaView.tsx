@@ -502,96 +502,42 @@ export function AgendaView({
               </div>
             )}
 
-            {/* SELECTOR DE HORARIO TIPO SCROLL 24 HORAS */}
-            <div className="space-y-3 p-4 bg-zinc-900/60 rounded-3xl border border-zinc-800">
-              <div className="flex justify-between items-center">
-                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest flex items-center gap-1.5">
-                  <Clock size={12} className="text-indigo-400"/> Seleccionar Horario (Formato 24h) *
+            {/* SELECCIÓN MINIMALISTA Y ELEGANTE DE HORARIO 24H Y DURACIÓN */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2 flex items-center gap-1.5 ml-1">
+                  <Clock size={12} className="text-indigo-400"/> Horario de Cita (24h) *
                 </label>
-                <span className="text-xs font-mono font-black text-emerald-400 px-2.5 py-0.5 bg-emerald-500/10 rounded-full border border-emerald-500/20">
-                  {selectedHour}:{selectedMinute} hrs
-                </span>
+                <input
+                  type="time"
+                  value={newAppointment.time || '09:00'}
+                  onChange={e => setNewAppointment({ ...newAppointment, time: e.target.value })}
+                  className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3.5 text-white font-mono font-black text-sm outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all cursor-pointer"
+                />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* 1. Selector de Horas con Scroll (00 a 23) */}
-                <div>
-                  <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest block mb-2">1. Hora (Scroll)</span>
-                  <div className="h-32 overflow-y-auto pr-1 space-y-1 rounded-2xl bg-zinc-950 p-2 border border-zinc-800/80">
-                    {HOURS_24.map(h => {
-                      const isSelected = selectedHour === h;
-                      return (
-                        <button
-                          key={h}
-                          type="button"
-                          onClick={() => {
-                            setSelectedHour(h);
-                            setNewAppointment(prev => ({ ...prev, time: `${h}:${selectedMinute}` }));
-                          }}
-                          className={`w-full py-2 px-3 rounded-xl font-mono text-xs font-black text-left flex items-center justify-between transition-all ${
-                            isSelected
-                              ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
-                              : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
-                          }`}
-                        >
-                          <span>{h}:00 hrs</span>
-                          {isSelected && <span className="text-[9px] bg-white/20 px-1.5 py-0.5 rounded font-sans uppercase">OK</span>}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* 2. Selector de Minutos y Duración */}
-                <div className="space-y-3">
-                  <div>
-                    <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest block mb-2">2. Minuto</span>
-                    <div className="grid grid-cols-2 gap-1.5">
-                      {MINUTES_15.map(m => {
-                        const isSelected = selectedMinute === m;
-                        return (
-                          <button
-                            key={m}
-                            type="button"
-                            onClick={() => {
-                              setSelectedMinute(m);
-                              setNewAppointment(prev => ({ ...prev, time: `${selectedHour}:${m}` }));
-                            }}
-                            className={`py-2 px-3 rounded-xl font-mono text-xs font-black text-center transition-all ${
-                              isSelected
-                                ? 'bg-indigo-600 text-white shadow-md'
-                                : 'bg-zinc-950 text-zinc-400 hover:text-white border border-zinc-800'
-                            }`}
-                          >
-                            :{m} min
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest block mb-1.5">3. Duración de Consulta</span>
-                    <div className="grid grid-cols-2 gap-1.5">
-                      {[15, 30, 45, 60].map(dur => {
-                        const isSelected = (newAppointment.duration || 30) === dur;
-                        return (
-                          <button
-                            key={dur}
-                            type="button"
-                            onClick={() => setNewAppointment(prev => ({ ...prev, duration: dur }))}
-                            className={`py-2 px-2.5 rounded-xl font-sans text-[10px] font-black text-center uppercase tracking-wider transition-all ${
-                              isSelected
-                                ? 'bg-emerald-600 text-white shadow-md'
-                                : 'bg-zinc-950 text-zinc-400 hover:text-white border border-zinc-800'
-                            }`}
-                          >
-                            {dur} min
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
+              <div>
+                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2 block ml-1">
+                  Duración *
+                </label>
+                <div className="grid grid-cols-4 gap-1 bg-zinc-900 p-1.5 rounded-2xl border border-zinc-800 h-[50px] items-center">
+                  {[15, 30, 45, 60].map(dur => {
+                    const isSelected = (newAppointment.duration || 30) === dur;
+                    return (
+                      <button
+                        key={dur}
+                        type="button"
+                        onClick={() => setNewAppointment({ ...newAppointment, duration: dur })}
+                        className={`h-full rounded-xl font-black text-[10px] uppercase transition-all flex items-center justify-center ${
+                          isSelected
+                            ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+                            : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
+                        }`}
+                      >
+                        {dur}m
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
