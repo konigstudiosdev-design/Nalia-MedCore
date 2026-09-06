@@ -159,7 +159,7 @@ export function PatientDetail({
           </div>
         </div>
 
-        {/* CTA: Iniciar Consulta / Ficha Asistencial */}
+        {/* CTA: Iniciar Consulta */}
         {(userRole === 'doctor' || userRole === 'organization_admin' || !userRole) ? (
           <div className="p-8 bg-indigo-600 rounded-[32px] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-indigo-600/20">
             <div className="text-center md:text-left">
@@ -171,19 +171,6 @@ export function PatientDetail({
               className="px-8 py-4 bg-white text-indigo-600 rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg hover:scale-105 transition-all active:scale-95 flex items-center gap-2"
             >
               Abrir en Consulta
-            </button>
-          </div>
-        ) : userRole === 'nurse' ? (
-          <div className="p-8 bg-emerald-600 rounded-[32px] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-emerald-600/20">
-            <div className="text-center md:text-left">
-              <h4 className="text-xl font-black mb-1 tracking-tight">Atención Asistencial</h4>
-              <p className="text-emerald-100 text-sm font-medium opacity-90">Los signos vitales y notas de preparación registrados se enviarán automáticamente al expediente médico.</p>
-            </div>
-            <button
-              onClick={() => navigateTo('vitals')}
-              className="px-8 py-4 bg-white text-emerald-700 rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg hover:scale-105 transition-all active:scale-95 flex items-center gap-2"
-            >
-              Centro de Signos Vitales
             </button>
           </div>
         ) : null}
