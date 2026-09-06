@@ -185,7 +185,7 @@
               <h3 class="text-2xl font-black text-white mt-3">Código Fuente Full</h3>
               <div class="flex items-center gap-2 mt-2">
                 <span class="text-2xl font-black text-emerald-400 font-mono">$499 USD</span>
-                <span class="text-xs font-bold text-zinc-400 font-mono">($9,999 MXN)</span>
+                <span id="price-full-mxn" class="text-xs font-bold text-zinc-400 font-mono">($9,999 MXN)</span>
               </div>
               <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Acceso total al código fuente original React 19, TypeScript, Electron, Firebase y configuraciones de PWA.</p>
             </div>
@@ -215,7 +215,7 @@
               <h3 class="text-2xl font-black text-white mt-3">Escritorio Nativo</h3>
               <div class="flex items-center gap-2 mt-2">
                 <span class="text-2xl font-black text-indigo-400 font-mono">$299 USD</span>
-                <span class="text-xs font-bold text-zinc-400 font-mono">($5,999 MXN)</span>
+                <span id="price-desk-mxn" class="text-xs font-bold text-zinc-400 font-mono">($5,999 MXN)</span>
               </div>
               <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Ejecutables independientes de pago compilados con Electron para instalar directamente en tu equipo.</p>
             </div>
@@ -879,12 +879,41 @@
       }
     }
 
+    let usdToMxnRate = 19.85;
+
+    async function fetchRealTimeExchangeRate() {
+      try {
+        const res = await fetch('https://open.er-api.com/v6/latest/USD');
+        const data = await res.json();
+        if (data && data.rates && data.rates.MXN) {
+          usdToMxnRate = data.rates.MXN;
+          updateDynamicPrices();
+        }
+      } catch (e) {
+        console.warn('[MXN CONVERSION] Usando tasa de respaldo:', e);
+      }
+    }
+
+    function updateDynamicPrices() {
+      const fullMxn = Math.round(499 * usdToMxnRate).toLocaleString('es-MX');
+      const deskMxn = Math.round(299 * usdToMxnRate).toLocaleString('es-MX');
+
+      const elFullMxn = document.getElementById('price-full-mxn');
+      const elDeskMxn = document.getElementById('price-desk-mxn');
+
+      if (elFullMxn) elFullMxn.innerText = `($${fullMxn} MXN)`;
+      if (elDeskMxn) elDeskMxn.innerText = `($${deskMxn} MXN)`;
+    }
+
     function openBuyModal(type) {
+      const fullMxn = Math.round(499 * usdToMxnRate).toLocaleString('es-MX');
+      const deskMxn = Math.round(299 * usdToMxnRate).toLocaleString('es-MX');
+
       if (type === 'source') {
         currentProduct = {
           type: 'source',
           title: 'Licencia Código Fuente Full',
-          price: '$499 USD ($9,999 MXN)',
+          price: `$499 USD ($${fullMxn} MXN)`,
           stripeUrl: 'https://buy.stripe.com/3cI4gzdVX0cE02Ofmo43S00',
           desc: 'Acceso total al código fuente original React 19 + TypeScript + Electron + Firebase con derechos de propiedad e instalación ilimitada.',
           includes: [
@@ -900,7 +929,7 @@
         currentProduct = {
           type: 'desktop',
           title: 'Software de Escritorio Nativo Nalia MedCore',
-          price: '$299 USD ($5,999 MXN)',
+          price: `$299 USD ($${deskMxn} MXN)`,
           stripeUrl: 'https://buy.stripe.com/cNibJ13hj9Ne7vgdeg43S01',
           desc: 'Archivos ejecutables independientes compilados con Electron para instalar directamente en tu equipo.',
           includes: [
