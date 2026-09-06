@@ -109,7 +109,7 @@ export function AgendaView({
 
       await onAddAppointment({
         ...newAppointment,
-        date: formatDate(selectedDate),
+        date: newAppointment.date || formatDate(selectedDate),
         patientName: finalPatientName,
         patientId: newAppointment.patientId || 'unregistered',
         doctorId: doctorId,
@@ -491,22 +491,34 @@ export function AgendaView({
                </div>
             </div>
 
-            {doctors && doctors.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2 block">Médico de Atención *</label>
-                <select
-                  value={newAppointment.doctorId || (doctors.length > 0 ? doctors[0].id : '')}
-                  onChange={e => setNewAppointment({ ...newAppointment, doctorId: e.target.value })}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3 text-white font-bold text-xs outline-none focus:ring-2 focus:ring-indigo-500/50"
-                >
-                  {doctors.map(d => (
-                    <option key={d.id} value={d.id}>
-                      Dr(a). {d.name} {d.lastName || ''} ({d.specialty || 'Médico de Staff'})
-                    </option>
-                  ))}
-                </select>
+                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2 block">Fecha de Cita *</label>
+                <input
+                  type="date"
+                  value={newAppointment.date || formatDate(selectedDate)}
+                  onChange={e => setNewAppointment({ ...newAppointment, date: e.target.value })}
+                  className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3 text-white font-mono font-bold text-xs outline-none focus:ring-2 focus:ring-indigo-500/50"
+                />
               </div>
-            )}
+
+              {doctors && doctors.length > 0 && (
+                <div>
+                  <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2 block">Médico de Atención *</label>
+                  <select
+                    value={newAppointment.doctorId || (doctors.length > 0 ? doctors[0].id : '')}
+                    onChange={e => setNewAppointment({ ...newAppointment, doctorId: e.target.value })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3 text-white font-bold text-xs outline-none focus:ring-2 focus:ring-indigo-500/50"
+                  >
+                    {doctors.map(d => (
+                      <option key={d.id} value={d.id}>
+                        Dr(a). {d.name} {d.lastName || ''} ({d.specialty || 'Médico de Staff'})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+            </div>
 
             {/* SELECTOR SCROLLABLE HORIZONTAL MINIMALISTA (24H) */}
             <div className="space-y-2">

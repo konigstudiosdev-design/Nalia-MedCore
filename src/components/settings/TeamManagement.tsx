@@ -92,6 +92,7 @@ export function TeamManagement({ organizationId }: TeamManagementProps) {
           role: newMember.role,
           organizationId,
           status: 'active',
+          onboardingCompleted: true,
           createdAt: new Date().toISOString()
         });
       } catch (fsErr: any) {

@@ -147,7 +147,7 @@ export function useMedicalData() {
   }, [teamMembers, currentUser]);
 
   useEffect(() => {
-    if (!currentUser?.organizationId || !currentUser?.onboardingCompleted) return;
+    if (!currentUser?.organizationId) return;
 
     const unsubPatients = dbService.subscribeToPatients(setPatients, currentUser.organizationId);
     const unsubAgenda = dbService.subscribeToAgenda(setAgenda, currentUser.organizationId);
