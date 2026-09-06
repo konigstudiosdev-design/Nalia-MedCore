@@ -27,11 +27,8 @@ const HOUR_HEIGHT = 80; // Reducimos un poco la altura para que quepan más hora
 const START_HOUR = 0;
 const END_HOUR = 23;
 
-const TIME_OPTIONS_24H = Array.from({ length: 48 }, (_, i) => {
-  const h = Math.floor(i / 2).toString().padStart(2, '0');
-  const m = i % 2 === 0 ? '00' : '30';
-  return `${h}:${m}`;
-});
+const HOURS_24 = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0'));
+const MINUTES_15 = ['00', '15', '30', '45'];
 
 export function AgendaView({
   agenda, patients, doctors = [], onAddAppointment, onUpdateAppointment, onDeleteAppointment, onStartConsultation,
@@ -43,6 +40,8 @@ export function AgendaView({
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState<AgendaItem | null>(null);
   const [searchPatient, setSearchPatient] = useState('');
+  const [selectedHour, setSelectedHour] = useState('09');
+  const [selectedMinute, setSelectedMinute] = useState('00');
   const [isSaving, setIsSaving] = useState(false);
   const [isConnectingGoogle, setIsConnectingGoogle] = useState(false);
   const [googleConnError, setGoogleConnError] = useState<string | null>(null);
@@ -503,23 +502,52 @@ export function AgendaView({
               </div>
             )}
 
-            <div class="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-3">
                <div>
-                 <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-1.5 block">Hora (Formato 24h) *</label>
+                 <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-1.5 block">Hora (24h) *</label>
                  <select
-                   value={newAppointment.time || '09:00'}
-                   onChange={e => setNewAppointment({...newAppointment, time: e.target.value})}
-                   className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-4 py-3.5 text-white font-mono font-bold text-xs outline-none focus:ring-2 focus:ring-indigo-500/50"
+                   value={selectedHour}
+                   onChange={e => {
+                     const h = e.target.value;
+                     setSelectedHour(h);
+                     setNewAppointment(prev => ({ ...prev, time: `${h}:${selectedMinute}` }));
+                   }}
+                   className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-3 py-3.5 text-white font-mono font-bold text-xs outline-none focus:ring-2 focus:ring-indigo-500/50"
                  >
-                   {TIME_OPTIONS_24H.map(t => (
-                     <option key={t} value={t}>{t} hrs</option>
+                   {HOURS_24.map(h => (
+                     <option key={h} value={h} className="bg-[#121212] text-white">{h} hrs</option>
                    ))}
                  </select>
                </div>
+
+               <div>
+                 <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-1.5 block">Minuto *</label>
+                 <select
+                   value={selectedMinute}
+                   onChange={e => {
+                     const m = e.target.value;
+                     setSelectedMinute(m);
+                     setNewAppointment(prev => ({ ...prev, time: `${selectedHour}:${m}` }));
+                   }}
+                   className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-3 py-3.5 text-white font-mono font-bold text-xs outline-none focus:ring-2 focus:ring-indigo-500/50"
+                 >
+                   {MINUTES_15.map(m => (
+                     <option key={m} value={m} className="bg-[#121212] text-white">:{m} min</option>
+                   ))}
+                 </select>
+               </div>
+
                <div>
                  <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-1.5 block">Duración *</label>
-                 <select value={newAppointment.duration} onChange={e => setNewAppointment({...newAppointment, duration: parseInt(e.target.value)})} className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-4 py-3.5 text-white font-bold text-xs outline-none focus:ring-2 focus:ring-indigo-500/50">
-                   <option value={15}>15 min</option><option value={30}>30 min</option><option value={45}>45 min</option><option value={60}>60 min</option>
+                 <select
+                   value={newAppointment.duration || 30}
+                   onChange={e => setNewAppointment({ ...newAppointment, duration: parseInt(e.target.value) })}
+                   className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-3 py-3.5 text-white font-bold text-xs outline-none focus:ring-2 focus:ring-indigo-500/50"
+                 >
+                   <option value={15} className="bg-[#121212] text-white">15 min</option>
+                   <option value={30} className="bg-[#121212] text-white">30 min</option>
+                   <option value={45} className="bg-[#121212] text-white">45 min</option>
+                   <option value={60} className="bg-[#121212] text-white">60 min</option>
                  </select>
                </div>
             </div>
