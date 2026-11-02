@@ -12,7 +12,7 @@ import {
   serverTimestamp
 } from 'firebase/firestore';
 import { db } from './firebase';
-import { Patient, AgendaItem, Transaction, NursingRequest, User, Organization, Consultation, Prescription } from '../types';
+import { Patient, AgendaItem, Transaction, NursingRequest, User, Organization, Consultation, Prescription, AuditLog } from '../types';
 
 // Helper de Fecha Local YYYY-MM-DD (Evita errores de zona horaria UTC en horario nocturno)
 export const formatLocalDate = (date: Date = new Date()): string => {
@@ -209,5 +209,48 @@ export const updateNursingRequestStatus = async (id: string, status: string, org
   if (status === 'completed') updateData.completedAt = serverTimestamp();
 
   await updateDoc(docRef, updateData);
+};
+
+// Audit Logs (NOM-004-SSA3-2012 & Security Compliance)
+export const logAuditEvent = async (
+  orgId: string,
+  userId: string,
+  userName: string,
+  role: string,
+  action: string,
+  resource: string,
+  details: string,
+  result: 'success' | 'failure' = 'success',
+  category: 'operational' | 'security' | 'compliance' = 'operational',
+  resourceId?: string
+) => {
+  if (!orgId) return;
+  try {
+    const colRef = collection(db, 'organizations', orgId, 'audit_logs');
+    await addDoc(colRef, {
+      organizationId: orgId,
+      timestamp: new Date().toISOString(),
+      userId,
+      userName,
+      role,
+      action,
+      resource,
+      resourceId: resourceId || '',
+      details,
+      result,
+      category,
+      createdAt: serverTimestamp()
+    });
+  } catch (err) {
+    console.error('[AUDIT] Error al registrar evento de auditoría:', err);
+  }
+};
+
+export const subscribeToAuditLogs = (callback: (logs: AuditLog[]) => void, orgId: string) => {
+  const q = query(collection(db, 'organizations', orgId, 'audit_logs'), orderBy('timestamp', 'desc'));
+  return onSnapshot(q, (snapshot) => {
+    const logs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as AuditLog));
+    callback(logs);
+  });
 };
 

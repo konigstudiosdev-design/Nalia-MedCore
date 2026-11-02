@@ -16,7 +16,7 @@ import { ComplianceCenter } from './components/compliance/ComplianceCenter';
 import { Modal } from './components/shared/Modal';
 import { Toast } from './components/shared/Toast';
 import { TrialBanner } from './components/shared/TrialBanner';
-import { checkOrStartTrial, TrialStatus } from './lib/trialService';
+import { getOrganizationSubscription, SubscriptionStatus } from './lib/trialService';
 import { AddPatientForm } from './components/pacientes/AddPatientForm';
 import { useMedicalData } from './hooks/useMedicalData';
 import { DoctorDashboard } from './components/dashboard/role-specific/DoctorDashboard';
@@ -60,11 +60,15 @@ export default function MedIOSApp() {
   const [activePatientId, setActivePatientId] = useState<string | null>(null);
   const [isAddPatientModalOpen, setAddPatientModalOpen] = useState(false);
   const [authView, setAuthView] = useState<'login' | 'register'>('login');
-  const [trialStatus, setTrialStatus] = useState<TrialStatus | null>(null);
+  const [subscriptionStatus, setSubscriptionStatus] = useState<SubscriptionStatus | null>(null);
 
   useEffect(() => {
-    checkOrStartTrial().then(status => setTrialStatus(status));
-  }, []);
+    if (currentUser?.organizationId) {
+      getOrganizationSubscription(currentUser.organizationId).then(status => setSubscriptionStatus(status));
+    } else {
+      setSubscriptionStatus(null);
+    }
+  }, [currentUser?.organizationId]);
 
   // Paciente activo derivado de la lista (para asegurar datos frescos)
   const activePatient = patients.find(p => p.id === activePatientId) || (patients.length > 0 ? patients[0] : null);
@@ -370,7 +374,7 @@ export default function MedIOSApp() {
         />
       )}
 
-      <TrialBanner trialStatus={trialStatus} />
+      <TrialBanner subscriptionStatus={subscriptionStatus} />
 
       <style dangerouslySetInnerHTML={{__html: `
         .pb-safe { padding-bottom: env(safe-area-inset-bottom, 24px); }

@@ -1,21 +1,25 @@
 import { contextBridge, ipcRenderer } from "electron";
+const ALLOWED_CHANNELS = ["main-process-message", "app-notification"];
 contextBridge.exposeInMainWorld("ipcRenderer", {
-  on(...args) {
-    const [channel, listener] = args;
-    return ipcRenderer.on(channel, (event, ...args2) => listener(event, ...args2));
+  on(channel, listener) {
+    if (ALLOWED_CHANNELS.includes(channel)) {
+      return ipcRenderer.on(channel, (event, ...args) => listener(event, ...args));
+    }
   },
-  off(...args) {
-    const [channel, ...omit] = args;
-    return ipcRenderer.off(channel, ...omit);
+  off(channel, ...omit) {
+    if (ALLOWED_CHANNELS.includes(channel)) {
+      return ipcRenderer.off(channel, ...omit);
+    }
   },
-  send(...args) {
-    const [channel, ...omit] = args;
-    return ipcRenderer.send(channel, ...omit);
+  send(channel, ...omit) {
+    if (ALLOWED_CHANNELS.includes(channel)) {
+      return ipcRenderer.send(channel, ...omit);
+    }
   },
-  invoke(...args) {
-    const [channel, ...omit] = args;
-    return ipcRenderer.invoke(channel, ...omit);
+  invoke(channel, ...omit) {
+    if (ALLOWED_CHANNELS.includes(channel)) {
+      return ipcRenderer.invoke(channel, ...omit);
+    }
+    return Promise.reject(new Error(`Canal IPC no autorizado: ${channel}`));
   }
-  // You can expose other apts here, or even expose the whole ipcRenderer
-  // but be careful with security!
 });

@@ -1,37 +1,18 @@
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from './firebase';
 
-export interface TrialStatus {
-  ip: string;
-  isExpired: boolean;
+export interface SubscriptionStatus {
+  organizationId: string;
+  plan: 'starter' | 'pro' | 'enterprise';
+  status: 'trialing' | 'active' | 'past_due' | 'canceled';
   daysRemaining: number;
   hoursRemaining: number;
   expiresAt: number;
+  isExpired: boolean;
 }
 
 const TRIAL_DURATION_DAYS = 15;
 const TRIAL_DURATION_MS = TRIAL_DURATION_DAYS * 24 * 60 * 60 * 1000;
-
-export async function getUserIp(): Promise<string> {
-  try {
-    const res = await fetch('https://api.ipify.org?format=json');
-    const data = await res.json();
-    return data.ip || '127.0.0.1';
-  } catch (err) {
-    console.warn('[TRIAL] No se pudo obtener la IP pública, usando respaldo local:', err);
-    // Respaldo con identificador guardado localmente si falla la red
-    let fallbackId = localStorage.getItem('nalia_trial_fallback_id');
-    if (!fallbackId) {
-      fallbackId = 'ip_fallback_' + Math.random().toString(36).substring(2, 10);
-      localStorage.setItem('nalia_trial_fallback_id', fallbackId);
-    }
-    return fallbackId;
-  }
-}
-
-function sanitizeIpKey(ip: string): string {
-  return ip.replace(/[\.\:\/]/g, '_');
-}
 
 export function isDevOrElectron(): boolean {
   if (typeof window === 'undefined') return false;
@@ -48,74 +29,90 @@ export function isDevOrElectron(): boolean {
   return false;
 }
 
-export async function checkOrStartTrial(): Promise<TrialStatus | null> {
-  // En desarrollo local (localhost), red local o aplicación Electron de escritorio NO se muestra la prueba
-  if (isDevOrElectron()) {
-    return null;
-  }
+/**
+ * Obtiene o inicializa el estado de suscripción/prueba gratuita a nivel de Organización en Firestore
+ */
+export async function getOrganizationSubscription(orgId: string): Promise<SubscriptionStatus | null> {
+  if (!orgId) return null;
 
-  const ip = await getUserIp();
-  const sanitizedKey = sanitizeIpKey(ip);
   const now = Date.now();
 
   try {
-    const trialRef = doc(db, 'trial_ips', sanitizedKey);
-    const docSnap = await getDoc(trialRef);
+    const orgRef = doc(db, 'organizations', orgId);
+    const orgSnap = await getDoc(orgRef);
 
-    let firstSeenAt = now;
     let expiresAt = now + TRIAL_DURATION_MS;
+    let status: 'trialing' | 'active' | 'past_due' | 'canceled' = 'trialing';
+    let plan: 'starter' | 'pro' | 'enterprise' = 'pro';
 
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      firstSeenAt = data.firstSeenAt || now;
-      expiresAt = data.expiresAt || (firstSeenAt + TRIAL_DURATION_MS);
-    } else {
-      // Registrar nueva IP en Firestore con periodo de 15 días
-      await setDoc(trialRef, {
-        ip,
-        firstSeenAt,
-        expiresAt,
-        createdAt: new Date().toISOString()
-      });
+    if (orgSnap.exists()) {
+      const data = orgSnap.data();
+
+      // Si ya cuenta con estado de suscripción explícito
+      if (data.subscriptionStatus) {
+        status = data.subscriptionStatus;
+      }
+      if (data.plan) {
+        plan = data.plan;
+      }
+
+      if (data.trialEndsAt) {
+        expiresAt = typeof data.trialEndsAt === 'number'
+          ? data.trialEndsAt
+          : new Date(data.trialEndsAt).getTime();
+      } else if (data.createdAt) {
+        const createdMs = new Date(data.createdAt).getTime();
+        expiresAt = createdMs + TRIAL_DURATION_MS;
+      } else {
+        // Inicializar trialEndsAt en la organización
+        await setDoc(orgRef, {
+          trialEndsAt: expiresAt,
+          subscriptionStatus: 'trialing',
+          plan: 'pro'
+        }, { merge: true });
+      }
+    }
+
+    // Si la suscripción está activa (paga), no expira
+    if (status === 'active') {
+      return {
+        organizationId: orgId,
+        plan,
+        status,
+        daysRemaining: 365,
+        hoursRemaining: 0,
+        expiresAt: now + (365 * 24 * 60 * 60 * 1000),
+        isExpired: false
+      };
     }
 
     const timeRemainingMs = expiresAt - now;
-    const isExpired = timeRemainingMs <= 0;
+    const isExpired = timeRemainingMs <= 0 || status === 'canceled';
     const daysRemaining = Math.max(0, Math.floor(timeRemainingMs / (24 * 60 * 60 * 1000)));
     const hoursRemaining = Math.max(0, Math.floor((timeRemainingMs % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000)));
 
-    // Guardar copia local en localStorage
-    localStorage.setItem('nalia_trial_expires_at', expiresAt.toString());
-
     return {
-      ip,
-      isExpired,
+      organizationId: orgId,
+      plan,
+      status,
       daysRemaining,
       hoursRemaining,
-      expiresAt
+      expiresAt,
+      isExpired
     };
+
   } catch (error) {
-    console.error('[TRIAL] Error al verificar estado de prueba en Firestore:', error);
+    console.error('[SUBSCRIPTION] Error al verificar estado de suscripción en Firestore:', error);
 
-    // Respaldo con localStorage si Firestore falla
-    const savedExpires = localStorage.getItem('nalia_trial_expires_at');
-    let expiresAt = savedExpires ? parseInt(savedExpires) : (now + TRIAL_DURATION_MS);
-
-    if (!savedExpires) {
-      localStorage.setItem('nalia_trial_expires_at', expiresAt.toString());
-    }
-
-    const timeRemainingMs = expiresAt - now;
-    const isExpired = timeRemainingMs <= 0;
-    const daysRemaining = Math.max(0, Math.floor(timeRemainingMs / (24 * 60 * 60 * 1000)));
-    const hoursRemaining = Math.max(0, Math.floor((timeRemainingMs % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000)));
-
+    // Respaldo resiliente
     return {
-      ip,
-      isExpired,
-      daysRemaining,
-      hoursRemaining,
-      expiresAt
+      organizationId: orgId,
+      plan: 'pro',
+      status: 'trialing',
+      daysRemaining: 15,
+      hoursRemaining: 0,
+      expiresAt: now + TRIAL_DURATION_MS,
+      isExpired: false
     };
   }
 }

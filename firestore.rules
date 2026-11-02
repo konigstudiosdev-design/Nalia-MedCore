@@ -2,33 +2,91 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Regla global: El usuario debe estar autenticado
+    // Helper functions
     function isAuthenticated() {
       return request.auth != null;
     }
 
-    // Colección de Usuarios: Permitir leer y escribir su propio documento
-    match /users/{userId} {
-      allow read, write: if isAuthenticated() && request.auth.uid == userId;
-      // Permitir que otros miembros de la misma org lean el perfil (para el equipo)
-      allow read: if isAuthenticated() &&
-        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.organizationId == resource.data.organizationId;
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
     }
 
-    // Colección de Organizaciones
-    match /organizations/{orgId} {
-      // Un usuario puede leer/escribir su organización si su perfil apunta a ella
-      // Simplificamos para el onboarding inicial
-      allow read, write: if isAuthenticated();
+    function isOrgMember(orgId) {
+      return isAuthenticated() && (
+        getUserData().organizationId == orgId ||
+        getUserData().role == 'super_admin'
+      );
+    }
 
-      // Pacientes, Agenda, Transacciones dentro de la Org
+    function isOrgAdmin(orgId) {
+      return isAuthenticated() && (
+        getUserData().role == 'super_admin' ||
+        (getUserData().organizationId == orgId && (
+          getUserData().role == 'organization_admin' ||
+          getUserData().role == 'clinic_admin' ||
+          getUserData().isOwner == true
+        ))
+      );
+    }
+
+    function isSuperAdmin() {
+      return isAuthenticated() && getUserData().role == 'super_admin';
+    }
+
+    // Colección de Usuarios
+    match /users/{userId} {
+      // Permitir leer a uno mismo o a miembros de la misma organización
+      allow read: if isAuthenticated() && (
+        request.auth.uid == userId ||
+        getUserData().organizationId == resource.data.organizationId ||
+        getUserData().role == 'super_admin'
+      );
+
+      // Permitir crear perfil inicial de usuario al registrarse
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+
+      // Permitir actualizar perfil propio (sin cambiar rol u organización) O ser admin de la org
+      allow update: if isAuthenticated() && (
+        // El usuario actualiza sus datos propios pero NO puede modificar rol, organización, propiedad o estatus
+        (
+          request.auth.uid == userId &&
+          (!('role' in request.resource.data) || request.resource.data.role == resource.data.role) &&
+          (!('organizationId' in request.resource.data) || request.resource.data.organizationId == resource.data.organizationId) &&
+          (!('isOwner' in request.resource.data) || request.resource.data.isOwner == resource.data.isOwner) &&
+          (!('status' in request.resource.data) || request.resource.data.status == resource.data.status)
+        ) ||
+        // O bien un administrador de la organización actualiza al miembro
+        isOrgAdmin(resource.data.organizationId)
+      );
+
+      allow delete: if isSuperAdmin();
+    }
+
+    // Colección de Organizaciones (Multi-Tenant Isolation)
+    match /organizations/{orgId} {
+      // Crear nueva organización durante registro/onboarding
+      allow create: if isAuthenticated();
+
+      // Leer y actualizar solo si el usuario pertenece a la organización
+      allow read, update: if isOrgMember(orgId);
+
+      allow delete: if isSuperAdmin();
+
+      // Subcolecciones aisladas de la organización (patients, agenda, consultations, prescriptions, nursing_requests, transactions, audit_logs)
       match /{collection}/{docId} {
-        allow read, write: if isAuthenticated();
+        allow read, write: if isOrgMember(orgId);
       }
     }
 
+    // Colección de Configuración del Sistema
     match /system_config/{docId} {
       allow read: if isAuthenticated();
+      allow write: if isSuperAdmin();
+    }
+
+    // Colección de Registro de Pruebas IP (Trial)
+    match /trial_ips/{ip} {
+      allow read, write: if true;
     }
   }
 }

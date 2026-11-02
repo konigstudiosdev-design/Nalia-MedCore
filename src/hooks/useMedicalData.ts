@@ -113,6 +113,15 @@ export function useMedicalData() {
         console.log('[AUTH] Sesión cerrada');
         if (unsubProfile) (unsubProfile as () => void)();
         setCurrentUser(null);
+        setPatients([]);
+        setAgenda([]);
+        setTransactions([]);
+        setNursingRequests([]);
+        setConsultations([]);
+        setPrescriptions([]);
+        setTeamMembers([]);
+        setGoogleEvents([]);
+        setIsGoogleConnected(false);
         setAuthLoading(false);
       }
     });
@@ -169,6 +178,15 @@ export function useMedicalData() {
   const logout = async () => {
     await signOut(auth);
     setCurrentUser(null);
+    setPatients([]);
+    setAgenda([]);
+    setTransactions([]);
+    setNursingRequests([]);
+    setConsultations([]);
+    setPrescriptions([]);
+    setTeamMembers([]);
+    setGoogleEvents([]);
+    setIsGoogleConnected(false);
   };
 
   const toggleWorkMode = () => setWorkMode(prev => prev === 'clinical' ? 'admin' : 'clinical');
@@ -270,6 +288,10 @@ export function useMedicalData() {
     deletePatient: async (id: string) => {
       try {
         await dbService.deletePatient(id, currentUser!.organizationId);
+        await dbService.logAuditEvent(
+          currentUser!.organizationId, currentUser!.id, currentUser!.name, currentUser!.role,
+          'ELIMINAR_PACIENTE', 'pacientes', `Expediente de paciente ID ${id} eliminado`, 'success', 'compliance', id
+        );
         showToast('Expediente eliminado correctamente');
       } catch (e) {
         showToast('Error al eliminar expediente', 'error');
@@ -303,6 +325,11 @@ export function useMedicalData() {
           });
 
           consultationId = await dbService.saveConsultation(cleanedConsultation, currentUser!.organizationId);
+
+          await dbService.logAuditEvent(
+            currentUser!.organizationId, currentUser!.id, currentUser!.name, currentUser!.role,
+            'FINALIZAR_CONSULTA', 'consultas', `Consulta médica finalizada para paciente ID ${consultationData.patientId}`, 'success', 'compliance', consultationId
+          );
         }
 
         if (prescriptionData && prescriptionData.medications && prescriptionData.medications.length > 0) {

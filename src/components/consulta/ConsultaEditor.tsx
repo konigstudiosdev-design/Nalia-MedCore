@@ -261,8 +261,8 @@ ${soap.objective}`;
           <div>
             <h1 className="text-lg font-black tracking-tight flex items-center gap-2">{patient.name} <span className="px-2 py-0.5 bg-indigo-500/10 text-indigo-500 rounded text-[9px] uppercase font-black">Exp: {patient.id.substring(0,8)}</span></h1>
             <div className="flex items-center gap-3 mt-0.5">
-              <span className="flex items-center gap-1 px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 rounded-full text-[9px] font-bold text-zinc-500 uppercase"><Clock size={10}/> Consulta Activa</span>
-              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">{patient.age} años • {patient.gender === 'M' ? 'Masculino' : 'Femenino'}</span>
+              <span className="flex items-center gap-1 px-2 py-0.5 bg-emerald-500/10 text-emerald-600 rounded-full text-[9px] font-bold uppercase"><ShieldCheck size={10}/> NOM-004-SSA3</span>
+              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">{patient.age} años • {patient.gender === 'M' ? 'Masculino' : 'Femenino'} • Dr(a). {user?.name} {user?.lastName} (Céd: {user?.licenseNumber || 'Pendiente'})</span>
             </div>
           </div>
         </div>
