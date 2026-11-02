@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { signInWithEmailAndPassword, sendPasswordResetEmail, fetchSignInMethodsForEmail } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
 import { Building2, Mail, Lock, ArrowRight, Loader2, AlertCircle, CheckCircle2, ArrowLeft, KeyRound } from 'lucide-react';
 
@@ -32,7 +32,9 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!resetEmail) {
+    const cleanEmail = resetEmail.trim().toLowerCase();
+
+    if (!cleanEmail) {
       setError('Por favor ingrese su correo electrónico.');
       return;
     }
@@ -42,16 +44,34 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
     setResetSuccess(null);
 
     try {
-      await sendPasswordResetEmail(auth, resetEmail);
-      setResetSuccess(`Hemos enviado las instrucciones a ${resetEmail}. Revisa tu bandeja de entrada o spam.`);
+      // 1. Verificar si el correo está registrado en la base de datos de Auth
+      let isRegistered = false;
+      try {
+        const methods = await fetchSignInMethodsForEmail(auth, cleanEmail);
+        isRegistered = methods.length > 0;
+      } catch (authErr: any) {
+        // Si el método de consulta rápida está restringido por Firebase, procedemos a la verificación directa de envío
+        isRegistered = true;
+      }
+
+      if (!isRegistered) {
+        setError('El correo electrónico no se encuentra registrado ni vinculado a ninguna cuenta.');
+        setResetLoading(false);
+        return;
+      }
+
+      // 2. Si el correo existe, enviar el correo de confirmación y restablecimiento
+      await sendPasswordResetEmail(auth, cleanEmail);
+      setResetSuccess(`Correo de confirmación enviado exitosamente a ${cleanEmail}. Revisa tu bandeja de entrada o carpeta de spam para restablecer tu contraseña.`);
+
     } catch (err: any) {
-      console.error(err);
+      console.error('[RESET PASSWORD]', err);
       if (err.code === 'auth/user-not-found') {
-        setError('No existe ninguna cuenta registrada con este correo electrónico.');
+        setError('El correo electrónico no se encuentra registrado ni vinculado a ninguna cuenta.');
       } else if (err.code === 'auth/invalid-email') {
-        setError('El correo electrónico ingresado no es válido.');
+        setError('El formato del correo electrónico ingresado no es válido.');
       } else {
-        setError('No se pudo enviar el correo de recuperación. Intente de nuevo.');
+        setError('No se pudo enviar el correo de recuperación. Verifique e intente nuevamente.');
       }
     } finally {
       setResetLoading(false);
@@ -167,7 +187,7 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
             <form onSubmit={handleResetPassword} className="space-y-6 animate-in fade-in duration-300">
               <div>
                 <p className="text-xs text-zinc-400 font-medium leading-relaxed mb-6">
-                  Ingresa el correo electrónico asociado a tu cuenta clínica. Te enviaremos un enlace seguro para restablecer tu contraseña.
+                  Ingresa el correo electrónico asociado a tu cuenta clínica. Te enviaremos un correo de confirmación con el enlace seguro para restablecer tu contraseña.
                 </p>
                 <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-3 block ml-1">Correo Registrado</label>
                 <div className="relative group">
@@ -206,11 +226,11 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
                 {resetLoading ? (
                   <>
                     <Loader2 size={18} className="animate-spin" />
-                    Enviando correo...
+                    Verificando y enviando...
                   </>
                 ) : (
                   <>
-                    Enviar Enlace por Correo
+                    Enviar Correo de Confirmación
                     <ArrowRight size={18} />
                   </>
                 )}
