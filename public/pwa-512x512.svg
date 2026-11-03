@@ -1,7 +1,17 @@
-
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
-  <rect width="512" height="512" rx="128" fill="#005f73"/>
-  <rect x="216" y="112" width="80" height="288" rx="20" fill="#ffffff"/>
-  <rect x="112" y="216" width="288" height="80" rx="20" fill="#ffffff"/>
-  <circle cx="256" cy="256" r="32" fill="#005f73"/>
+  <defs>
+    <linearGradient id="naliaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <linearGradient id="crossGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E0F2FE"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="url(#naliaGrad)"/>
+  <rect x="216" y="96" width="80" height="320" rx="24" fill="url(#crossGrad)"/>
+  <rect x="96" y="216" width="320" height="80" rx="24" fill="url(#crossGrad)"/>
+  <circle cx="256" cy="256" r="44" fill="#4F46E5"/>
+  <path d="M236 256L248 240L256 272L264 246L276 256" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
