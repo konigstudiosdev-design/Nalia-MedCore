@@ -396,18 +396,12 @@
       <!-- CARDS CONTAINER -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
 
-        <!-- CARD 1: CÓDIGO FUENTE FULL (FEATURED CARD) -->
-        <div class="relative rounded-[36px] p-8 md:p-10 space-y-8 flex flex-col justify-between bg-gradient-to-b from-[#111222] via-[#0D0E18] to-[#0A0B10] border-2 border-indigo-500/60 shadow-[0_0_50px_-12px_rgba(79,70,229,0.3)] group hover:border-indigo-400 transition-all duration-300">
-
-          <!-- Featured Badge -->
-          <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-indigo-600 to-sky-500 text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg shadow-indigo-600/40 flex items-center gap-1.5 whitespace-nowrap">
-            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-            <span>MÁS POPULAR • CÓDIGO FUENTE COMPLETO</span>
-          </div>
+        <!-- CARD 1: CÓDIGO FUENTE FULL -->
+        <div class="rounded-[36px] p-8 md:p-10 space-y-8 flex flex-col justify-between bg-[#0B0C10] border border-zinc-800/90 shadow-2xl shadow-black/80 relative group hover:border-indigo-500/40 transition-all duration-300">
 
           <div class="space-y-6 pt-2">
             <div class="flex items-center justify-between">
-              <div class="w-14 h-14 bg-gradient-to-br from-indigo-600 to-indigo-500 text-white rounded-2xl flex items-center justify-center shadow-xl shadow-indigo-600/30">
+              <div class="w-14 h-14 bg-indigo-500/10 text-indigo-400 rounded-2xl flex items-center justify-center border border-indigo-500/20">
                 <i data-lucide="code" class="w-7 h-7"></i>
               </div>
               <span class="px-3 py-1 bg-indigo-500/10 text-indigo-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-indigo-500/20">
@@ -461,18 +455,24 @@
             </ul>
           </div>
 
-          <button onclick="openBuyModal('source')" class="w-full py-4.5 bg-gradient-to-r from-indigo-600 via-indigo-500 to-sky-500 hover:from-indigo-500 hover:to-sky-400 text-white rounded-2xl font-black text-xs uppercase tracking-[0.15em] shadow-xl shadow-indigo-600/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer">
+          <button onclick="openBuyModal('source')" class="w-full py-4.5 bg-indigo-600/90 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-[0.15em] shadow-xl shadow-indigo-600/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer">
             <i data-lucide="shopping-bag" class="w-4 h-4"></i>
             <span>Comprar Licencia Full</span>
           </button>
         </div>
 
-        <!-- CARD 2: ESCRITORIO NATIVO -->
-        <div class="rounded-[36px] p-8 md:p-10 space-y-8 flex flex-col justify-between bg-[#0B0C10] border border-zinc-800/90 shadow-2xl shadow-black/80 relative group hover:border-sky-500/40 transition-all duration-300">
+        <!-- CARD 2: ESCRITORIO NATIVO (FEATURED CARD) -->
+        <div class="relative rounded-[36px] p-8 md:p-10 space-y-8 flex flex-col justify-between bg-gradient-to-b from-[#0B1324] via-[#080E1A] to-[#060912] border-2 border-sky-500/60 shadow-[0_0_50px_-12px_rgba(2,132,199,0.35)] group hover:border-sky-400 transition-all duration-300">
+
+          <!-- Featured Badge -->
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500 text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg shadow-sky-500/40 flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+            <span>MÁS POPULAR • SOFTWARE DE ESCRITORIO</span>
+          </div>
 
           <div class="space-y-6 pt-2">
             <div class="flex items-center justify-between">
-              <div class="w-14 h-14 bg-sky-500/10 text-sky-400 rounded-2xl flex items-center justify-center border border-sky-500/20">
+              <div class="w-14 h-14 bg-gradient-to-br from-sky-500 to-indigo-600 text-white rounded-2xl flex items-center justify-center shadow-xl shadow-sky-500/30">
                 <i data-lucide="monitor" class="w-7 h-7"></i>
               </div>
               <span class="px-3 py-1 bg-sky-500/10 text-sky-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-sky-500/20">
@@ -520,8 +520,8 @@
             </ul>
           </div>
 
-          <button onclick="openBuyModal('desktop')" class="w-full py-4.5 bg-zinc-800/90 hover:bg-zinc-700/90 border border-zinc-700/80 text-white rounded-2xl font-black text-xs uppercase tracking-[0.15em] shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer">
-            <i data-lucide="download" class="w-4 h-4"></i>
+          <button onclick="openBuyModal('desktop')" class="w-full py-5 bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500 hover:from-sky-400 hover:to-emerald-400 text-white rounded-2xl font-black text-xs uppercase tracking-[0.18em] shadow-2xl shadow-sky-500/40 hover:shadow-sky-500/60 transition-all active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer">
+            <i data-lucide="download" class="w-5 h-5"></i>
             <span>Comprar Ejecutable (.DMG / .EXE)</span>
           </button>
         </div>
