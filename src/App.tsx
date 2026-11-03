@@ -376,8 +376,6 @@ export default function MedIOSApp() {
         />
       )}
 
-      <TrialBanner subscriptionStatus={subscriptionStatus} />
-
       <style dangerouslySetInnerHTML={{__html: `
         .pb-safe { padding-bottom: env(safe-area-inset-bottom, 24px); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
