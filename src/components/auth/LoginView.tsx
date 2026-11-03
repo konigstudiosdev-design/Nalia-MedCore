@@ -90,15 +90,12 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
 
         {/* Brand Header */}
         <div className="text-center mb-8">
-          <div className="w-24 h-24 bg-white/95 border border-white/20 rounded-[32px] flex items-center justify-center mx-auto mb-5 shadow-2xl shadow-indigo-500/20 p-2 overflow-hidden hover:scale-105 transition-transform duration-300">
+          <div className="w-28 h-28 bg-white rounded-[32px] flex items-center justify-center mx-auto mb-5 shadow-2xl p-2.5 overflow-hidden hover:scale-105 transition-transform duration-300">
             {isResetView ? (
-              <KeyRound size={38} className="text-indigo-600" />
+              <KeyRound size={40} className="text-indigo-600" />
             ) : (
-              <img src="/logonaliamedcore.png" alt="Nalia MedCore" className="w-full h-full object-contain" />
+              <img src="/logonaliamedcore.png" alt="Nalia MedCore" className="w-full h-full object-contain mix-blend-multiply" />
             )}
-          </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-[10px] font-black uppercase tracking-widest text-indigo-400 mb-2">
-            <Sparkles size={12} className="text-indigo-400" /> Medical SaaS Platform
           </div>
           <h1 className="text-3xl font-black text-white tracking-tight mb-1">
             {isResetView ? 'Recuperar Contraseña' : 'Bienvenido de Nuevo'}

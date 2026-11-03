@@ -60,11 +60,11 @@ export function Sidebar({ currentModule, navigateTo, isMobileMenuOpen, setMobile
       {/* Brand Header */}
       <div className="h-20 flex items-center justify-between xl:justify-start px-4 xl:px-6 border-b border-zinc-100 dark:border-zinc-800 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 bg-white border border-zinc-200 dark:border-zinc-700 rounded-xl flex items-center justify-center shrink-0 shadow-sm overflow-hidden p-1">
+          <div className="w-11 h-11 bg-white rounded-xl flex items-center justify-center shrink-0 shadow-sm overflow-hidden p-1">
             {clinicLogo ? (
               <img src={clinicLogo} alt={clinicName || 'Logo'} className="w-full h-full object-contain" />
             ) : (
-              <img src="/logonaliamedcore.png" alt="Nalia MedCore" className="w-full h-full object-contain" />
+              <img src="/logonaliamedcore.png" alt="Nalia MedCore" className="w-full h-full object-contain mix-blend-multiply" />
             )}
           </div>
           <div className="hidden xl:flex flex-col min-w-0">

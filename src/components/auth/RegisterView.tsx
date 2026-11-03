@@ -4,7 +4,7 @@ import { auth, db } from '../../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import {
   Mail, Lock, ArrowRight, Loader2, ShieldCheck, AlertCircle,
-  Eye, EyeOff, Sparkles, CheckCircle2, HeartPulse, Building2
+  Eye, EyeOff, HeartPulse, Building2
 } from 'lucide-react';
 
 interface RegisterViewProps {
@@ -75,11 +75,8 @@ export function RegisterView({ onSwitchToLogin }: RegisterViewProps) {
 
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-24 h-24 bg-white/95 border border-white/20 rounded-[32px] flex items-center justify-center mx-auto mb-5 shadow-2xl shadow-indigo-500/20 p-2 overflow-hidden hover:scale-105 transition-transform duration-300">
-            <img src="/logonaliamedcore.png" alt="Nalia MedCore" className="w-full h-full object-contain" />
-          </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2">
-            <Sparkles size={12} className="text-emerald-400" /> Prueba Gratuita de 15 Días
+          <div className="w-28 h-28 bg-white rounded-[32px] flex items-center justify-center mx-auto mb-5 shadow-2xl p-2.5 overflow-hidden hover:scale-105 transition-transform duration-300">
+            <img src="/logonaliamedcore.png" alt="Nalia MedCore" className="w-full h-full object-contain mix-blend-multiply" />
           </div>
           <h1 className="text-3xl font-black text-white tracking-tight mb-1">Registrar mi Clínica</h1>
           <p className="text-zinc-400 text-xs font-medium">Configura la cuenta de médico propietario en 1 minuto</p>
@@ -161,18 +158,6 @@ export function RegisterView({ onSwitchToLogin }: RegisterViewProps) {
               </div>
             </div>
 
-            {/* Checklist de Beneficios Inmediatos */}
-            <div className="bg-zinc-900/50 border border-zinc-800/80 p-3.5 rounded-2xl space-y-1.5">
-               <div className="flex items-center gap-2 text-[11px] font-medium text-zinc-300">
-                  <CheckCircle2 size={14} className="text-emerald-400 shrink-0" />
-                  <span>Sin necesidad de tarjeta de crédito</span>
-               </div>
-               <div className="flex items-center gap-2 text-[11px] font-medium text-zinc-300">
-                  <CheckCircle2 size={14} className="text-emerald-400 shrink-0" />
-                  <span>Acceso completo a Expediente NOM-004 e IA</span>
-               </div>
-            </div>
-
             {error && (
               <div className="bg-rose-500/10 border border-rose-500/20 p-3.5 rounded-2xl flex items-start gap-3 animate-in shake-in duration-300">
                 <AlertCircle size={18} className="text-rose-400 shrink-0 mt-0.5" />
@@ -191,7 +176,7 @@ export function RegisterView({ onSwitchToLogin }: RegisterViewProps) {
                 </>
               ) : (
                 <>
-                  Comenzar Prueba Gratuita
+                  Registrar mi Clínica
                   <ArrowRight size={18} />
                 </>
               )}
