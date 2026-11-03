@@ -43,9 +43,11 @@ interface SidebarProps {
   role: Role;
   workMode?: 'clinical' | 'admin';
   onToggleMode?: () => void;
+  clinicLogo?: string;
+  clinicName?: string;
 }
 
-export function Sidebar({ currentModule, navigateTo, isMobileMenuOpen, setMobileMenuOpen, role, workMode, onToggleMode }: SidebarProps) {
+export function Sidebar({ currentModule, navigateTo, isMobileMenuOpen, setMobileMenuOpen, role, workMode, onToggleMode, clinicLogo, clinicName }: SidebarProps) {
   const isDoctor = role === 'doctor';
   const isNurse = role === 'nurse';
   const isReception = role === 'reception';
@@ -58,12 +60,20 @@ export function Sidebar({ currentModule, navigateTo, isMobileMenuOpen, setMobile
       {/* Brand Header */}
       <div className="h-20 flex items-center justify-between xl:justify-start px-4 xl:px-6 border-b border-zinc-100 dark:border-zinc-800 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-indigo-600/20">
-            <Building2 size={18} className="text-white" />
+          <div className="w-10 h-10 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl flex items-center justify-center shrink-0 shadow-sm overflow-hidden p-1">
+            {clinicLogo ? (
+              <img src={clinicLogo} alt={clinicName || 'Logo'} className="w-full h-full object-contain" />
+            ) : (
+              <img src="/logonaliamedcore.png" alt="Nalia MedCore" className="w-full h-full object-contain" />
+            )}
           </div>
-          <div className="hidden xl:flex flex-col">
-            <span className="font-black text-lg tracking-tighter text-zinc-900 dark:text-zinc-50 leading-none">Nalia MedCore</span>
-            <span className="text-[9px] font-black text-zinc-400 uppercase tracking-widest mt-0.5">SaaS Medical Platform</span>
+          <div className="hidden xl:flex flex-col min-w-0">
+            <span className="font-black text-base tracking-tighter text-zinc-900 dark:text-zinc-50 leading-none truncate">
+              {clinicName || 'Nalia MedCore'}
+            </span>
+            <span className="text-[9px] font-black text-zinc-400 uppercase tracking-widest mt-0.5 truncate">
+              SaaS Medical Platform
+            </span>
           </div>
         </div>
         {isMobileMenuOpen && (

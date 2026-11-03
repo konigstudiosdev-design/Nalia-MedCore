@@ -197,6 +197,8 @@ export default function MedIOSApp() {
         role={currentUser.role}
         workMode={workMode}
         onToggleMode={toggleWorkMode}
+        clinicLogo={settings.logo}
+        clinicName={settings.clinicName}
       />
 
       <BottomNav

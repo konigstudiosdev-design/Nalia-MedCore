@@ -59,8 +59,8 @@ export function RegisterView({ onSwitchToLogin }: RegisterViewProps) {
 
       <div className="w-full max-w-md relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
         <div className="text-center mb-10">
-          <div className="w-16 h-16 bg-indigo-600 rounded-[24px] flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-indigo-600/30">
-            <Building2 size={32} className="text-white" />
+          <div className="w-20 h-20 bg-zinc-900 border border-zinc-800 rounded-[28px] flex items-center justify-center mx-auto mb-6 shadow-2xl p-2 overflow-hidden">
+            <img src="/logonaliamedcore.png" alt="Nalia MedCore" className="w-full h-full object-contain" />
           </div>
           <h1 className="text-3xl font-black text-white tracking-tighter mb-2">Nalia MedCore</h1>
           <p className="text-zinc-500 font-bold text-sm uppercase tracking-[0.2em]">Registro de Médico Propietario</p>
