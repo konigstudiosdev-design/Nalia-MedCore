@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword, sendPasswordResetEmail, fetchSignInMethodsForEmail } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
-import { Building2, Mail, Lock, ArrowRight, Loader2, AlertCircle, CheckCircle2, ArrowLeft, KeyRound } from 'lucide-react';
+import {
+  Mail, Lock, ArrowRight, Loader2, AlertCircle, CheckCircle2,
+  ArrowLeft, KeyRound, Eye, EyeOff, ShieldCheck, Sparkles, HeartPulse
+} from 'lucide-react';
 
 export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => void }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,7 +25,7 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
     setError(null);
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email.trim(), password);
     } catch (err: any) {
       console.error(err);
       setError('Credenciales inválidas. Por favor verifique su correo y contraseña.');
@@ -44,13 +48,11 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
     setResetSuccess(null);
 
     try {
-      // 1. Verificar si el correo está registrado en la base de datos de Auth
       let isRegistered = false;
       try {
         const methods = await fetchSignInMethodsForEmail(auth, cleanEmail);
         isRegistered = methods.length > 0;
       } catch (authErr: any) {
-        // Si el método de consulta rápida está restringido por Firebase, procedemos a la verificación directa de envío
         isRegistered = true;
       }
 
@@ -60,9 +62,8 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
         return;
       }
 
-      // 2. Si el correo existe, enviar el correo de confirmación y restablecimiento
       await sendPasswordResetEmail(auth, cleanEmail);
-      setResetSuccess(`Correo de confirmación enviado exitosamente a ${cleanEmail}. Revisa tu bandeja de entrada o carpeta de spam para restablecer tu contraseña.`);
+      setResetSuccess(`Correo de confirmación enviado exitosamente a ${cleanEmail}. Revisa tu bandeja de entrada o carpeta de spam.`);
 
     } catch (err: any) {
       console.error('[RESET PASSWORD]', err);
@@ -79,47 +80,64 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#080808] flex items-center justify-center p-4 relative overflow-hidden font-sans">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#005f73 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px]"></div>
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-emerald-600/5 rounded-full blur-[120px]"></div>
+    <div className="min-h-screen w-full bg-[#060608] flex items-center justify-center p-4 md:p-6 relative overflow-hidden font-sans select-none">
+      {/* Glow Effects */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+      <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-full h-full opacity-[0.025] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#4F46E5 1px, transparent 1px)', backgroundSize: '36px 36px' }}></div>
 
-      <div className="w-full max-w-md relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
-        <div className="text-center mb-10">
-          <div className="w-28 h-28 bg-white border border-zinc-200/80 rounded-[32px] flex items-center justify-center mx-auto mb-6 shadow-2xl p-2.5 overflow-hidden">
-            {isResetView ? <KeyRound size={40} className="text-indigo-600" /> : <img src="/logonaliamedcore.png" alt="Nalia MedCore" className="w-full h-full object-contain" />}
+      <div className="w-full max-w-md relative z-10 animate-in fade-in zoom-in-95 duration-500">
+
+        {/* Brand Header */}
+        <div className="text-center mb-8">
+          <div className="w-24 h-24 bg-white/95 border border-white/20 rounded-[32px] flex items-center justify-center mx-auto mb-5 shadow-2xl shadow-indigo-500/20 p-2 overflow-hidden hover:scale-105 transition-transform duration-300">
+            {isResetView ? (
+              <KeyRound size={38} className="text-indigo-600" />
+            ) : (
+              <img src="/logonaliamedcore.png" alt="Nalia MedCore" className="w-full h-full object-contain" />
+            )}
           </div>
-          <h1 className="text-3xl font-black text-white tracking-tighter mb-2">Nalia MedCore</h1>
-          <p className="text-zinc-500 font-bold text-sm uppercase tracking-[0.2em]">
-            {isResetView ? 'Recuperación de Contraseña' : 'SaaS Medical Intelligence'}
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-[10px] font-black uppercase tracking-widest text-indigo-400 mb-2">
+            <Sparkles size={12} className="text-indigo-400" /> Medical SaaS Platform
+          </div>
+          <h1 className="text-3xl font-black text-white tracking-tight mb-1">
+            {isResetView ? 'Recuperar Contraseña' : 'Bienvenido de Nuevo'}
+          </h1>
+          <p className="text-zinc-400 text-xs font-medium">
+            {isResetView ? 'Ingresa tu correo para recibir el enlace de acceso' : 'Accede a tu plataforma médica centralizada'}
           </p>
         </div>
 
-        <div className="bg-[#121212] border border-zinc-800 rounded-[40px] p-8 md:p-10 shadow-2xl">
+        {/* Auth Card Container */}
+        <div className="bg-[#101014]/90 backdrop-blur-2xl border border-zinc-800/80 rounded-[36px] p-7 md:p-9 shadow-2xl shadow-black/80 relative">
+
           {!isResetView ? (
             /* FORMULARIO DE INICIO DE SESIÓN */
-            <form onSubmit={handleLogin} className="space-y-6">
+            <form onSubmit={handleLogin} className="space-y-5">
               <div>
-                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-3 block ml-1">Correo Electrónico</label>
+                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2 block ml-1">
+                  Correo Electrónico
+                </label>
                 <div className="relative group">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-indigo-500 transition-colors">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-indigo-400 transition-colors">
                     <Mail size={18} />
                   </div>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="nombre@clinica.com"
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl py-4 pl-12 pr-4 text-white text-sm outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/50 transition-all font-medium placeholder:text-zinc-600"
+                    placeholder="doctor@tuclinica.com"
+                    className="w-full bg-zinc-900/90 border border-zinc-800/90 rounded-2xl py-3.5 pl-11 pr-4 text-white text-sm outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500/60 transition-all font-medium placeholder:text-zinc-600"
                     required
                   />
                 </div>
               </div>
 
               <div>
-                <div className="flex justify-between items-center mb-3 ml-1">
-                  <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest block">Contraseña</label>
+                <div className="flex justify-between items-center mb-2 ml-1">
+                  <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest block">
+                    Contraseña
+                  </label>
                   <button
                     type="button"
                     onClick={() => {
@@ -134,35 +152,42 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
                   </button>
                 </div>
                 <div className="relative group">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-indigo-500 transition-colors">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-indigo-400 transition-colors">
                     <Lock size={18} />
                   </div>
                   <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl py-4 pl-12 pr-4 text-white text-sm outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/50 transition-all font-medium placeholder:text-zinc-600"
+                    className="w-full bg-zinc-900/90 border border-zinc-800/90 rounded-2xl py-3.5 pl-11 pr-11 text-white text-sm outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500/60 transition-all font-medium placeholder:text-zinc-600"
                     required
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors p-1"
+                  >
+                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
                 </div>
               </div>
 
               {error && (
-                <div className="bg-red-500/10 border border-red-500/20 p-4 rounded-2xl flex items-start gap-3 animate-in shake-in duration-300">
-                  <AlertCircle size={18} className="text-red-500 shrink-0 mt-0.5" />
-                  <p className="text-xs text-red-400 font-bold leading-relaxed">{error}</p>
+                <div className="bg-rose-500/10 border border-rose-500/20 p-3.5 rounded-2xl flex items-start gap-3 animate-in shake-in duration-300">
+                  <AlertCircle size={18} className="text-rose-400 shrink-0 mt-0.5" />
+                  <p className="text-xs text-rose-300 font-semibold leading-relaxed">{error}</p>
                 </div>
               )}
 
               <button
                 disabled={isLoading}
-                className="w-full py-4.5 bg-white text-black rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl hover:bg-zinc-200 active:scale-95 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:pointer-events-none"
+                className="w-full py-4 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-indigo-600/25 transition-all flex items-center justify-center gap-3 disabled:opacity-50 active:scale-[0.98] cursor-pointer"
               >
                 {isLoading ? (
                   <>
                     <Loader2 size={18} className="animate-spin" />
-                    Autenticando...
+                    Iniciando Sesión...
                   </>
                 ) : (
                   <>
@@ -172,26 +197,28 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
                 )}
               </button>
 
-              <div className="mt-8 text-center">
+              <div className="pt-2 text-center border-t border-zinc-800/80">
                 <button
                   type="button"
                   onClick={onSwitchToRegister}
                   className="text-xs font-bold text-zinc-400 hover:text-white transition-colors"
                 >
-                  ¿No tienes una cuenta? <span className="text-indigo-500">Registrar mi clínica</span>
+                  ¿No tienes una cuenta médica? <span className="text-indigo-400 font-extrabold hover:underline">Registrar mi Clínica</span>
                 </button>
               </div>
             </form>
           ) : (
             /* FORMULARIO DE RESTABLECIMIENTO DE CONTRASEÑA POR CORREO */
-            <form onSubmit={handleResetPassword} className="space-y-6 animate-in fade-in duration-300">
+            <form onSubmit={handleResetPassword} className="space-y-5 animate-in fade-in duration-300">
               <div>
-                <p className="text-xs text-zinc-400 font-medium leading-relaxed mb-6">
-                  Ingresa el correo electrónico asociado a tu cuenta clínica. Te enviaremos un correo de confirmación con el enlace seguro para restablecer tu contraseña.
+                <p className="text-xs text-zinc-400 font-medium leading-relaxed mb-5">
+                  Ingresa tu correo profesional registrado. Te enviaremos un correo con el enlace seguro para restablecer tu contraseña.
                 </p>
-                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-3 block ml-1">Correo Registrado</label>
+                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2 block ml-1">
+                  Correo Profesional
+                </label>
                 <div className="relative group">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-indigo-500 transition-colors">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-indigo-400 transition-colors">
                     <Mail size={18} />
                   </div>
                   <input
@@ -199,34 +226,34 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
                     value={resetEmail}
                     onChange={(e) => setResetEmail(e.target.value)}
                     placeholder="doctor@tuclinica.com"
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl py-4 pl-12 pr-4 text-white text-sm outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/50 transition-all font-medium placeholder:text-zinc-600"
+                    className="w-full bg-zinc-900/90 border border-zinc-800/90 rounded-2xl py-3.5 pl-11 pr-4 text-white text-sm outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500/60 transition-all font-medium placeholder:text-zinc-600"
                     required
                   />
                 </div>
               </div>
 
               {error && (
-                <div className="bg-red-500/10 border border-red-500/20 p-4 rounded-2xl flex items-start gap-3 animate-in shake-in duration-300">
-                  <AlertCircle size={18} className="text-red-500 shrink-0 mt-0.5" />
-                  <p className="text-xs text-red-400 font-bold leading-relaxed">{error}</p>
+                <div className="bg-rose-500/10 border border-rose-500/20 p-3.5 rounded-2xl flex items-start gap-3 animate-in shake-in duration-300">
+                  <AlertCircle size={18} className="text-rose-400 shrink-0 mt-0.5" />
+                  <p className="text-xs text-rose-300 font-semibold leading-relaxed">{error}</p>
                 </div>
               )}
 
               {resetSuccess && (
                 <div className="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-2xl flex items-start gap-3 animate-in fade-in duration-300">
-                  <CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-0.5" />
-                  <p className="text-xs text-emerald-400 font-bold leading-relaxed">{resetSuccess}</p>
+                  <CheckCircle2 size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                  <p className="text-xs text-emerald-300 font-semibold leading-relaxed">{resetSuccess}</p>
                 </div>
               )}
 
               <button
                 disabled={resetLoading}
-                className="w-full py-4.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl transition-all flex items-center justify-center gap-3 disabled:opacity-50 active:scale-95"
+                className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-indigo-600/25 transition-all flex items-center justify-center gap-3 disabled:opacity-50 active:scale-[0.98] cursor-pointer"
               >
                 {resetLoading ? (
                   <>
                     <Loader2 size={18} className="animate-spin" />
-                    Verificando y enviando...
+                    Enviando enlace...
                   </>
                 ) : (
                   <>
@@ -236,7 +263,7 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
                 )}
               </button>
 
-              <div className="mt-6 text-center">
+              <div className="pt-2 text-center">
                 <button
                   type="button"
                   onClick={() => {
@@ -253,7 +280,19 @@ export function LoginView({ onSwitchToRegister }: { onSwitchToRegister: () => vo
           )}
         </div>
 
-        <div className="mt-8 text-center">
+        {/* Security Badges */}
+        <div className="mt-8 flex items-center justify-center gap-6">
+           <div className="flex items-center gap-1.5 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+              <ShieldCheck size={14} className="text-emerald-500" />
+              Multi-tenant Isolated
+           </div>
+           <div className="flex items-center gap-1.5 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+              <HeartPulse size={14} className="text-indigo-400" />
+              NOM-004-SSA3 Compliant
+           </div>
+        </div>
+
+        <div className="mt-4 text-center">
            <p className="text-[10px] font-black text-zinc-700 uppercase tracking-[0.3em]">Nalia Technologies © 2026</p>
         </div>
       </div>
