@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nalia MedCore - Plataforma Médica SaaS de Nueva Generación</title>
-  <meta name="description" content="Plataforma SaaS médica modular multi-rol para clínicas, consultorios y equipos de salud. Adquiere la licencia completa o descarga para Mac y Windows." />
+  <title>Nalia MedCore - Plataforma Médica SaaS Centralizada</title>
+  <meta name="description" content="Plataforma SaaS médica inteligente para clínicas, consultorios y equipos de salud. Expediente clínico NOM-004, agenda, triaje de enfermería y finanzas." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-  <!-- Tailwind CSS v4 via CDN for standalone landing page -->
+  <!-- Tailwind CSS v4 via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts Inter -->
+  <!-- Google Fonts Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
@@ -25,13 +25,18 @@
         extend: {
           colors: {
             brand: {
-              50: '#f0f9fa',
-              100: '#d1eff1',
-              500: '#008190',
-              600: '#005f73',
-              700: '#004d5d',
-              900: '#002d3a',
-              950: '#001a24'
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+              950: '#082f49'
+            },
+            indigoBrand: {
+              500: '#4f46e5',
+              600: '#4338ca',
+              700: '#3730a3'
             }
           },
           fontFamily: {
@@ -45,57 +50,65 @@
 
   <style>
     body {
-      background-color: #080808;
+      background-color: #060608;
       color: #f4f4f5;
       font-family: 'Inter', sans-serif;
     }
     .glass-card {
-      background: rgba(18, 18, 18, 0.7);
-      backdrop-filter: blur(16px);
+      background: rgba(16, 16, 20, 0.75);
+      backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .glass-card-hover:hover {
-      border-color: rgba(0, 95, 115, 0.5);
-      box-shadow: 0 20px 40px -15px rgba(0, 95, 115, 0.25);
+      border-color: rgba(79, 70, 229, 0.4);
+      box-shadow: 0 20px 40px -15px rgba(79, 70, 229, 0.2);
     }
     .bg-grid {
-      background-image: radial-gradient(rgba(0, 95, 115, 0.15) 1px, transparent 1px);
-      background-size: 32px 32px;
+      background-image: radial-gradient(rgba(79, 70, 229, 0.12) 1px, transparent 1px);
+      background-size: 36px 36px;
     }
     .text-gradient {
-      background: linear-gradient(135deg, #ffffff 0%, #a3dfe3 50%, #008190 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #38bdf8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .badge-gradient {
-      background: linear-gradient(135deg, rgba(0, 95, 115, 0.3) 0%, rgba(0, 129, 144, 0.1) 100%);
-      border: 1px solid rgba(0, 166, 179, 0.3);
+      background: rgba(79, 70, 229, 0.1);
+      border: 1px solid rgba(79, 70, 229, 0.25);
     }
   </style>
 </head>
-<body class="bg-[#080808] text-zinc-100 antialiased selection:bg-brand-600 selection:text-white bg-grid">
+<body class="bg-[#060608] text-zinc-100 antialiased selection:bg-indigo-600 selection:text-white bg-grid">
 
   <!-- NAVBAR -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#080808]/80 backdrop-blur-2xl border-b border-zinc-800/80">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#060608]/80 backdrop-blur-2xl border-b border-zinc-800/80">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <a href="#" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 bg-brand-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-brand-600/30 group-hover:scale-105 transition-transform">
-          <i data-lucide="building-2" class="w-5 h-5"></i>
+        <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center p-1 shadow-lg shadow-indigo-500/10 group-hover:scale-105 transition-transform overflow-hidden">
+          <img src="/logonaliamedcore.png" alt="Nalia MedCore" class="w-full h-full object-contain mix-blend-multiply" />
         </div>
         <div>
-          <span class="font-black text-xl tracking-tighter text-white block leading-none">Nalia MedCore</span>
-          <span class="text-[9px] font-black text-brand-400 uppercase tracking-widest">SaaS Medical Intelligence</span>
+          <span class="font-black text-xl tracking-tight text-white block leading-none">Nalia MedCore</span>
+          <span class="text-[9px] font-black text-indigo-400 uppercase tracking-widest">Medical SaaS Platform</span>
         </div>
       </a>
 
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center gap-8 text-xs font-bold text-zinc-400">
+        <a href="#modulos" class="hover:text-white transition-colors">Módulos</a>
+        <a href="#roles" class="hover:text-white transition-colors">Roles</a>
+        <a href="#cumplimiento" class="hover:text-white transition-colors">Normatividad</a>
+        <a href="#licencias" class="hover:text-white transition-colors">Licencias</a>
+      </div>
+
       <div class="flex items-center gap-3">
-        <button onclick="openUnlockModal()" class="px-5 py-3 bg-zinc-900 hover:bg-zinc-800 text-emerald-400 border border-emerald-500/30 rounded-2xl font-black text-xs uppercase tracking-widest transition-all active:scale-95 flex items-center gap-2">
-          <i data-lucide="key" class="w-4 h-4"></i>
+        <button onclick="openUnlockModal()" class="hidden sm:flex px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 rounded-xl font-black text-xs uppercase tracking-widest transition-all active:scale-95 items-center gap-2">
+          <i data-lucide="key" class="w-4 h-4 text-emerald-400"></i>
           <span>Canjear Código</span>
         </button>
-        <a href="#comprar" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-brand-600/30 transition-all active:scale-95 flex items-center gap-2">
-          <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-          <span>Comprar / Descargar</span>
+        <a href="/app" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black text-xs uppercase tracking-widest shadow-xl shadow-indigo-600/25 transition-all active:scale-95 flex items-center gap-2">
+          <i data-lucide="log-in" class="w-4 h-4"></i>
+          <span>Acceder al Sistema</span>
         </a>
       </div>
     </div>
@@ -103,57 +116,56 @@
 
   <!-- HERO SECTION -->
   <section class="pt-36 pb-24 px-6 relative overflow-hidden">
-    <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-600/20 rounded-full blur-[140px] pointer-events-none"></div>
-    <div class="absolute top-1/2 -right-40 w-96 h-96 bg-emerald-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-indigo-600/10 rounded-full blur-[160px] pointer-events-none"></div>
 
     <div class="max-w-5xl mx-auto text-center space-y-8 relative z-10">
 
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full badge-gradient text-brand-300 text-xs font-black uppercase tracking-widest">
-        <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400"></i>
-        <span>SaaS Medical Intelligence v4.0 • PWA & Desktop</span>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full badge-gradient text-indigo-300 text-xs font-black uppercase tracking-widest">
+        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+        <span>SaaS Medical Intelligence • NOM-004 & NOM-024 Compliant</span>
       </div>
 
-      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] text-gradient">
-        La Plataforma Médica Modular de Nueva Generación
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] text-gradient max-w-4xl mx-auto">
+        La Plataforma Médica Centralizada para Clínicas y Consultorios
       </h1>
 
-      <p class="text-lg md:text-xl text-zinc-400 font-medium max-w-3xl mx-auto leading-relaxed">
-        Gestión clínica multi-rol aislada para <strong class="text-white">Médicos</strong>, <strong class="text-white">Enfermería</strong>, <strong class="text-white">Recepción</strong> y <strong class="text-white">Administración</strong>. Integración de signos vitales en vivo, expedientes NOM-024, recetas PDF oficiales y control financiero.
+      <p class="text-base md:text-xl text-zinc-400 font-medium max-w-3xl mx-auto leading-relaxed">
+        Expedientes clínicos digitales, agenda inteligente, triaje de enfermería, prescripciones PDF oficiales y control financiero en una sola plataforma segura.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-        <a href="#comprar" class="w-full sm:w-auto px-10 py-5 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-sm uppercase tracking-widest shadow-2xl shadow-brand-600/40 transition-all active:scale-95 flex items-center justify-center gap-3">
-          <i data-lucide="download" class="w-5 h-5"></i>
-          <span>Comprar o Descargar Sistema</span>
+        <a href="/app" class="w-full sm:w-auto px-10 py-4.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-2xl shadow-indigo-600/35 transition-all active:scale-95 flex items-center justify-center gap-3">
+          <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          <span>Acceder a la Plataforma</span>
         </a>
-        <a href="/app" class="w-full sm:w-auto px-8 py-5 glass-card hover:bg-zinc-800 text-zinc-200 rounded-2xl font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3">
-          <i data-lucide="play" class="w-5 h-5 text-emerald-400"></i>
-          <span>Probar Demo en Vivo</span>
+        <a href="#licencias" class="w-full sm:w-auto px-8 py-4.5 glass-card hover:bg-zinc-800 text-zinc-200 rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-3">
+          <i data-lucide="download" class="w-5 h-5 text-indigo-400"></i>
+          <span>Ver Licencias y Adquisición</span>
         </a>
       </div>
 
-      <!-- APP MOCKUP SHOWCASE CON IMAGEN DEL SISTEMA FUNCIONANDO -->
+      <!-- APP MOCKUP SHOWCASE -->
       <div class="pt-12 relative max-w-5xl mx-auto">
-        <div class="glass-card rounded-[40px] p-3 md:p-5 shadow-2xl border border-white/10 relative overflow-hidden group">
-          <div class="bg-[#0A0A0A] rounded-[28px] overflow-hidden border border-zinc-800">
+        <div class="glass-card rounded-[36px] p-3 md:p-4 shadow-2xl border border-white/10 relative overflow-hidden group">
+          <div class="bg-[#0A0A0E] rounded-[24px] overflow-hidden border border-zinc-800">
             <!-- Simulated Window Header -->
-            <div class="h-12 bg-[#121212] border-b border-zinc-800 px-6 flex items-center justify-between">
+            <div class="h-11 bg-[#101014] border-b border-zinc-800 px-6 flex items-center justify-between">
               <div class="flex items-center gap-2">
                 <div class="w-3 h-3 rounded-full bg-rose-500"></div>
                 <div class="w-3 h-3 rounded-full bg-amber-500"></div>
                 <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                <span class="text-[10px] font-mono text-zinc-500 ml-4">Nalia MedCore - Sistema Médico Funcionando</span>
+                <span class="text-[10px] font-mono text-zinc-500 ml-3">Nalia MedCore — Central Clínica</span>
               </div>
-              <div class="flex items-center gap-3 text-xs font-mono text-emerald-400">
+              <div class="flex items-center gap-2 text-xs font-mono text-emerald-400">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>Firestore Multi-Tenant • En Vivo</span>
+                <span class="text-[10px] uppercase font-bold tracking-wider">Multi-Tenant En Vivo</span>
               </div>
             </div>
 
-            <!-- Imagen Real del Sistema Funcionando -->
+            <!-- Imagen del Sistema -->
             <div class="relative overflow-hidden group">
-              <img src="/image.png" alt="Nalia MedCore - Plataforma Médica Funcionando" class="w-full h-auto object-cover rounded-b-[24px] shadow-2xl transition-transform duration-700 group-hover:scale-[1.01]" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#080808]/60 via-transparent to-transparent pointer-events-none"></div>
+              <img src="/image.png" alt="Nalia MedCore - Plataforma Médica" class="w-full h-auto object-cover rounded-b-[20px] shadow-2xl transition-transform duration-700 group-hover:scale-[1.01]" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#060608]/40 via-transparent to-transparent pointer-events-none"></div>
             </div>
           </div>
         </div>
@@ -161,33 +173,239 @@
     </div>
   </section>
 
-  <!-- SECCIÓN: ADQUISICIÓN Y DESCARGAS (COMPRAR / DESCARGAR) -->
-  <section id="comprar" class="py-24 px-6 border-t border-zinc-900 bg-brand-950/40 relative">
+  <!-- SECCIÓN MÓDULOS DEL SISTEMA -->
+  <section id="modulos" class="py-24 px-6 border-t border-zinc-900 bg-[#08080C]">
     <div class="max-w-6xl mx-auto space-y-16">
       <div class="text-center space-y-4 max-w-3xl mx-auto">
-        <span class="px-4 py-1.5 rounded-full badge-gradient text-brand-300 text-xs font-black uppercase tracking-widest">Adquisición del Sistema</span>
-        <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">Comprar Licencia o Descargar Software</h2>
+        <span class="px-3 py-1 rounded-full badge-gradient text-indigo-300 text-[10px] font-black uppercase tracking-widest">Arquitectura Modular</span>
+        <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">Módulos Especializados para tu Clínica</h2>
         <p class="text-zinc-400 text-sm md:text-base font-medium leading-relaxed">
-          Elige la modalidad que mejor se adapte a tu clínica o proyecto. Descarga ejecutables de escritorio o adquiere la licencia completa de código fuente.
+          Diseñados para coordinar sin fricción a todo el equipo de salud en un entorno seguro e intuitivo.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        <!-- CARD 1: CÓDIGO FUENTE / LICENCIA COMPLETA -->
-        <div class="glass-card rounded-[40px] p-8 md:p-10 space-y-8 flex flex-col justify-between border border-brand-500/40 relative group hover:border-brand-400 transition-all">
+        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
+          <div class="w-12 h-12 bg-indigo-600/20 text-indigo-400 rounded-2xl flex items-center justify-center border border-indigo-500/30">
+            <i data-lucide="clipboard-list" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-white">Expediente Clínico NOM-004</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Evolución SOAP, historial patológico, alergias, diagnósticos y trazabilidad obligatoria con cédula profesional.</p>
+        </div>
+
+        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
+          <div class="w-12 h-12 bg-sky-500/20 text-sky-400 rounded-2xl flex items-center justify-center border border-sky-500/30">
+            <i data-lucide="calendar" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-white">Agenda Inteligente & Recepción</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Gestión de citas por médico, confirmación de llegada (Check-in) y control de sala de espera en tiempo real.</p>
+        </div>
+
+        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
+          <div class="w-12 h-12 bg-rose-500/20 text-rose-400 rounded-2xl flex items-center justify-center border border-rose-500/30">
+            <i data-lucide="heart-pulse" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-white">Triaje & Enfermería Asistencial</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Captura de constantes vitales, somatometría con cálculo automático de IMC y centro de solicitudes médicas.</p>
+        </div>
+
+        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
+          <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/30">
+            <i data-lucide="pill" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-white">Prescripciones PDF Oficiales</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Emisión de recetas médicas digitales e impresas con datos institucionales, dosis, frecuencia y sello médico.</p>
+        </div>
+
+        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
+          <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center border border-amber-500/30">
+            <i data-lucide="credit-card" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-white">Finanzas & Corte de Caja</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Monitoreo de ingresos por efectivo, tarjeta y transferencia, cobro de consultas y reportes estadísticos.</p>
+        </div>
+
+        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
+          <div class="w-12 h-12 bg-purple-500/20 text-purple-400 rounded-2xl flex items-center justify-center border border-purple-500/30">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-white">Compliance & Auditoría</h3>
+          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Registro inmutable de auditoría (Audit Logs) que garantiza la seguridad e inalterabilidad de los expedientes.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN EXPERIENCIA DE ROLES -->
+  <section id="roles" class="py-24 px-6 border-t border-zinc-900 bg-[#060608]">
+    <div class="max-w-6xl mx-auto space-y-12">
+      <div class="text-center space-y-4 max-w-3xl mx-auto">
+        <span class="px-3 py-1 rounded-full badge-gradient text-indigo-300 text-[10px] font-black uppercase tracking-widest">Espacios de Trabajo por Rol</span>
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-white">Aislamiento de Trabajo por Rol de Usuario</h2>
+        <p class="text-zinc-400 text-sm font-medium">Cada colaborador accede únicamente a los módulos e instrumentos requeridos para sus funciones.</p>
+      </div>
+
+      <!-- Role Tabs -->
+      <div class="flex justify-center border-b border-zinc-800 max-w-2xl mx-auto overflow-x-auto">
+        <button onclick="switchRoleTab('doctor')" id="tab-doctor" class="role-tab px-6 py-4 text-xs font-black uppercase tracking-widest border-b-2 border-indigo-500 text-indigo-400 flex items-center gap-2 shrink-0">
+          <i data-lucide="stethoscope" class="w-4 h-4"></i> Médico
+        </button>
+        <button onclick="switchRoleTab('nurse')" id="tab-nurse" class="role-tab px-6 py-4 text-xs font-black uppercase tracking-widest border-b-2 border-transparent text-zinc-500 hover:text-zinc-300 flex items-center gap-2 shrink-0">
+          <i data-lucide="heart-pulse" class="w-4 h-4"></i> Enfermería
+        </button>
+        <button onclick="switchRoleTab('reception')" id="tab-reception" class="role-tab px-6 py-4 text-xs font-black uppercase tracking-widest border-b-2 border-transparent text-zinc-500 hover:text-zinc-300 flex items-center gap-2 shrink-0">
+          <i data-lucide="user-check" class="w-4 h-4"></i> Recepción
+        </button>
+        <button onclick="switchRoleTab('admin')" id="tab-admin" class="role-tab px-6 py-4 text-xs font-black uppercase tracking-widest border-b-2 border-transparent text-zinc-500 hover:text-zinc-300 flex items-center gap-2 shrink-0">
+          <i data-lucide="shield" class="w-4 h-4"></i> Administración
+        </button>
+      </div>
+
+      <!-- Role Details Content -->
+      <div class="glass-card rounded-[36px] p-8 md:p-12 relative overflow-hidden">
+
+        <!-- DOCTOR ROLE -->
+        <div id="content-doctor" class="role-content space-y-6">
+          <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
+            <div class="w-14 h-14 bg-indigo-600/20 text-indigo-400 rounded-2xl flex items-center justify-center border border-indigo-500/30">
+              <i data-lucide="stethoscope" class="w-8 h-8"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-black text-white">Perfil: Médico / Especialista</h3>
+              <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Atención Clínica y Expedientes</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+            <div class="p-5 bg-zinc-900/60 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-indigo-300">Consultas SOAP Estructuradas</h4>
+              <p class="text-xs text-zinc-400">Anamnesis subjetiva, exploración por sistemas, diagnósticos y plan médico.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/60 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-emerald-400">Signos Vitales Automáticos</h4>
+              <p class="text-xs text-zinc-400">Visualiza en tiempo real la somatometría registrada previamente por enfermería.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/60 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-sky-400">Prescripciones Oficiales</h4>
+              <p class="text-xs text-zinc-400">Emisión de recetas médicas impresas o en PDF con cédula profesional (DGP) y sello.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- NURSE ROLE -->
+        <div id="content-nurse" class="role-content hidden space-y-6">
+          <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
+            <div class="w-14 h-14 bg-rose-500/20 text-rose-400 rounded-2xl flex items-center justify-center border border-rose-500/30">
+              <i data-lucide="heart-pulse" class="w-8 h-8"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-black text-white">Perfil: Enfermería Asistencial</h3>
+              <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Triaje y Signos Vitales</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+            <div class="p-5 bg-zinc-900/60 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-rose-400">Captura de Somatometría</h4>
+              <p class="text-xs text-zinc-400">Registro rápido de Presión Arterial, FC, Temp, SpO2, Peso, Talla e IMC.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/60 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-amber-400">Centro de Solicitudes</h4>
+              <p class="text-xs text-zinc-400">Notificaciones en tiempo real derivadas por médicos para procedimientos y curaciones.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/60 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-indigo-300">Expediente Asistencial</h4>
+              <p class="text-xs text-zinc-400">Ficha de identificación simplificada sin acceso a notas clínicas de médicos.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECEPTION ROLE -->
+        <div id="content-reception" class="role-content hidden space-y-6">
+          <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
+            <div class="w-14 h-14 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center border border-amber-500/30">
+              <i data-lucide="user-check" class="w-8 h-8"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-black text-white">Perfil: Recepción / Caja Operativa</h3>
+              <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Recepción de Pacientes y Cobranza</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+            <div class="p-5 bg-zinc-900/60 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-amber-400">Check-in & Sala de Espera</h4>
+              <p class="text-xs text-zinc-400">Confirmación de llegada de pacientes y asignación a sala de espera médica.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/60 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-emerald-400">Monitor de Cobros</h4>
+              <p class="text-xs text-zinc-400">Caja con avisos automáticos de servicios finalizados pendientes de cobro.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/60 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-indigo-400">Corte de Caja Diario</h4>
+              <p class="text-xs text-zinc-400">Desglose inmediato de ingresos cobrados en efectivo, tarjeta o transferencia.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN ROLE -->
+        <div id="content-admin" class="role-content hidden space-y-6">
+          <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
+            <div class="w-14 h-14 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/30">
+              <i data-lucide="shield" class="w-8 h-8"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-black text-white">Perfil: Administrador de Clínica</h3>
+              <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Métricas, Equipo y Gobernanza</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+            <div class="p-5 bg-zinc-900/60 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-emerald-400">Gestión de Equipo</h4>
+              <p class="text-xs text-zinc-400">Alta directa de colaboradores (médicos, enfermeros, recepcionistas) con asignación de rol.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/60 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-indigo-400">Compliance & Auditoría</h4>
+              <p class="text-xs text-zinc-400">Acceso a matriz de cumplimiento NOM-004 y registros de auditoría inmutables.</p>
+            </div>
+            <div class="p-5 bg-zinc-900/60 rounded-2xl border border-zinc-800 space-y-2">
+              <h4 class="font-black text-sm text-sky-300">Modo Dual (Clínico/Admin)</h4>
+              <p class="text-xs text-zinc-400">El médico propietario puede alternar entre atender pacientes o supervisar métricas de la clínica.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN LICENCIAS Y ADQUISICIÓN (ÚNICAMENTE OPCIONES REALES) -->
+  <section id="licencias" class="py-24 px-6 border-t border-zinc-900 bg-[#08080C] relative">
+    <div class="max-w-5xl mx-auto space-y-16">
+      <div class="text-center space-y-4 max-w-3xl mx-auto">
+        <span class="px-4 py-1.5 rounded-full badge-gradient text-indigo-300 text-xs font-black uppercase tracking-widest">Adquisición del Software</span>
+        <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">Licencias del Sistema Nalia MedCore</h2>
+        <p class="text-zinc-400 text-sm md:text-base font-medium leading-relaxed">
+          Selecciona la modalidad de software adecuada para la operación de tu clínica o proyecto tecnológico.
+        </p>
+      </div>
+
+      <!-- ÚNICAMENTE 2 OPCIONES REALES (SIN TARJETA DEMO) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+        <!-- CARD 1: CÓDIGO FUENTE FULL -->
+        <div class="glass-card rounded-[36px] p-8 md:p-10 space-y-8 flex flex-col justify-between border border-indigo-500/40 relative group hover:border-indigo-400 transition-all">
           <div class="space-y-6">
-            <div class="w-14 h-14 bg-brand-600 text-white rounded-2xl flex items-center justify-center shadow-xl shadow-brand-600/30">
+            <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center shadow-xl shadow-indigo-600/30">
               <i data-lucide="code" class="w-7 h-7"></i>
             </div>
             <div>
-              <span class="px-3 py-1 bg-brand-500/20 text-brand-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-brand-500/30">Licencia SaaS Completa</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-indigo-500/30">Licencia SaaS Completa</span>
               <h3 class="text-2xl font-black text-white mt-3">Código Fuente Full</h3>
               <div class="flex items-center gap-2 mt-2">
-                <span class="text-2xl font-black text-emerald-400 font-mono">$499 USD</span>
+                <span class="text-3xl font-black text-emerald-400 font-mono">$499 USD</span>
                 <span id="price-full-mxn" class="text-xs font-bold text-zinc-400 font-mono">($9,999 MXN)</span>
               </div>
-              <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Acceso total al código fuente original React 19, TypeScript, Electron, Firebase y configuraciones de PWA.</p>
+              <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Acceso total al código fuente original React 19, TypeScript, Electron, Firebase y PWA con derechos comerciales.</p>
             </div>
 
             <ul class="space-y-3 text-xs font-medium text-zinc-300 border-t border-zinc-800 pt-6">
@@ -198,80 +416,55 @@
             </ul>
           </div>
 
-          <button onclick="openBuyModal('source')" class="w-full py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-brand-600/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+          <button onclick="openBuyModal('source')" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-indigo-600/30 transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
             <i data-lucide="shopping-bag" class="w-4 h-4"></i>
             <span>Comprar Licencia Full</span>
           </button>
         </div>
 
-        <!-- CARD 2: DESCARGAR DESKTOP (MAC / WINDOWS) -->
-        <div class="glass-card rounded-[40px] p-8 md:p-10 space-y-8 flex flex-col justify-between border border-zinc-800 relative group hover:border-indigo-500/40 transition-all">
+        <!-- CARD 2: ESCRITORIO NATIVO -->
+        <div class="glass-card rounded-[36px] p-8 md:p-10 space-y-8 flex flex-col justify-between border border-zinc-800 relative group hover:border-sky-500/40 transition-all">
           <div class="space-y-6">
-            <div class="w-14 h-14 bg-indigo-600/20 text-indigo-400 rounded-2xl flex items-center justify-center border border-indigo-500/30">
+            <div class="w-14 h-14 bg-sky-600/20 text-sky-400 rounded-2xl flex items-center justify-center border border-sky-500/30">
               <i data-lucide="monitor" class="w-7 h-7"></i>
             </div>
             <div>
-              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-indigo-500/30">Versión Escritorio de Pago</span>
+              <span class="px-3 py-1 bg-sky-500/20 text-sky-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-sky-500/30">Software de Escritorio</span>
               <h3 class="text-2xl font-black text-white mt-3">Escritorio Nativo</h3>
               <div class="flex items-center gap-2 mt-2">
-                <span class="text-2xl font-black text-indigo-400 font-mono">$299 USD</span>
+                <span class="text-3xl font-black text-sky-400 font-mono">$299 USD</span>
                 <span id="price-desk-mxn" class="text-xs font-bold text-zinc-400 font-mono">($5,999 MXN)</span>
               </div>
-              <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Ejecutables independientes de pago compilados con Electron para instalar directamente en tu equipo.</p>
+              <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Ejecutables independientes compilados con Electron para instalar directamente en equipos de la clínica.</p>
             </div>
 
             <ul class="space-y-3 text-xs font-medium text-zinc-300 border-t border-zinc-800 pt-6">
               <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> macOS Installer (`.dmg` Apple Silicon / Intel)</li>
               <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Windows Portable Installer (`.exe`)</li>
-              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Licencia de uso para escritorio sin límites</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Licencia de uso definitivo para tu consultorio o clínica</li>
             </ul>
           </div>
 
-          <button onclick="openBuyModal('desktop')" class="w-full py-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2">
+          <button onclick="openBuyModal('desktop')" class="w-full py-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
             <i data-lucide="download" class="w-4 h-4"></i>
             <span>Comprar Ejecutable (.DMG / .EXE)</span>
           </button>
         </div>
 
-        <!-- CARD 3: PROBAR DEMO WEB PWA -->
-        <div class="glass-card rounded-[40px] p-8 md:p-10 space-y-8 flex flex-col justify-between border border-zinc-800 relative group hover:border-emerald-500/40 transition-all">
-          <div class="space-y-6">
-            <div class="w-14 h-14 bg-emerald-600/20 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/30">
-              <i data-lucide="globe" class="w-7 h-7"></i>
-            </div>
-            <div>
-              <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-emerald-500/30">Prueba Gratuita 15 Días</span>
-              <h3 class="text-2xl font-black text-white mt-3">Demo Web / PWA</h3>
-              <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-2">Prueba la plataforma interactiva gratis por 15 días desde el navegador o instálala como PWA.</p>
-            </div>
-
-            <ul class="space-y-3 text-xs font-medium text-zinc-300 border-t border-zinc-800 pt-6">
-              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Acceso gratis controlado por IP (15 Días)</li>
-              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Contador en vivo de días restantes</li>
-              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i> Prueba de roles: Médico, Enfermera, Recepción, Admin</li>
-            </ul>
-          </div>
-
-          <a href="/app" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-emerald-600/30 transition-all active:scale-95 flex items-center justify-center gap-2">
-            <i data-lucide="play" class="w-4 h-4"></i>
-            <span>Iniciar Prueba Gratis (15 Días)</span>
-          </a>
-        </div>
-
       </div>
 
-      <!-- Banner de Canje de Licencias para compradores por Transferencia -->
-      <div class="glass-card rounded-[32px] p-8 border border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-6 bg-emerald-950/20">
+      <!-- Banner de Canje para Clientes SPEI -->
+      <div class="glass-card rounded-[32px] p-8 border border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-6 bg-emerald-950/20 max-w-4xl mx-auto">
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 bg-emerald-600/20 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/30 shrink-0">
             <i data-lucide="key" class="w-6 h-6"></i>
           </div>
           <div>
             <h4 class="text-lg font-black text-white">¿Ya realizaste tu transferencia bancaria SPEI?</h4>
-            <p class="text-xs text-zinc-400 font-medium mt-0.5">Ingresa tu Código de Activación asignado por WhatsApp para desbloquear la descarga del software inmediatamente.</p>
+            <p class="text-xs text-zinc-400 font-medium mt-0.5">Ingresa tu Código de Activación asignado para desbloquear la descarga inmediatamente.</p>
           </div>
         </div>
-        <button onclick="openUnlockModal()" class="w-full md:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-600/30 transition-all active:scale-95 flex items-center justify-center gap-2 shrink-0">
+        <button onclick="openUnlockModal()" class="w-full md:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-600/30 transition-all active:scale-95 flex items-center justify-center gap-2 shrink-0 cursor-pointer">
           <i data-lucide="shield-check" class="w-4 h-4"></i>
           <span>Canjear Código / Desbloquear</span>
         </button>
@@ -279,245 +472,11 @@
     </div>
   </section>
 
-  <!-- SECCIÓN 1: ¿PARA QUIÉN ESTÁ PENSADO? -->
-  <section id="audiencia" class="py-24 px-6 border-t border-zinc-900 bg-[#0A0A0A]/50">
-    <div class="max-w-6xl mx-auto space-y-16">
-      <div class="text-center space-y-4 max-w-3xl mx-auto">
-        <span class="px-3 py-1 rounded-full badge-gradient text-brand-300 text-[10px] font-black uppercase tracking-widest">Especialización de Mercado</span>
-        <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">¿Para quién está pensado Nalia MedCore?</h2>
-        <p class="text-zinc-400 text-sm md:text-base font-medium leading-relaxed">Diseñado desde cero para resolver la fragmentación operativa en consultorios independientes y centros médicos multidisciplinarios.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
-          <div class="w-12 h-12 bg-brand-600/20 text-brand-400 rounded-2xl flex items-center justify-center border border-brand-500/20">
-            <i data-lucide="stethoscope" class="w-6 h-6"></i>
-          </div>
-          <h3 class="text-xl font-black text-white">Médicos & Especialistas</h3>
-          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Médicos generales y especialistas que requieren notas SOAP rápidas, historia clínica y generación de recetas en PDF oficial.</p>
-        </div>
-
-        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
-          <div class="w-12 h-12 bg-rose-500/20 text-rose-400 rounded-2xl flex items-center justify-center border border-rose-500/20">
-            <i data-lucide="heart-pulse" class="w-6 h-6"></i>
-          </div>
-          <h3 class="text-xl font-black text-white">Personal de Enfermería</h3>
-          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Enfermeras y asistentes que realizan la toma de signos vitales, somatometría (IMC) y procedimientos de apoyo médico.</p>
-        </div>
-
-        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
-          <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center border border-amber-500/20">
-            <i data-lucide="user-check" class="w-6 h-6"></i>
-          </div>
-          <h3 class="text-xl font-black text-white">Recepción & Caja</h3>
-          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Recepcionistas encargadas del agendamiento, confirmación de llegada (Check-in), cobro de consultas y cortes de caja.</p>
-        </div>
-
-        <div class="glass-card rounded-[32px] p-8 space-y-4 glass-card-hover transition-all">
-          <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/20">
-            <i data-lucide="shield-check" class="w-6 h-6"></i>
-          </div>
-          <h3 class="text-xl font-black text-white">Clínicas & Admins</h3>
-          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Propietarios de clínicas que necesitan métricas de ingresos, gestión de equipo, auditoría inmutable y cumplimiento legal.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECCIÓN 2: EXPERIENCIA DE ROLES INTERACTIVA -->
-  <section id="demostracion" class="py-24 px-6 border-t border-zinc-900">
-    <div class="max-w-6xl mx-auto space-y-12">
-      <div class="text-center space-y-4 max-w-3xl mx-auto">
-        <span class="px-3 py-1 rounded-full badge-gradient text-brand-300 text-[10px] font-black uppercase tracking-widest">Arquitectura de Contexto</span>
-        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-white">Aislamiento Estricto por Rol de Usuario</h2>
-        <p class="text-zinc-400 text-sm font-medium">Cada trabajador entra a una interfaz diseñada 100% para su función, eliminando la duplicidad de menús.</p>
-      </div>
-
-      <!-- Role Tabs -->
-      <div class="flex justify-center border-b border-zinc-800 max-w-2xl mx-auto">
-        <button onclick="switchRoleTab('doctor')" id="tab-doctor" class="role-tab px-6 py-4 text-xs font-black uppercase tracking-widest border-b-2 border-brand-500 text-brand-400 flex items-center gap-2">
-          <i data-lucide="stethoscope" class="w-4 h-4"></i> Médico
-        </button>
-        <button onclick="switchRoleTab('nurse')" id="tab-nurse" class="role-tab px-6 py-4 text-xs font-black uppercase tracking-widest border-b-2 border-transparent text-zinc-500 hover:text-zinc-300 flex items-center gap-2">
-          <i data-lucide="heart-pulse" class="w-4 h-4"></i> Enfermería
-        </button>
-        <button onclick="switchRoleTab('reception')" id="tab-reception" class="role-tab px-6 py-4 text-xs font-black uppercase tracking-widest border-b-2 border-transparent text-zinc-500 hover:text-zinc-300 flex items-center gap-2">
-          <i data-lucide="user-check" class="w-4 h-4"></i> Recepción
-        </button>
-        <button onclick="switchRoleTab('admin')" id="tab-admin" class="role-tab px-6 py-4 text-xs font-black uppercase tracking-widest border-b-2 border-transparent text-zinc-500 hover:text-zinc-300 flex items-center gap-2">
-          <i data-lucide="shield" class="w-4 h-4"></i> Administración
-        </button>
-      </div>
-
-      <!-- Role Details Content -->
-      <div class="glass-card rounded-[40px] p-8 md:p-12 relative overflow-hidden">
-
-        <!-- DOCTOR ROLE CONTENT -->
-        <div id="content-doctor" class="role-content space-y-6">
-          <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
-            <div class="w-14 h-14 bg-brand-600/20 text-brand-400 rounded-2xl flex items-center justify-center border border-brand-500/30">
-              <i data-lucide="stethoscope" class="w-8 h-8"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-black text-white">Perfil: Médico / Especialista</h3>
-              <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Atención Clínica y Diagnóstico</p>
-            </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
-              <h4 class="font-black text-sm text-brand-300">Consultas SOAP Estructuradas</h4>
-              <p class="text-xs text-zinc-400">Anamnesis subjetiva, hallazgos objetivos por sistemas, diagnóstico e indicaciones del plan médico.</p>
-            </div>
-            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
-              <h4 class="font-black text-sm text-emerald-400">Pre-llenado de Signos Vitales</h4>
-              <p class="text-xs text-zinc-400">Recibe en automático los signos tomados por enfermería antes de abrir la consulta.</p>
-            </div>
-            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
-              <h4 class="font-black text-sm text-indigo-400">Recetas Digitales PDF</h4>
-              <p class="text-xs text-zinc-400">Emisión de recetas oficiales impresas o en PDF con cédula profesional (DGP), sello y marca de agua.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- NURSE ROLE CONTENT -->
-        <div id="content-nurse" class="role-content hidden space-y-6">
-          <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
-            <div class="w-14 h-14 bg-rose-500/20 text-rose-400 rounded-2xl flex items-center justify-center border border-rose-500/30">
-              <i data-lucide="heart-pulse" class="w-8 h-8"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-black text-white">Perfil: Enfermería Asistencial</h3>
-              <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Captura de Signos y Apoyo Médico</p>
-            </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
-              <h4 class="font-black text-sm text-rose-400">Captura de Signos & Somatometría</h4>
-              <p class="text-xs text-zinc-400">Registro rápido de Tensión Arterial, FC, Temp, SpO2, Peso, Talla e IMC calculated automáticamente.</p>
-            </div>
-            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
-              <h4 class="font-black text-sm text-amber-400">Centro de Solicitudes Vivas</h4>
-              <p class="text-xs text-zinc-400">Notificaciones en tiempo real enviadas por los médicos (aplicación de medicamentos, curaciones, muestras).</p>
-            </div>
-            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
-              <h4 class="font-black text-sm text-brand-300">Expediente Asistencial</h4>
-              <p class="text-xs text-zinc-400">Ficha de identificación sin botones de consulta médica, garantizando la privacidad de roles.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- RECEPTION ROLE CONTENT -->
-        <div id="content-reception" class="role-content hidden space-y-6">
-          <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
-            <div class="w-14 h-14 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center border border-amber-500/30">
-              <i data-lucide="user-check" class="w-8 h-8"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-black text-white">Perfil: Recepción / Caja Operativa</h3>
-              <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Validación, Agendamiento y Cobranza</p>
-            </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
-              <h4 class="font-black text-sm text-amber-400">Validation & Check-in</h4>
-              <p class="text-xs text-zinc-400">Confirmación de llegada de pacientes para enviarlos a sala de espera e informar al médico.</p>
-            </div>
-            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
-              <h4 class="font-black text-sm text-emerald-400">Monitor de Cobros</h4>
-              <p class="text-xs text-zinc-400">Notificaciones automáticas con el monto a cobrar asignado por el médico al terminar la consulta.</p>
-            </div>
-            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
-              <h4 class="font-black text-sm text-indigo-400">Corte de Caja Diario</h4>
-              <p class="text-xs text-zinc-400">Desglose inmediato de ingresos por Efectivo, Tarjeta/TPV, Transferencias y Aseguradoras.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ADMIN ROLE CONTENT -->
-        <div id="content-admin" class="role-content hidden space-y-6">
-          <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
-            <div class="w-14 h-14 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/30">
-              <i data-lucide="shield" class="w-8 h-8"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-black text-white">Perfil: Administrador de Organización</h3>
-              <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Métricas, Equipo y Cumplimiento Legal</p>
-            </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
-              <h4 class="font-black text-sm text-emerald-400">Gestión de Equipo & Permisos</h4>
-              <p class="text-xs text-zinc-400">Creación directa de colaboradores con usuario y contraseña sin requerir correos de confirmación.</p>
-            </div>
-            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
-              <h4 class="font-black text-sm text-indigo-400">Compliance & Legal Hold</h4>
-              <p class="text-xs text-zinc-400">Matriz NOM-024 / NOM-004, auditorías inmutables y congelamiento legal de datos.</p>
-            </div>
-            <div class="p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800 space-y-2">
-              <h4 class="font-black text-sm text-brand-300">Modo Dual (Clínico/Admin)</h4>
-              <p class="text-xs text-zinc-400">El propietario puede alternar entre atender pacientes como médico o supervisar la clínica como administrador.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SECCIÓN 3: ¿CÓMO SE HIZO? (STACK TECNOLÓGICO) -->
-  <section id="tecnologia" class="py-24 px-6 border-t border-zinc-900 bg-[#0A0A0A]/50">
-    <div class="max-w-6xl mx-auto space-y-16">
-      <div class="text-center space-y-4 max-w-3xl mx-auto">
-        <span class="px-3 py-1 rounded-full badge-gradient text-brand-300 text-[10px] font-black uppercase tracking-widest">Ingeniería & Código</span>
-        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-white">¿Cómo está construido Nalia MedCore?</h2>
-        <p class="text-zinc-400 text-sm font-medium">Stack moderno de alto rendimiento enfocado en seguridad multi-tenant y disponibilidad continua.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="glass-card rounded-3xl p-8 space-y-3">
-          <span class="text-[10px] font-mono font-black text-brand-400 uppercase">Core Framework</span>
-          <h3 class="text-xl font-black text-white">React 19 + TypeScript + Vite</h3>
-          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Compilación ultra-rápida, renderizado reactivo y tipos estrictos que previenen errores en tiempo de ejecución.</p>
-        </div>
-
-        <div class="glass-card rounded-3xl p-8 space-y-3">
-          <span class="text-[10px] font-mono font-black text-emerald-400 uppercase">Diseño & Estilos</span>
-          <h3 class="text-xl font-black text-white">Tailwind CSS v4</h3>
-          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Diseño en modo claro y oscuro con variables CSS avanzadas y paleta institucional Azul Petróleo (`#005f73`).</p>
-        </div>
-
-        <div class="glass-card rounded-3xl p-8 space-y-3">
-          <span class="text-[10px] font-mono font-black text-indigo-400 uppercase">Base de Datos Cloud</span>
-          <h3 class="text-xl font-black text-white">Firebase Firestore Multi-Tenant</h3>
-          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Aislamiento estricto de datos por organización, sincronización en vivo y caché local en memoria.</p>
-        </div>
-
-        <div class="glass-card rounded-3xl p-8 space-y-3">
-          <span class="text-[10px] font-mono font-black text-amber-400 uppercase">Escritorio Nativo</span>
-          <h3 class="text-xl font-black text-white">Electron 43 Engine</h3>
-          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Empaquetado nativo para macOS (`.dmg`) y Windows (`.exe`) ejecutable sin dependencias externas.</p>
-        </div>
-
-        <div class="glass-card rounded-3xl p-8 space-y-3">
-          <span class="text-[10px] font-mono font-black text-rose-400 uppercase">Web PWA Support</span>
-          <h3 class="text-xl font-black text-white">Vite PWA Service Worker</h3>
-          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Instalable en 1-clic desde cualquier navegador web en Mac, PC, Android o iOS como aplicación nativa.</p>
-        </div>
-
-        <div class="glass-card rounded-3xl p-8 space-y-3">
-          <span class="text-[10px] font-mono font-black text-brand-300 uppercase">Google Calendar API</span>
-          <h3 class="text-xl font-black text-white">Sincronización Externa</h3>
-          <p class="text-zinc-400 text-xs font-medium leading-relaxed">Vinculación de eventos personales con la agenda médica en tiempo real vía OAuth 2.0.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA FINAL -->
   <section class="py-24 px-6 border-t border-zinc-900 relative overflow-hidden">
-    <div class="max-w-4xl mx-auto glass-card rounded-[48px] p-12 md:p-16 text-center space-y-8 relative z-10 border border-brand-500/30">
-      <div class="w-20 h-20 bg-brand-600 text-white rounded-3xl flex items-center justify-center mx-auto shadow-2xl shadow-brand-600/50">
-        <i data-lucide="building-2" class="w-10 h-10"></i>
+    <div class="max-w-4xl mx-auto glass-card rounded-[44px] p-10 md:p-14 text-center space-y-8 relative z-10 border border-indigo-500/30">
+      <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto shadow-2xl p-2.5 overflow-hidden">
+        <img src="/logonaliamedcore.png" alt="Nalia MedCore" class="w-full h-full object-contain mix-blend-multiply" />
       </div>
 
       <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white leading-tight">
@@ -525,24 +484,24 @@
       </h2>
 
       <p class="text-zinc-400 text-base max-w-xl mx-auto font-medium leading-relaxed">
-        Adquiere el sistema completo o descarga la versión de escritorio para tu equipo.
+        Accede a la plataforma web centralizada o adquiere la licencia completa para tu equipo.
       </p>
 
-      <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4">
-        <a href="#comprar" class="px-10 py-5 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-brand-600/40 transition-all active:scale-95 flex items-center justify-center gap-3">
-          <i data-lucide="download" class="w-4 h-4"></i>
-          <span>Comprar / Descargar</span>
+      <div class="pt-2 flex flex-col sm:flex-row justify-center gap-4">
+        <a href="/app" class="px-10 py-4.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-indigo-600/35 transition-all active:scale-95 flex items-center justify-center gap-3">
+          <i data-lucide="log-in" class="w-4 h-4"></i>
+          <span>Acceder a la Plataforma</span>
         </a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-12 px-6 border-t border-zinc-900 bg-[#050505] text-xs font-bold text-zinc-500">
+  <footer class="py-12 px-6 border-t border-zinc-900 bg-[#040406] text-xs font-bold text-zinc-500">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 bg-brand-600 rounded-xl flex items-center justify-center text-white">
-          <i data-lucide="building-2" class="w-4 h-4"></i>
+        <div class="w-8 h-8 bg-white rounded-xl flex items-center justify-center p-1 overflow-hidden">
+          <img src="/logonaliamedcore.png" alt="Nalia MedCore" class="w-full h-full object-contain mix-blend-multiply" />
         </div>
         <span class="font-black text-white text-sm">Nalia MedCore SaaS Platform</span>
       </div>
@@ -550,30 +509,27 @@
     </div>
   </footer>
 
-  <!-- MODAL PREVIO DE INFORMACIÓN DE LICENCIA (FICHA TÉCNICA E INCLUSIONES) -->
+  <!-- MODAL FICHA TÉCNICA -->
   <div id="preview-modal" class="fixed inset-0 z-[998] bg-black/90 backdrop-blur-2xl hidden items-center justify-center p-4 overflow-y-auto">
-    <div class="glass-card rounded-[40px] p-6 md:p-10 max-w-2xl w-full border border-brand-500/40 relative space-y-8 animate-in zoom-in-95 duration-300 my-8">
+    <div class="glass-card rounded-[36px] p-6 md:p-10 max-w-2xl w-full border border-indigo-500/40 relative space-y-8 animate-in zoom-in-95 duration-300 my-8">
 
-      <!-- Close Button -->
-      <button onclick="closePreviewModal()" class="absolute top-6 right-6 p-2.5 text-zinc-400 hover:text-white bg-zinc-900 rounded-full transition-colors z-10">
+      <button onclick="closePreviewModal()" class="absolute top-6 right-6 p-2.5 text-zinc-400 hover:text-white bg-zinc-900 rounded-full transition-colors z-10 cursor-pointer">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
-      <!-- Header Ficha -->
       <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
-        <div id="preview-icon-box" class="w-16 h-14 bg-brand-600 text-white rounded-2xl flex items-center justify-center shadow-xl shadow-brand-600/30 shrink-0">
-          <i data-lucide="code" class="w-8 h-8"></i>
+        <div id="preview-icon-box" class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center shadow-xl shadow-indigo-600/30 shrink-0">
+          <i data-lucide="code" class="w-7 h-7"></i>
         </div>
         <div>
-          <span class="px-3 py-1 bg-brand-500/20 text-brand-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-brand-500/30">Ficha Informativa de Licencia</span>
+          <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-indigo-500/30">Ficha Informativa de Licencia</span>
           <h3 id="preview-title" class="text-2xl md:text-3xl font-black text-white mt-1">Licencia Código Fuente Full</h3>
         </div>
       </div>
 
-      <!-- Bloque de Precio y Modalidad -->
-      <div class="p-6 bg-brand-950/60 rounded-3xl border border-brand-500/30 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="p-6 bg-indigo-950/40 rounded-3xl border border-indigo-500/30 flex flex-col md:flex-row items-center justify-between gap-4">
         <div>
-          <span class="text-[10px] font-black text-brand-300 uppercase tracking-widest block">Inversión de Software</span>
+          <span class="text-[10px] font-black text-indigo-300 uppercase tracking-widest block">Inversión de Software</span>
           <p id="preview-price-display" class="text-3xl md:text-4xl font-black text-emerald-400 font-mono mt-0.5">$299 USD <span class="text-xs text-zinc-400 font-normal">($4,999 MXN)</span></p>
         </div>
         <div class="px-4 py-2 bg-emerald-500/10 text-emerald-400 rounded-xl text-[10px] font-black uppercase tracking-widest border border-emerald-500/20 text-center">
@@ -581,61 +537,46 @@
         </div>
       </div>
 
-      <!-- Desglose de lo que Incluye -->
       <div class="space-y-4">
         <h4 class="text-xs font-black uppercase tracking-widest text-zinc-400">¿Qué incluye esta Licencia?</h4>
         <div id="preview-includes-list" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-medium text-zinc-200">
-          <!-- Items dinámicos por JS -->
         </div>
       </div>
 
-      <!-- Garantía e Instrucciones -->
-      <div class="p-4 bg-zinc-900/80 rounded-2xl border border-zinc-800 flex items-center gap-3">
-        <i data-lucide="shield-check" class="w-6 h-6 text-brand-400 shrink-0"></i>
-        <p class="text-[11px] text-zinc-400 font-medium leading-relaxed">
-          Entrega inmediata de archivos, documentación de arquitectura e instrucciones de despliegue tras confirmar la orden.
-        </p>
-      </div>
-
-      <!-- Botón para pasar al Checkout -->
-      <button onclick="proceedFromPreviewToCheckout()" class="w-full py-5 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-2xl shadow-brand-600/40 transition-all active:scale-95 flex items-center justify-center gap-3">
+      <button onclick="proceedFromPreviewToCheckout()" class="w-full py-5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-2xl shadow-indigo-600/40 transition-all active:scale-95 flex items-center justify-center gap-3 cursor-pointer">
         <span>Proceder al Pago / Checkout</span>
         <i data-lucide="arrow-right" class="w-5 h-5"></i>
       </button>
     </div>
   </div>
 
-  <!-- MODAL MULTI-PASO DE PROCESO DE COMPRA (CHECKOUT) -->
+  <!-- MODAL CHECKOUT -->
   <div id="checkout-modal" class="fixed inset-0 z-[999] bg-black/90 backdrop-blur-2xl hidden items-center justify-center p-4 overflow-y-auto">
-    <div class="glass-card rounded-[40px] p-6 md:p-10 max-w-2xl w-full border border-white/10 relative space-y-8 animate-in zoom-in-95 duration-300 my-8">
+    <div class="glass-card rounded-[36px] p-6 md:p-10 max-w-2xl w-full border border-white/10 relative space-y-8 animate-in zoom-in-95 duration-300 my-8">
 
-      <!-- Close Button -->
-      <button onclick="closeCheckoutModal()" class="absolute top-6 right-6 p-2.5 text-zinc-400 hover:text-white bg-zinc-900 rounded-full transition-colors z-10">
+      <button onclick="closeCheckoutModal()" class="absolute top-6 right-6 p-2.5 text-zinc-400 hover:text-white bg-zinc-900 rounded-full transition-colors z-10 cursor-pointer">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
-      <!-- Modal Header -->
       <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
-        <div class="w-14 h-14 bg-brand-600 text-white rounded-2xl flex items-center justify-center shadow-xl shadow-brand-600/30 shrink-0">
+        <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center shadow-xl shadow-indigo-600/30 shrink-0">
           <i data-lucide="shopping-bag" class="w-7 h-7"></i>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="px-2.5 py-0.5 bg-brand-500/20 text-brand-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-brand-500/30">Proceso de Checkout Seguro</span>
+            <span class="px-2.5 py-0.5 bg-indigo-500/20 text-indigo-300 rounded-full text-[9px] font-black uppercase tracking-widest border border-indigo-500/30">Checkout Seguro</span>
             <span id="checkout-step-badge" class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 rounded-full text-[9px] font-black uppercase tracking-widest">Paso 1 de 3</span>
           </div>
           <h3 id="checkout-title" class="text-2xl font-black text-white mt-1">Proceso de Compra - Nalia MedCore</h3>
         </div>
       </div>
 
-      <!-- STEP 1: RESUMEN DE SELECCIÓN Y DATOS DEL COMPRADOR -->
+      <!-- STEP 1 -->
       <div id="checkout-step-1" class="space-y-6">
-
-        <!-- Tarjeta de Producto Seleccionado -->
-        <div class="p-6 bg-zinc-900/80 rounded-3xl border border-brand-500/40 space-y-3">
+        <div class="p-6 bg-zinc-900/80 rounded-3xl border border-indigo-500/40 space-y-3">
           <div class="flex justify-between items-start">
             <div>
-              <span class="text-[10px] font-mono font-black text-brand-400 uppercase tracking-widest block">Producto Seleccionado</span>
+              <span class="text-[10px] font-mono font-black text-indigo-400 uppercase tracking-widest block">Producto Seleccionado</span>
               <h4 id="checkout-prod-title" class="text-xl font-black text-white mt-1">Licencia Código Fuente Full</h4>
             </div>
             <div class="text-right">
@@ -644,100 +585,93 @@
             </div>
           </div>
           <p id="checkout-prod-desc" class="text-xs text-zinc-400 font-medium leading-relaxed">
-            Acceso total al código fuente original React 19 + TypeScript + Electron + Firebase con derechos de propiedad e instalación ilimitada.
+            Acceso total al código fuente original React 19 + TypeScript + Electron + Firebase con derechos comerciales.
           </p>
         </div>
 
-        <!-- Formulario de Datos del Comprador -->
         <div class="space-y-4 pt-2">
           <h4 class="text-xs font-black uppercase tracking-widest text-zinc-400">1. Datos del Comprador / Clínica</h4>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Nombre Completo o Clínica *</label>
-              <input type="text" id="buyer-name" placeholder="Ej. Dr. Alejandro Ruiz / Clínica MedCore" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-xs font-bold text-white outline-none focus:border-brand-500 transition-colors" />
+              <input type="text" id="buyer-name" placeholder="Ej. Dr. Alejandro Ruiz / Clínica MedCore" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-xs font-bold text-white outline-none focus:border-indigo-500 transition-colors" />
             </div>
             <div>
-              <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Correo Electrónico (Para envío) *</label>
-              <input type="email" id="buyer-email" placeholder="ejemplo@clinica.com" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-xs font-bold text-white outline-none focus:border-brand-500 transition-colors" />
+              <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Correo Electrónico *</label>
+              <input type="email" id="buyer-email" placeholder="ejemplo@clinica.com" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-xs font-bold text-white outline-none focus:border-indigo-500 transition-colors" />
             </div>
           </div>
 
           <div>
             <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Teléfono / WhatsApp *</label>
-            <input type="tel" id="buyer-phone" placeholder="Ej. 3313270047" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-xs font-bold text-white outline-none focus:border-brand-500 transition-colors" />
+            <input type="tel" id="buyer-phone" placeholder="Ej. 3313270047" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-xs font-bold text-white outline-none focus:border-indigo-500 transition-colors" />
           </div>
         </div>
 
-        <button onclick="goToStep2()" class="w-full py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-brand-600/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+        <button onclick="goToStep2()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-indigo-600/30 transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
           <span>Continuar al Método de Pago</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <!-- STEP 2: MÉTODOS DE PAGO -->
+      <!-- STEP 2 -->
       <div id="checkout-step-2" class="space-y-6 hidden">
         <h4 class="text-xs font-black uppercase tracking-widest text-zinc-400">2. Selecciona tu Método de Pago</h4>
 
-        <!-- Opciones de Pago -->
         <div class="space-y-3">
-          <!-- Opción 1: SPEI / Transferencia -->
-          <label onclick="selectPaymentMethod('spei')" class="p-5 bg-zinc-900 rounded-2xl border border-zinc-800 hover:border-brand-500/50 flex items-center justify-between cursor-pointer transition-all payment-option" id="opt-spei">
+          <label onclick="selectPaymentMethod('spei')" class="p-5 bg-zinc-900 rounded-2xl border border-zinc-800 hover:border-indigo-500/50 flex items-center justify-between cursor-pointer transition-all payment-option" id="opt-spei">
             <div class="flex items-center gap-4">
-              <input type="radio" name="payment_method" value="spei" checked class="w-4 h-4 accent-brand-500" />
+              <input type="radio" name="payment_method" value="spei" checked class="w-4 h-4 accent-indigo-500" />
               <div>
                 <span class="text-sm font-black text-white block">Transferencia Bancaria SPEI (Banregio)</span>
-                <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">Acreditación con envío de comprobante por WhatsApp al 3313270047</span>
+                <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">Acreditación directa vía WhatsApp al 3313270047</span>
               </div>
             </div>
-            <i data-lucide="building-2" class="w-5 h-5 text-brand-400"></i>
+            <i data-lucide="building-2" class="w-5 h-5 text-indigo-400"></i>
           </label>
 
-          <!-- Opción 2: Tarjeta / Stripe -->
-          <label onclick="selectPaymentMethod('card')" class="p-5 bg-zinc-900 rounded-2xl border border-zinc-800 hover:border-brand-500/50 flex items-center justify-between cursor-pointer transition-all payment-option" id="opt-card">
+          <label onclick="selectPaymentMethod('card')" class="p-5 bg-zinc-900 rounded-2xl border border-zinc-800 hover:border-indigo-500/50 flex items-center justify-between cursor-pointer transition-all payment-option" id="opt-card">
             <div class="flex items-center gap-4">
-              <input type="radio" name="payment_method" value="card" class="w-4 h-4 accent-brand-500" />
+              <input type="radio" name="payment_method" value="card" class="w-4 h-4 accent-indigo-500" />
               <div>
                 <span class="text-sm font-black text-white block">Tarjeta de Crédito / Débito (Stripe Checkout)</span>
                 <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">Visa, Mastercard, American Express</span>
               </div>
             </div>
-            <i data-lucide="credit-card" class="w-5 h-5 text-indigo-400"></i>
+            <i data-lucide="credit-card" class="w-5 h-5 text-sky-400"></i>
           </label>
         </div>
 
-        <!-- Campos / Info de Tarjeta Stripe -->
         <div id="card-fields" class="p-5 bg-zinc-950 rounded-2xl border border-indigo-500/30 space-y-3 hidden">
           <div class="flex items-center gap-3">
             <i data-lucide="shield-check" class="w-5 h-5 text-indigo-400"></i>
             <div>
               <span class="text-xs font-black text-white block">Checkout Cifrado con Stripe</span>
-              <span class="text-[9px] text-zinc-400 font-bold uppercase tracking-widest">Al confirmar, serás redirigido al portal oficial de Stripe para completar tu pago de forma 100% segura.</span>
+              <span class="text-[9px] text-zinc-400 font-bold uppercase tracking-widest">Al confirmar, serás redirigido al portal oficial de Stripe.</span>
             </div>
           </div>
         </div>
 
-        <!-- Datos SPEI (Solo si se selecciona SPEI) -->
-        <div id="spei-fields" class="p-5 bg-zinc-950 rounded-2xl border border-brand-500/30 space-y-2">
-          <span class="text-[9px] font-black text-brand-300 uppercase tracking-widest block">Datos para Transferencia SPEI</span>
+        <div id="spei-fields" class="p-5 bg-zinc-950 rounded-2xl border border-indigo-500/30 space-y-2">
+          <span class="text-[9px] font-black text-indigo-300 uppercase tracking-widest block">Datos para Transferencia SPEI</span>
           <p class="text-xs text-zinc-300 font-bold">Banco: <span class="text-white font-mono">Banregio</span></p>
           <p class="text-xs text-zinc-300 font-bold">CLABE Interbancaria: <span class="text-emerald-400 font-mono">058597000153759297</span></p>
           <p class="text-xs text-zinc-300 font-bold">Beneficiario: <span class="text-white font-mono">Eder Diaz Ruiz / Developer Konig Studios</span></p>
-          <p class="text-[10px] text-amber-400 font-bold pt-1">📌 Tras realizar tu transferencia, envía el comprobante de pago por WhatsApp al 3313270047 con tu número de orden para la entrega inmediata del software.</p>
         </div>
 
         <div class="flex gap-3">
-          <button onclick="goToStep1()" class="py-4 px-6 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 rounded-2xl font-black text-xs uppercase tracking-widest transition-all">
+          <button onclick="goToStep1()" class="py-4 px-6 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 rounded-2xl font-black text-xs uppercase tracking-widest transition-all cursor-pointer">
             Volver
           </button>
-          <button id="btn-process-submit" onclick="processOrder()" class="flex-1 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-emerald-600/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+          <button id="btn-process-submit" onclick="processOrder()" class="flex-1 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-emerald-600/30 transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
             <i data-lucide="check-circle" class="w-4 h-4"></i>
             <span id="btn-process-text">Confirmar y Generar Orden de Compra</span>
           </button>
         </div>
       </div>
 
-      <!-- STEP 3: CONFIRMACIÓN Y ENTREGA DE ORDEN -->
+      <!-- STEP 3 -->
       <div id="checkout-step-3" class="space-y-6 hidden text-center">
         <div class="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-3xl flex items-center justify-center mx-auto border border-emerald-500/30 shadow-2xl">
           <i data-lucide="check-circle-2" class="w-10 h-10"></i>
@@ -747,10 +681,7 @@
           <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-[10px] font-black uppercase tracking-widest border border-emerald-500/30">
             ¡Orden Generada Exitosamente!
           </span>
-          <h3 class="text-3xl font-black text-white">Número de Orden: <span id="order-number" class="text-brand-300 font-mono">ORD-94821</span></h3>
-          <p class="text-zinc-400 text-xs font-medium leading-relaxed max-w-md mx-auto">
-            Hemos registrado tu pedido a nombre de <strong id="summary-name" class="text-white">--</strong>. Los detalles y la clave de activación fueron preparados.
-          </p>
+          <h3 class="text-3xl font-black text-white">Número de Orden: <span id="order-number" class="text-indigo-300 font-mono">ORD-94821</span></h3>
         </div>
 
         <div class="p-6 bg-zinc-900/80 rounded-3xl border border-zinc-800 text-left space-y-3 font-mono text-xs">
@@ -766,18 +697,14 @@
             <span class="text-zinc-500">Correo Registrado:</span>
             <span id="summary-email" class="text-white font-bold">--</span>
           </div>
-          <div class="flex justify-between">
-            <span class="text-zinc-500">Método Elegido:</span>
-            <span id="summary-method" class="text-brand-300 font-bold">SPEI / WhatsApp Directo</span>
-          </div>
         </div>
 
         <div class="space-y-3 pt-2">
           <a id="btn-final-whatsapp" href="#" target="_blank" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-emerald-600/40 transition-all active:scale-95 flex items-center justify-center gap-3">
             <i data-lucide="message-circle" class="w-5 h-5"></i>
-            <span>Completar Pago y Entrega por WhatsApp Directo</span>
+            <span>Completar Pago y Entrega por WhatsApp</span>
           </a>
-          <button onclick="closeCheckoutModal()" class="w-full py-3 text-zinc-500 hover:text-white text-xs font-bold uppercase tracking-widest">
+          <button onclick="closeCheckoutModal()" class="w-full py-3 text-zinc-500 hover:text-white text-xs font-bold uppercase tracking-widest cursor-pointer">
             Cerrar Ventana
           </button>
         </div>
@@ -786,16 +713,14 @@
     </div>
   </div>
 
-  <!-- MODAL DE CANJE Y DESBLOQUEO DE LICENCIA / DESCARGAS -->
+  <!-- MODAL CANJE DE LICENCIA -->
   <div id="unlock-modal" class="fixed inset-0 z-[999] bg-black/90 backdrop-blur-2xl hidden items-center justify-center p-4 overflow-y-auto">
-    <div class="glass-card rounded-[40px] p-6 md:p-10 max-w-xl w-full border border-emerald-500/40 relative space-y-6 animate-in zoom-in-95 duration-300 my-8">
+    <div class="glass-card rounded-[36px] p-6 md:p-10 max-w-xl w-full border border-emerald-500/40 relative space-y-6 animate-in zoom-in-95 duration-300 my-8">
 
-      <!-- Close Button -->
-      <button onclick="closeUnlockModal()" class="absolute top-6 right-6 p-2.5 text-zinc-400 hover:text-white bg-zinc-900 rounded-full transition-colors z-10">
+      <button onclick="closeUnlockModal()" class="absolute top-6 right-6 p-2.5 text-zinc-400 hover:text-white bg-zinc-900 rounded-full transition-colors z-10 cursor-pointer">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
-      <!-- Header -->
       <div class="flex items-center gap-4 border-b border-zinc-800 pb-6">
         <div class="w-14 h-14 bg-emerald-600 text-white rounded-2xl flex items-center justify-center shadow-xl shadow-emerald-600/30 shrink-0">
           <i data-lucide="key" class="w-7 h-7"></i>
@@ -807,24 +732,22 @@
       </div>
 
       <p class="text-xs text-zinc-300 leading-relaxed font-medium">
-        Si realizaste tu transferencia bancaria y recibiste tu <strong>Código de Licencia por WhatsApp</strong>, ingrésalo a continuación para desbloquear la descarga del software o código fuente.
+        Si realizaste tu transferencia bancaria y recibiste tu <strong>Código de Licencia</strong>, ingrésalo a continuación para desbloquear la descarga.
       </p>
 
-      <!-- Formulario de Validación de Código -->
       <div id="unlock-form-box" class="space-y-4">
         <div>
           <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Código de Activación / Licencia *</label>
           <input type="text" id="license-code-input" placeholder="Ingresa tu clave de licencia" class="w-full px-4 py-3.5 bg-zinc-900 border border-zinc-800 rounded-2xl text-sm font-black text-white outline-none focus:border-emerald-500 font-mono tracking-wider transition-colors uppercase" />
-          <p id="unlock-error-msg" class="text-[10px] font-black text-rose-400 mt-1.5 hidden">⚠️ Código de licencia no válido o expirado. Verifica el código enviado por WhatsApp al 3313270047.</p>
+          <p id="unlock-error-msg" class="text-[10px] font-black text-rose-400 mt-1.5 hidden">⚠️ Código de licencia no válido o expirado. Verifica el código enviado por WhatsApp.</p>
         </div>
 
-        <button onclick="validateLicenseCode()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-emerald-600/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+        <button onclick="validateLicenseCode()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-xl shadow-emerald-600/30 transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
           <i data-lucide="shield-check" class="w-4 h-4"></i>
           <span>Validar Código y Desbloquear Descarga</span>
         </button>
       </div>
 
-      <!-- Pantalla de Éxito y Descarga de Archivos -->
       <div id="unlocked-downloads-box" class="space-y-6 hidden animate-in fade-in duration-500">
         <div class="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-center space-y-1">
           <span class="text-xs font-black text-emerald-400 uppercase tracking-widest block">✓ ¡Licencia Validada Correctamente!</span>
@@ -832,17 +755,12 @@
         </div>
 
         <div id="unlocked-buttons-container" class="space-y-3">
-          <!-- Botones de Descarga dinámicos por JS -->
         </div>
-      </div>
-
-      <div class="border-t border-zinc-800 pt-4 text-center">
-        <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">¿Aún no tienes un código? Envía tu comprobante de pago al <a href="https://wa.me/523313270047" target="_blank" class="text-emerald-400 underline">WhatsApp 3313270047</a></p>
       </div>
     </div>
   </div>
 
-  <!-- ROLE SWITCHER INTERACTIVE SCRIPT -->
+  <!-- SCRIPT ROLES Y PRICING -->
   <script>
     lucide.createIcons();
 
@@ -850,29 +768,25 @@
       type: 'source',
       title: 'Licencia Código Fuente Full',
       price: '$499 USD ($9,999 MXN)',
-      desc: 'Acceso total al código fuente original React 19 + TypeScript + Electron + Firebase con derechos de propiedad e instalación ilimitada.'
+      desc: 'Acceso total al código fuente original React 19 + TypeScript + Electron + Firebase con derechos comerciales.'
     };
 
     let selectedPayment = 'spei';
 
     function switchRoleTab(role) {
-      // Reset tabs
       document.querySelectorAll('.role-tab').forEach(t => {
-        t.classList.remove('border-brand-500', 'text-brand-400');
+        t.classList.remove('border-indigo-500', 'text-indigo-400');
         t.classList.add('border-transparent', 'text-zinc-500');
       });
 
-      // Highlight selected tab
       const selectedTab = document.getElementById('tab-' + role);
       if (selectedTab) {
-        selectedTab.classList.add('border-brand-500', 'text-brand-400');
+        selectedTab.classList.add('border-indigo-500', 'text-indigo-400');
         selectedTab.classList.remove('border-transparent', 'text-zinc-500');
       }
 
-      // Hide all contents
       document.querySelectorAll('.role-content').forEach(c => c.classList.add('hidden'));
 
-      // Show selected content
       const selectedContent = document.getElementById('content-' + role);
       if (selectedContent) {
         selectedContent.classList.remove('hidden');
@@ -915,7 +829,7 @@
           title: 'Licencia Código Fuente Full',
           price: `$499 USD ($${fullMxn} MXN)`,
           stripeUrl: 'https://buy.stripe.com/3cI4gzdVX0cE02Ofmo43S00',
-          desc: 'Acceso total al código fuente original React 19 + TypeScript + Electron + Firebase con derechos de propiedad e instalación ilimitada.',
+          desc: 'Acceso total al código fuente original React 19 + TypeScript + Electron + Firebase con derechos comerciales.',
           includes: [
             'Código fuente completo en TypeScript 100% comentado',
             'Arquitectura multi-rol aislada (Médico, Enfermera, Recepción, Admin)',
@@ -1037,7 +951,6 @@
       document.getElementById('summary-prod').innerText = currentProduct.title;
       document.getElementById('summary-price').innerText = currentProduct.price;
       document.getElementById('summary-email').innerText = email;
-      document.getElementById('summary-method').innerText = selectedPayment === 'spei' ? 'TRANSFERENCIA SPEI (BANREGIO)' : 'STRIPE CHECKOUT';
 
       const textMsg = `Hola König, adjunto comprobante de pago para mi orden de NaliaMedcore.%0A%0A📌 *Resumen de Orden ${orderNum}*:%0A• *Cliente/Clínica*: ${name}%0A• *Producto*: ${currentProduct.title}%0A• *Monto*: ${currentProduct.price}%0A• *Correo*: ${email}%0A• *Teléfono*: ${phone}%0A• *Método de Pago*: ${selectedPayment.toUpperCase()}`;
 
@@ -1102,24 +1015,24 @@
       if (isMaster || (isFull && isDesk)) {
         title.innerText = 'Licencia Master Desbloqueada: Código Fuente + Ejecutables Nativo';
         htmlButtons = `
-          <a href="https://github.com/konigstudiosdev-design/Nalia-MedCore/archive/refs/heads/main.zip" target="_blank" class="w-full py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-lg transition-all flex items-center justify-center gap-3">
+          <a href="https://github.com/konigstudiosdev-design/Nalia-MedCore/archive/refs/heads/main.zip" target="_blank" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-lg transition-all flex items-center justify-center gap-3">
             <i data-lucide="download" class="w-5 h-5"></i> Descargar Paquete Código Fuente (.ZIP)
           </a>
-          <a href="https://github.com/konigstudiosdev-design/Nalia-MedCore/releases" target="_blank" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-lg transition-all flex items-center justify-center gap-3">
+          <a href="https://github.com/konigstudiosdev-design/Nalia-MedCore/releases" target="_blank" class="w-full py-4 bg-sky-600 hover:bg-sky-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-lg transition-all flex items-center justify-center gap-3">
             <i data-lucide="monitor" class="w-5 h-5"></i> Descargar Instaladores macOS (.DMG) / Windows (.EXE)
           </a>
         `;
       } else if (isFull) {
         title.innerText = 'Licencia Código Fuente Full Desbloqueada';
         htmlButtons = `
-          <a href="https://github.com/konigstudiosdev-design/Nalia-MedCore/archive/refs/heads/main.zip" target="_blank" class="w-full py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-lg transition-all flex items-center justify-center gap-3">
+          <a href="https://github.com/konigstudiosdev-design/Nalia-MedCore/archive/refs/heads/main.zip" target="_blank" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-lg transition-all flex items-center justify-center gap-3">
             <i data-lucide="download" class="w-5 h-5"></i> Descargar Paquete Código Fuente (.ZIP)
           </a>
         `;
       } else if (isDesk) {
         title.innerText = 'Licencia Software de Escritorio Nativo Desbloqueada';
         htmlButtons = `
-          <a href="https://github.com/konigstudiosdev-design/Nalia-MedCore/releases" target="_blank" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-lg transition-all flex items-center justify-center gap-3">
+          <a href="https://github.com/konigstudiosdev-design/Nalia-MedCore/releases" target="_blank" class="w-full py-4 bg-sky-600 hover:bg-sky-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest text-center shadow-lg transition-all flex items-center justify-center gap-3">
             <i data-lucide="download" class="w-5 h-5"></i> Descargar Instaladores macOS (.DMG) / Windows (.EXE)
           </a>
         `;
@@ -1135,7 +1048,6 @@
       validateLicenseCode();
     }
 
-    // Detección automática de redirección post-pago de Stripe (?success=full o ?success=desk)
     window.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const successType = urlParams.get('success');
