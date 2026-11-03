@@ -60,7 +60,7 @@ export function Sidebar({ currentModule, navigateTo, isMobileMenuOpen, setMobile
       {/* Brand Header */}
       <div className="h-20 flex items-center justify-between xl:justify-start px-4 xl:px-6 border-b border-zinc-100 dark:border-zinc-800 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl flex items-center justify-center shrink-0 shadow-sm overflow-hidden p-1">
+          <div className="w-10 h-10 bg-white border border-zinc-200 dark:border-zinc-700 rounded-xl flex items-center justify-center shrink-0 shadow-sm overflow-hidden p-1.5">
             {clinicLogo ? (
               <img src={clinicLogo} alt={clinicName || 'Logo'} className="w-full h-full object-contain" />
             ) : (
