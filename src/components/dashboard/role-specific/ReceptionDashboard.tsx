@@ -274,7 +274,7 @@ export function ReceptionDashboard({ agenda = [], patients = [], transactions = 
         >
           <div className="space-y-6">
             <div className="p-4 bg-zinc-50 dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800">
-              <span class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Paciente en Recepción</span>
+              <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Paciente en Recepción</span>
               <p className="text-lg font-black text-zinc-900 dark:text-zinc-50">{assigningApt.patientName}</p>
               <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest mt-1">{assigningApt.time} • {assigningApt.type}</p>
             </div>

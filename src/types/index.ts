@@ -108,6 +108,7 @@ export interface AgendaItem {
   patientId: string;
   patientName: string;
   doctorId: string;
+  doctorId_name?: string;
   serviceId: string;
   type: 'consulta' | 'procedimiento' | 'seguimiento';
   status: AppointmentStatus;

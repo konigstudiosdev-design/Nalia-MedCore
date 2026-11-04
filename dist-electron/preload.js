@@ -3,22 +3,24 @@ const ALLOWED_CHANNELS = ["main-process-message", "app-notification"];
 contextBridge.exposeInMainWorld("ipcRenderer", {
   on(channel, listener) {
     if (ALLOWED_CHANNELS.includes(channel)) {
-      return ipcRenderer.on(channel, (event, ...args) => listener(event, ...args));
+      const subscription = (event, ...args) => listener(event, ...args);
+      ipcRenderer.on(channel, subscription);
+      return subscription;
     }
   },
-  off(channel, ...omit) {
+  off(channel, listener) {
     if (ALLOWED_CHANNELS.includes(channel)) {
-      return ipcRenderer.off(channel, ...omit);
+      return ipcRenderer.off(channel, listener);
     }
   },
-  send(channel, ...omit) {
+  send(channel, ...args) {
     if (ALLOWED_CHANNELS.includes(channel)) {
-      return ipcRenderer.send(channel, ...omit);
+      return ipcRenderer.send(channel, ...args);
     }
   },
-  invoke(channel, ...omit) {
+  invoke(channel, ...args) {
     if (ALLOWED_CHANNELS.includes(channel)) {
-      return ipcRenderer.invoke(channel, ...omit);
+      return ipcRenderer.invoke(channel, ...args);
     }
     return Promise.reject(new Error(`Canal IPC no autorizado: ${channel}`));
   }

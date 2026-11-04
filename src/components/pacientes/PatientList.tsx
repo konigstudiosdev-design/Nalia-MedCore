@@ -5,7 +5,7 @@ import { Avatar } from '../shared/Avatar';
 
 interface PatientListProps {
   patients: Patient[];
-  activePatient: Patient;
+  activePatient: Patient | null;
   setActivePatient: (patient: Patient) => void;
   onAddClick: () => void;
   userRole?: Role;

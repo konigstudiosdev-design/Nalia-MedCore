@@ -27,9 +27,6 @@ export default defineConfig(({ mode }) => {
         },
         {
           entry: 'electron/preload.ts',
-          onhmr( { send }: any ) {
-            send('full-reload')
-          },
           vite: {
             build: {
               minify: false,

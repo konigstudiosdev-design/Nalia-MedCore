@@ -1,10 +1,10 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import {
   Calendar as CalendarIcon, ChevronLeft, ChevronRight, Plus, Grid3X3, Clock,
-  User, MoreHorizontal, CheckCircle2, AlertCircle, Stethoscope, Search, X, Edit, Trash2, XCircle,
+  User as UserIcon, MoreHorizontal, CheckCircle2, AlertCircle, Stethoscope, Search, X, Edit, Trash2, XCircle,
   Globe, RefreshCw, Check
 } from 'lucide-react';
-import { AgendaItem, Patient, AppointmentStatus, Role } from '../../types';
+import { AgendaItem, Patient, AppointmentStatus, Role, User } from '../../types';
 import { StatusBadge } from '../shared/StatusBadge';
 import { Modal } from '../shared/Modal';
 import { formatLocalDate } from '../../lib/db';
