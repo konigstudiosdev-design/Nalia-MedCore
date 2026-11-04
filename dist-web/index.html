@@ -554,16 +554,16 @@
               <!-- Price Display -->
               <div class="mt-4">
                 <div class="flex items-baseline gap-2">
-                  <span class="text-4xl md:text-5xl font-black text-white tracking-tight">$6,000</span>
+                  <span class="text-4xl md:text-5xl font-black text-white tracking-tight">$5,999</span>
                   <span class="text-base font-black text-indigo-400 font-mono">MXN</span>
                 </div>
-                <div class="inline-block mt-2 px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-lg text-indigo-300 font-bold text-xs">
-                  ✓ Licencia de uso definitivo sin pagos recurrentes
+                <div class="inline-flex items-center gap-1.5 mt-2 px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-lg text-indigo-300 font-bold text-xs">
+                  <span>+ $199.00 MXN / mes de mantenimiento mensual</span>
                 </div>
               </div>
 
               <p class="text-zinc-400 text-xs font-medium leading-relaxed mt-4">
-                Adquiere Nalia MedCore mediante un único pago y utiliza el software bajo una licencia permanente, conforme a sus condiciones de uso.
+                Adquiere Nalia MedCore mediante un pago único de $5,999 MXN y utiliza el software bajo una licencia permanente con $199.00 MXN mensuales de mantenimiento.
               </p>
             </div>
 
@@ -635,6 +635,12 @@
                 </div>
                 <span>Asistente IA integrado (sujeto a disponibilidad)</span>
               </li>
+              <li class="flex items-center gap-3">
+                <div class="w-5 h-5 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                  <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                </div>
+                <span>Mantenimiento, soporte continuo y actualizaciones por $199.00 MXN/mes</span>
+              </li>
             </ul>
           </div>
 
@@ -671,12 +677,12 @@
                 <tr class="hover:bg-zinc-900/40">
                   <td class="p-5 font-bold text-white">Precio de Inversión</td>
                   <td class="p-5 font-mono text-emerald-400 font-bold">$199 MXN/mes (Meses 1-3) ➔ $499 MXN/mes</td>
-                  <td class="p-5 font-mono text-indigo-300 font-bold">$6,000 MXN (Pago Único)</td>
+                  <td class="p-5 font-mono text-indigo-300 font-bold">$5,999 MXN (Pago Inicial) + $199 MXN/mes mantenimiento</td>
                 </tr>
                 <tr class="hover:bg-zinc-900/40">
                   <td class="p-5 font-bold text-white">Modalidad de Pago</td>
                   <td class="p-5">Cobro recurrente mensual automático</td>
-                  <td class="p-5">Pago único inicial</td>
+                  <td class="p-5">Pago único inicial de $5,999 MXN + $199.00 MXN/mes de mantenimiento</td>
                 </tr>
                 <tr class="hover:bg-zinc-900/40">
                   <td class="p-5 font-bold text-white">Acceso a Funcionalidades</td>
@@ -1075,9 +1081,9 @@
         currentProduct = {
           type: 'permanent',
           title: 'Nalia MedCore — Licencia Permanente',
-          price: '$6,000 MXN (Un Solo Pago)',
+          price: '$5,999 MXN (+ $199.00 MXN/mes mantenimiento)',
           stripeUrl: 'https://buy.stripe.com/3cI4gzdVX0cE02Ofmo43S00',
-          desc: 'Adquiere Nalia MedCore mediante un único pago de $6,000 MXN y utiliza el software bajo una licencia permanente.',
+          desc: 'Adquiere Nalia MedCore mediante un pago único de $5,999 MXN y utiliza el software bajo una licencia permanente con $199.00 MXN mensuales de mantenimiento.',
           includes: [
             'Aplicación de escritorio para macOS (Apple Silicon e Intel)',
             'Aplicación de escritorio para Windows 10/11',
@@ -1089,7 +1095,8 @@
             'Recetas PDF oficiales y consultas SOAP',
             'Gestión financiera y caja del día',
             'Reportes y estadísticas',
-            'Asistente IA integrado (sujeto a disponibilidad)'
+            'Asistente IA integrado (sujeto a disponibilidad)',
+            'Mantenimiento, soporte continuo y actualizaciones por $199.00 MXN/mes'
           ]
         };
       }
