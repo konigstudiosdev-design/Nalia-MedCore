@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Lucide Icons (jsDelivr CDN robusto) -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 
   <script>
     tailwind.config = {
@@ -834,7 +834,11 @@
 
   <!-- SCRIPT ROLES, HERO SWITCHER Y STRIPE VERIFICATION -->
   <script>
-    lucide.createIcons();
+    function renderIcons() {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+    }
 
     let currentProduct = {
       type: 'subscription',
@@ -861,6 +865,7 @@
       if (selectedContent) {
         selectedContent.classList.remove('hidden');
       }
+      renderIcons();
     }
 
     function switchHeroImage(view) {
@@ -896,6 +901,7 @@
           activeTab.classList.remove('text-zinc-400');
         }
       }
+      renderIcons();
     }
 
     function openBuyModal(type) {
@@ -931,7 +937,7 @@
         </a>
       `;
 
-      lucide.createIcons();
+      renderIcons();
       if (modal) {
         modal.classList.remove('hidden');
         modal.classList.add('flex');
@@ -939,12 +945,17 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      renderIcons();
       const urlParams = new URLSearchParams(window.location.search);
       const successType = urlParams.get('success');
 
       if (successType) {
         setTimeout(() => showStripeUnlockedDownloadModal(successType), 300);
       }
+    });
+
+    window.addEventListener('load', () => {
+      renderIcons();
     });
   </script>
 </body>
