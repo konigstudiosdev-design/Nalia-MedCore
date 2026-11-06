@@ -187,6 +187,7 @@ export function useMedicalData() {
     setTeamMembers([]);
     setGoogleEvents([]);
     setIsGoogleConnected(false);
+    sessionStorage.clear();
   };
 
   const toggleWorkMode = () => setWorkMode(prev => prev === 'clinical' ? 'admin' : 'clinical');

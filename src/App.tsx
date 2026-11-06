@@ -29,6 +29,8 @@ import { LoginView } from './components/auth/LoginView';
 import { RegisterView } from './components/auth/RegisterView';
 import { OnboardingView } from './components/auth/OnboardingView';
 import { TeamManagement } from './components/settings/TeamManagement';
+import { PWAInstallBanner } from './components/pwa/PWAInstallBanner';
+import { PWAUpdatePrompt } from './components/pwa/PWAUpdatePrompt';
 
 export default function MedIOSApp() {
   const {
@@ -375,6 +377,9 @@ export default function MedIOSApp() {
           onClose={hideToast}
         />
       )}
+
+      <PWAInstallBanner />
+      <PWAUpdatePrompt />
 
       <style dangerouslySetInnerHTML={{__html: `
         .pb-safe { padding-bottom: env(safe-area-inset-bottom, 24px); }
