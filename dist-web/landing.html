@@ -99,14 +99,10 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <a href="https://wa.me/523313270047?text=Hola%20K%C3%B6nig%2C%20me%20interesa%20solicitar%20una%20demostraci%C3%B3n%20de%20Nalia%20MedCore" target="_blank" class="hidden sm:flex px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 rounded-xl font-black text-xs uppercase tracking-widest transition-all active:scale-95 items-center gap-2">
-          <i data-lucide="message-square" class="w-4 h-4 text-emerald-400"></i>
-          <span>Solicitar Demo</span>
-        </a>
-        <a href="/app" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black text-xs uppercase tracking-widest shadow-xl shadow-indigo-600/25 transition-all active:scale-95 flex items-center gap-2">
-          <i data-lucide="log-in" class="w-4 h-4"></i>
-          <span>Acceder al Sistema</span>
-        </a>
+        <button onclick="openBuyModal('subscription')" class="px-6 py-2.5 bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500 hover:from-sky-400 hover:to-emerald-400 text-white rounded-xl font-black text-xs uppercase tracking-widest shadow-xl shadow-sky-500/25 transition-all active:scale-95 flex items-center gap-2 cursor-pointer">
+          <i data-lucide="zap" class="w-4 h-4"></i>
+          <span>Contratar ($799/mes)</span>
+        </button>
       </div>
     </div>
   </nav>
@@ -131,13 +127,13 @@
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-        <a href="https://wa.me/523313270047?text=Hola%20K%C3%B6nig%2C%20quisiera%20solicitar%20una%20demostraci%C3%B3n%20personalizada%20de%20Nalia%20MedCore" target="_blank" class="w-full sm:w-auto px-10 py-4.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-2xl shadow-indigo-600/35 transition-all active:scale-95 flex items-center justify-center gap-3">
-          <i data-lucide="calendar" class="w-5 h-5"></i>
-          <span>SOLICITAR DEMOSTRACIÓN</span>
-        </a>
+        <button onclick="openBuyModal('subscription')" class="w-full sm:w-auto px-10 py-4.5 bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500 hover:from-sky-400 hover:to-emerald-400 text-white rounded-2xl font-black text-xs uppercase tracking-[0.18em] shadow-2xl shadow-sky-500/40 hover:shadow-sky-500/60 transition-all active:scale-95 flex items-center justify-center gap-3 cursor-pointer">
+          <i data-lucide="zap" class="w-5 h-5"></i>
+          <span>CONTRATAR AHORA — $799.00 MXN / MES</span>
+        </button>
         <a href="#licencias" class="w-full sm:w-auto px-8 py-4.5 glass-card hover:bg-zinc-800 text-zinc-200 rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-3">
-          <i data-lucide="tag" class="w-5 h-5 text-indigo-400"></i>
-          <span>CONOCER PLANES</span>
+          <i data-lucide="tag" class="w-5 h-5 text-sky-400"></i>
+          <span>VER PLAN INTEGRAL</span>
         </a>
       </div>
 
@@ -780,15 +776,11 @@
         Solicita una demostración o accede a la plataforma desde tu navegador sin programas tradicionales.
       </p>
 
-      <div class="pt-2 flex flex-col sm:flex-row justify-center gap-4">
-        <a href="https://wa.me/523313270047?text=Hola%20K%C3%B6nig%2C%20quisiera%20solicitar%20una%20demostraci%C3%B3n%20de%20Nalia%20MedCore" target="_blank" class="px-8 py-4.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-indigo-600/35 transition-all active:scale-95 flex items-center justify-center gap-3">
-          <i data-lucide="message-square" class="w-4 h-4"></i>
-          <span>Solicitar Demostración</span>
-        </a>
-        <a href="/app" class="px-8 py-4.5 glass-card hover:bg-zinc-800 text-zinc-200 rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-3">
-          <i data-lucide="log-in" class="w-4 h-4 text-indigo-400"></i>
-          <span>Acceder a la Plataforma</span>
-        </a>
+      <div class="pt-2 flex justify-center">
+        <button onclick="openBuyModal('subscription')" class="px-10 py-4.5 bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500 hover:from-sky-400 hover:to-emerald-400 text-white rounded-2xl font-black text-xs uppercase tracking-[0.18em] shadow-2xl shadow-sky-500/40 hover:shadow-sky-500/60 transition-all active:scale-95 flex items-center justify-center gap-3 cursor-pointer">
+          <i data-lucide="zap" class="w-5 h-5"></i>
+          <span>CONTRATAR AHORA ($799.00 MXN / MES)</span>
+        </button>
       </div>
     </div>
   </section>
