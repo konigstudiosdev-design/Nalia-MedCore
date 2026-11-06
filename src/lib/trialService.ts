@@ -8,8 +8,8 @@ export interface SubscriptionStatus {
   isExpired: boolean;
 }
 
-export function isDevOrElectron(): boolean {
-  return true;
+export function isDev(): boolean {
+  return import.meta.env.DEV;
 }
 
 /**

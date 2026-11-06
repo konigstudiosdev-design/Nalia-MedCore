@@ -4,10 +4,8 @@ import App from './App'
 import './index.css'
 import { registerSW } from 'virtual:pwa-register'
 
-// Registro del Service Worker para la PWA (solo en web)
-if (!navigator.userAgent.includes('Electron')) {
-  registerSW({ immediate: true })
-}
+// Registro del Service Worker para la PWA Nalia MedCore
+registerSW({ immediate: true })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
